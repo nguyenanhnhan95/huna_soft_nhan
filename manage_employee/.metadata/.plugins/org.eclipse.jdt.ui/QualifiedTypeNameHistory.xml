@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.zkoss.zk.ui.AbstractComponent"/>
+    <fullyQualifiedTypeName name="org.zkoss.zk.ui.select.SelectorComposer"/>
+    <fullyQualifiedTypeName name="org.zkoss.zk.ui.Component"/>
+    <fullyQualifiedTypeName name="java.awt.Button"/>
+    <fullyQualifiedTypeName name="org.zkoss.zk.ui.select.annotation.Wire"/>
+    <fullyQualifiedTypeName name="org.zkoss.zul.Checkbox"/>
+    <fullyQualifiedTypeName name="org.zkoss.zul.Button"/>
+    <fullyQualifiedTypeName name="javax.xml.crypto.Data"/>
+    <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="huana.com.vn.manage_employees.Employee"/>
+    <fullyQualifiedTypeName name="huana.com.vn.manage_employees.enums.EPositionOfAdmin"/>
+    <fullyQualifiedTypeName name="huana.com.vn.manage_employees.model.Admin"/>
+    <fullyQualifiedTypeName name="org.zkoss.zk.ui.select.annotation.Listen"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collector"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="huana.com.vn.manage_employees.model.Employee"/>
+</qualifiedTypeNameHistroy>

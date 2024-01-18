@@ -1,0 +1,14 @@
+package huana.com.vn.manage_employees;
+
+import javax.xml.crypto.Data;
+
+public class Admin {
+	private Integer id;
+	private String name;
+	private String address;
+	private String email;
+	private String phone;
+	private Data birthOfData;
+	private Data dateStartWork;
+	private 
+}

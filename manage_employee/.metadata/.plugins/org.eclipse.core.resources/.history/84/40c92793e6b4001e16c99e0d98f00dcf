@@ -1,0 +1,83 @@
+package huana.com.vn.manage_employees;
+
+import javax.xml.crypto.Data;
+
+public class Employee {
+	private Integer id;
+	private String name;
+	private String address;
+	private String email;
+	private String phone;
+	private Data dateStartWork;
+	private Double Salary;
+	public Employee(Integer id, String name, String address, String email, String phone, Data dateStartWork,
+			Double salary) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+		this.dateStartWork = dateStartWork;
+		Salary = salary;
+	}
+	public Employee() {
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public Data getDateStartWork() {
+		return dateStartWork;
+	}
+	public void setDateStartWork(Data dateStartWork) {
+		this.dateStartWork = dateStartWork;
+	}
+	public Double getSalary() {
+		return Salary;
+	}
+	public void setSalary(Double salary) {
+		Salary = salary;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Employee))
+			return false;
+		Employee other = (Employee) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+}
