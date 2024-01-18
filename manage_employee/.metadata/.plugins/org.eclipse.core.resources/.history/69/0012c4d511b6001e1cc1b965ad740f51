@@ -1,0 +1,5 @@
+package huana.com.vn.manage_employees.ViewModel;
+
+public class EmployeesViewModel {
+
+}

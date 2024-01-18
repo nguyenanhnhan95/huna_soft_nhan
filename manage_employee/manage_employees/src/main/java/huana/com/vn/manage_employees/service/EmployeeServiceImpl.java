@@ -18,11 +18,16 @@ public class EmployeeServiceImpl {
 	static {
 		mapEmployeeMap.put(1, new Employee(1,"Nguyen Anh Nhan","Da Nang","nguyenanhnhan@gmai.com","0906356412",
 		LocalDate.parse("1995-04-29"),LocalDate.parse("2022-05-05"),260000.0));
+		mapEmployeeMap.put(2, new Employee(2,"Nguyen Anh Vu","Da Nang","nguyenanhvu@gmai.com","0906356154",
+				LocalDate.parse("1994-01-01"),LocalDate.parse("2022-10-05"),220000.0));
 	}
 	public List<Employee> findAll(){
 		return new ArrayList<Employee>(mapEmployeeMap.values());
 	}
 	public List<Employee> searchEmployees(String name){
+		if(name==null || name=="") {
+			return findAll();
+		}
 		return mapEmployeeMap.values().stream().filter(employee->employee.getEmail().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toList());
 	}
 	public List<Employee> deleteEmployeeByOfId(Integer id){

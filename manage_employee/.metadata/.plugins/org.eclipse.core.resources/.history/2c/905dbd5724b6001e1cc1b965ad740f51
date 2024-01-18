@@ -1,0 +1,5 @@
+<zk>
+ 	<window title="search" width="50%" border="normal" onOK="@Command('search')"
+ 	viewModel="@id('vm') @init('view_model.EmployeesViewModel') ">
+ 	</window>
+</zk>

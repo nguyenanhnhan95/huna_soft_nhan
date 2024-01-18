@@ -12,7 +12,7 @@ public class Employee {
 	private String phone;
 	private LocalDate birthOfData;
 	private LocalDate dateStartWork;
-	private Double Salary;
+	private Double salary;
 	
 	
 	public Employee(Integer id, String name, String address, String email, String phone, LocalDate birthOfData,
@@ -24,7 +24,7 @@ public class Employee {
 		this.phone = phone;
 		this.birthOfData = birthOfData;
 		this.dateStartWork = dateStartWork;
-		Salary = salary;
+		this.salary = salary;
 	}
 
 	public Employee() {
@@ -74,9 +74,19 @@ public class Employee {
 		this.phone = phone;
 	}
 
-	public void setSalary(Double salary) {
-		Salary = salary;
+	
+	public Double getSalary() {
+		return salary;
 	}
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+
+	public LocalDate getDateStartWork() {
+		return dateStartWork;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
