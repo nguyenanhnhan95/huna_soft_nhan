@@ -1,0 +1,128 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?component name="form" inline="true" macroURI="./form.zul"?>
+<zk xmlns:n="native" xmlns:zk="zk" xmlns:x="xhtml"
+	xmlns:ca="client/attribute">
+   <n:section>
+		<div class="row" viewModel="@id('addEV') @init('huana.com.vn.manage_employees.view_model.AddEmployeeViewModel')" validationMessages="@id('vmsgs')">
+			<div class="col-12">
+				<n:div class="card form-action" >
+					<n:div class="card-body" style="padding: 10px 20px">
+						<n:div class="row">
+							<div class="col-12">
+								<button iconSclass="fa fa-floppy-o"
+									zclass="btn btn-success mr-1 waves-effect waves-float waves-light"
+									onClick="@command('saveEntity')">
+									Lưu
+								</button>
+								<button iconSclass="fa fa-floppy-o"
+									zclass="btn btn-success mr-1 waves-effect waves-float waves-light"
+									onClick="@command('saveEntity', closeable=true)">
+									Lưu và Đóng
+								</button>
+								<button iconSclass="fa fa-times"
+									zclass="btn btn-outline-secondary waves-effect"
+									onClick="@command('redirectPage', uri='/admin/customer')">
+									Đóng
+								</button>
+							</div>
+						</n:div>
+					</n:div>
+				</n:div>
+				<div class="card">
+					<div class="card-header">
+						<n:h4 class="card-title">${arg.title}</n:h4>
+					</div>
+					<div class="card-body">
+						<include src="customer/form_basic_info.zul"/>
+					</div>
+				</div>
+				<div children="@load(addVM.model.contacts)">
+					<template name="children">
+						<div class="card mb-1">
+							<div class="card-header">
+								<n:h4 class="card-title">Người liên hệ ${forEachStatus.index + 1}</n:h4>
+								<a zclass="close" tooltiptext="Xóa" onClick="@command('removeContact', contact=each)">×</a>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6">
+										<div class="form-group">
+											<n:label>Họ và tên</n:label>
+											<textbox zclass="form-control"
+												value="@bind(each.name)
+					 												@save(each.name, before='saveEntity')
+																	@validator(addVM.baseValidator, constraint='no empty')" />
+											<label zclass="label-invalid-feedback"
+												value="@load(vmsgs[self.previousSibling])" />
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-6">
+										<div class="form-group">
+											<n:label>Ngày sinh</n:label>
+											<datebox sclass="form-control"
+												value="@bind(each.dob) 
+												@save(each.dob, before='saveEntity')
+												@validator(addVM.dobValidator)" />
+											<label zclass="label-invalid-feedback"
+												value="@load(vmsgs[self.previousSibling])" />
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-6">
+										<div class="form-group">
+											<n:label>Số điện thoại</n:label>
+											<textbox zclass="form-control"
+												value="@bind(each.phone)
+					 												@save(each.phone, before='saveEntity')
+																	@validator(addVM.baseValidator, constraint='no empty')" />
+											<label zclass="label-invalid-feedback"
+												value="@load(vmsgs[self.previousSibling])" />
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-6">
+										<div class="form-group">
+											<n:label>Email</n:label>
+											<textbox zclass="form-control"
+												value="@bind(each.email)
+					 												@save(each.email, before='saveEntity')
+																	@validator(addVM.baseValidator, constraint='no empty')" />
+											<label zclass="label-invalid-feedback"
+												value="@load(vmsgs[self.previousSibling])" />
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-6">
+										<div class="form-group">
+											<n:label>Địa chỉ</n:label>
+											<textbox zclass="form-control"
+												value="@bind(each.address)
+					 												@save(each.address, before='saveEntity')
+																	@validator(addVM.baseValidator, constraint='no empty')" />
+											<label zclass="label-invalid-feedback"
+												value="@load(vmsgs[self.previousSibling])" />
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-6">
+										<div class="form-group">
+											<n:label>Chức vụ</n:label>
+											<combobox sclass="form-control" model="@load(addVM.roleList)"
+					                                  placeholder="Chọn chức vụ"
+					                                  selectedItem="@bind(each.role)">
+					                            <template name="model">
+					                                <comboitem label="@load(empty each ? '--- Chọn ---' : each.name)"/>
+					                            </template>
+					                        </combobox>
+					                        <label zclass="label-invalid-feedback"
+												value="@load(vmsgs[self.previousSibling])" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</template>
+				</div>
+				<div zclass="text-right">
+					<button iconSclass="fa fa-plus" zclass="btn btn-danger" label="Thêm người liên hệ" onClick="@command('addContact')"></button>
+				</div>
+			</div>
+		</div>
+	</n:section>
+</zk>

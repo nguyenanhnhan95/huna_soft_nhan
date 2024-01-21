@@ -1,5 +1,0 @@
-package huana.com.vn.manage_employees.service;
-
-public interface IEmployeeService {
-
-}
