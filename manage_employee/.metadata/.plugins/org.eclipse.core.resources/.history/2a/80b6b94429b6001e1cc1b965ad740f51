@@ -1,0 +1,34 @@
+package huana.com.vn.manage_employees.view_model;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.zkoss.zk.ui.annotation.Command;
+import org.zkoss.zul.ListModelList;
+
+import huana.com.vn.manage_employees.model.Employee;
+import huana.com.vn.manage_employees.service.EmployeeServiceImpl;
+import huana.com.vn.manage_employees.service.IEmployeeService;
+
+public class EmployeesViewModel {
+	private String nameSearch;
+	private List<Employee> employees = new ListModelList<Employee>();
+	private Employee selectEmployee;
+	private Integer idEmployee;
+	private EmployeeServiceImpl employeeService= new EmployeeServiceImpl();
+	
+	@Command
+	public void searchEmployees() {
+		employees.clear();
+		employees.addAll(employeeService.search(nameSearch));
+	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees() {
+		return employees;
+	}
+	
+ }

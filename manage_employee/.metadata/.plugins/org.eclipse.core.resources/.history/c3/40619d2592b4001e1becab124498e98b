@@ -1,0 +1,10 @@
+package huana.com.vn.manage_employees;
+
+public class RegistrationComposer {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

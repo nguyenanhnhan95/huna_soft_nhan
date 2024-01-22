@@ -1,0 +1,60 @@
+<zk xmlns:n="native" xmlns:zk="zk" xmlns:x="xhtml"
+	xmlns:ca="client/attribute">
+	<style src="/assets/components/list-employee.css"/>
+<!-- 	<style>
+		.search_employee{ display:flex; justify-content:space-between;
+		color:black; }
+	</style> -->
+	<div zclass="container_manage_employee" width="80%"
+		onOK="@Command('search')" 
+		viewModel="@id('vm') @init('huana.com.vn.manage_employees.view_model.EmployeesViewModel') ">
+		<div sclass="search_employee">
+			<div sclass="search_employee-left">
+				<label>Keyword:</label>
+				<textbox value="@save(vm.nameSearch)" />
+				<button label="Search" iconSclass="z-icon-search"
+					onClick="@command('search')" style="margin: 0 0 5px 5px" />
+			</div>
+			<div sclass="searchemployee-right">
+				<x:button class="btn add-new btn-success"
+                          onClick="@command('redirectPage', uri='/content/add-employee.zul')">
+                    <x:i data-feather="plus"/>
+                    Thêm mới
+                </x:button>
+			</div>
+		</div>
+
+		<listbox model="@init(vm.employees)"
+			emptyMessage="No employee found in the result" rows="5">
+			<listhead sizable="true">
+				<listheader label="ID" />
+				<listheader label="NAME" />
+				<listheader label="Address" />
+				<listheader label="Phone" />
+				<listheader label="Salary" />
+				<listheader label="Action" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@init(each.id)"></listcell>
+					<listcell label="@init(each.name)"></listcell>
+					<listcell label="@init(each.address)"></listcell>
+					<listcell label="@init(each.phone)"></listcell>
+					<listcell label="@init(each.salary)"></listcell>
+					<listcell>
+						<n:a
+							href="${ctxPath}/admin/customer/detail?entityId=${each.id}">
+							<n:i class="fa fa-pencil mr-50"></n:i>
+							<n:span>Sửa</n:span>
+						</n:a>
+						<x:a href="javascript:void(0);"
+							onClick="@command('removeRecord', entity=each)">
+							<n:i class="fa fa-trash-o mr-50"></n:i>
+							<n:span>Xóa</n:span>
+						</x:a>
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+	</div>
+</zk>

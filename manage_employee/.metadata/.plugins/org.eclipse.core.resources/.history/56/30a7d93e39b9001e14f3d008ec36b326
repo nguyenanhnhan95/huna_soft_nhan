@@ -1,0 +1,154 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:zk="zk" xmlns:x="xhtml"
+	xmlns:ca="client/attribute">
+
+<div
+		viewModel="@id('addEM') @init('huana.com.vn.manage_employees.view_model.AddEmployeeViewModel')"
+		validationMessages="@id('vmsgs')"
+		form="@id('em') @load(addEM.employee) @save(addEM.employee, before='submit') @validator('huana.com.vn.manage_employees.view_model.EmployeeValidatorViewModel',  captcha=addEM.captcha, captchaInput=addEM.captchaInput)">
+		<grid>
+			<columns>
+				<column label="Type" width="120px" />
+				<column label="Content" />
+				<column label="Component" width="200px" />
+			</columns>
+			<rows>
+				<row>
+					<label value="name" width="150px" />
+					<hlayout>
+						<textbox value="@bind(em.name)"
+							width="150px" tabindex="1" />
+					</hlayout>
+					<div>
+						<label sclass="hightlight">Textbox</label>
+					</div>
+				</row>
+				<row>
+					<label value="address" width="150px" />
+					<hlayout>
+						<textbox value="@bind(em.address)"
+							width="150px" tabindex="1" />
+					</hlayout>
+					<div>
+						<label sclass="hightlight">Textbox</label>
+					</div>
+				</row>
+				<row>
+					Phone:
+					<textbox constraint="no empty" value="@bind(em.phone)"
+						width="150px" maxlength="15" tabindex="5" />
+					<div>
+						<label sclass="hightlight">Textbox</label>
+						with max length limit
+					</div>
+				</row>
+				<row>
+					Salary:
+					<cell>
+						<decimalbox format="###.##" value="@bind(em.salary)"
+							width="150px"  tabindex="6" />
+						<label class="error"
+							value="@load(vmsgs['weight'])" />
+					</cell>
+					<div>
+						<label sclass="hightlight">Decimalbox</label>
+						with format
+					</div>
+				</row>
+				<row>
+					Birthday:
+					<hbox align="center">
+						<datebox value="@bind(em.birthOfData)" 
+							format="@load(vm.dateFormat)" width="150px"  tabindex="7"/>
+						Format :
+						<listbox selectedItem="@bind(addEM.dateFormat)"
+							mold="select" tabindex="8">
+							<listitem label="Default" value="" />
+							<listitem label="yyyy/MM/dd hh:mm a"
+								value="yyyy/MM/dd hh:mm a" />
+							<listitem label="yyyy/MM/dd"
+								value="yyyy/MM/dd" />
+							<listitem label="MM-dd-yy" value="MM-dd-yy" />
+						</listbox>
+					</hbox>
+					<div>
+						<label sclass="hightlight">Datebox</label>
+						and
+						<label sclass="hightlight">Listbox</label>
+						in select mold
+					</div>
+				</row>
+				<row>
+					BirthStartWork:
+					<hbox align="center">
+						<datebox value="@bind(em.birthStartWork)" 
+							 width="150px"  tabindex="7"/>
+	
+					</hbox>
+					<div>
+						<label sclass="hightlight">Datebox</label>
+						and
+						<label sclass="hightlight">Listbox</label>
+						in select mold
+					</div>
+				</row>
+				<row>
+					E-mail:
+					<cell>
+						<textbox value="@bind(em.email)" width="150px" tabindex="9" />
+						<label class="error"
+							value="@load(vmsgs['email'])" />
+					</cell>
+					<div>
+						<label sclass="hightlight">Textbox</label>
+						with regexp constraint
+					</div>
+
+				</row>
+				<row>
+					Validation:
+					<vlayout>
+						<hlayout>
+							<textbox value="@bind(addEM.captchaInput)"
+								width="150px"  tabindex="12" />
+							<label class="error"
+								value="@load(vmsgs['captcha'])" />
+						</hlayout>
+						<hlayout>
+							<captcha value="@load(addEM.captcha)"
+								bgColor="@load(addEM.backgroundColour)" 
+								fontColor="@load(addEM.foregroundColour)"
+								width="150px" height="50px" 
+								frame="true" />
+							<vlayout>
+								<button label="Regenerate"
+									onClick="@command('regenerate')" width="100px" />
+								<hlayout>
+									<!-- <colorbox
+										value="@bind(addEM.backgroundColour)" width="35px" />
+									<colorbox
+										value="@bind(addEM.foregroundColour)" width="35px" /> -->
+								</hlayout>
+							</vlayout>
+						</hlayout>
+					</vlayout>
+					<div>
+						<label sclass="hightlight">Captcha</label>
+						and
+						<label sclass="hightlight">Colorbox</label>
+					</div>
+				</row>
+				<row>
+					<cell colspan="3" style="text-align:center">
+						<vlayout>
+							<label visible="@load(empty vmsgs)" 
+								value="@load(empty vmsgs ? 'Form successfully submitted!' : '', before='submit')" />
+							<button label="Submit" onClick="@command('submit')"
+								width="100px" height="30px" />
+						</vlayout>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</div> 
+</zk>

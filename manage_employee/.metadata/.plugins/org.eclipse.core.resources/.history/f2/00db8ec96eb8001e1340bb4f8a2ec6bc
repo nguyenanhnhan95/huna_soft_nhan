@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:zk="zk" xmlns:z="zul" xmlns:w="client"
+	xmlns:n="native" xmlns:x="xhtml">
+	<zk:zscript>
+		import org.zkoss.zkplus.spring.SpringUtil; 
+		String resource = execution.getParameter("resource");
+		ctxPath = execution.getContextPath();
+		paramService = SpringUtil.getBean("paramService");
+		metaTagRender = SpringUtil.getBean("metaTagRender");
+		metaTagRender.initialize();
+		String title = metaTagRender.getTitle();
+		String description = metaTagRender.getDescription();
+		String imageUrl = metaTagRender.getImageUrl();
+		favicon = paramService.getFavicon();
+		cacheIdBean = SpringUtil.getBean("cacheIdBean");
+		metaTagRender.createScript();
+	</zk:zscript>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+			
+		<meta name="description" content="${description}" />
+        <meta property="og:description" content="${description}" />
+        <meta property="og:title" content="${title}" />
+        <meta property="og:image" content="${imageUrl}" />
+		<!-- Font -->
+		<link
+			href="${ctxPath}/assets/font/patrick.css"
+			rel="stylesheet" />
+		<link
+			href="${ctxPath}/assets/font/nunito.css"
+			rel="stylesheet" />
+		<link
+			href="${ctxPath}/assets/font/montserrat.css"
+			rel="stylesheet" />
+        <link
+        	href="${ctxPath}/assets/font/material.css"
+        	rel="stylesheet" />
+        <link 
+        	rel="stylesheet"
+            href="${ctxPath}/assets/css/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<!-- End font -->
+		
+        <!-- Bootstrap CSS -->
+        <link 
+        	rel="stylesheet"
+            href="${ctxPath}/assets/css/bootstrap.css" />
+        <link 
+        	rel="stylesheet"
+            href="${ctxPath}/assets/css/bootstrap-icons-1.8.2/bootstrap-icons.css" />
+		<link 
+			rel="icon" href="${favicon.imageUrl}" sizes="any"
+			type="image/svg+xml" />
+		<link 
+			rel="stylesheet"
+			href="${ctxPath}/assets/fe-assets/slick-theme.min.css"/>
+		<link 
+			rel="stylesheet"
+			href="${ctxPath}/assets/fe-assets/slick.min.css"/>
+		<link 
+			rel="stylesheet"
+			href="${ctxPath}/assets/fe-assets/index.css?v=${cacheIdBean.cacheId}" />
+		<link rel="stylesheet" type="text/css" href="${ctxPath}/assets/css/colorbox.css"/>
+        <title>${title}</title>
+        
+     
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-Y8S2KSPVKC');
+		</script>
+		
+		<!-- Google Tag Manager -->
+		
+		<!-- End Google Tag Manager -->
+	</head>
+	<body>
+		<div class="page">
+<!-- 		    <z:include src="/WEB-INF/web/headermobile.zhtml"></z:include>
+			<z:include src="/WEB-INF/web/header.zhtml"></z:include>
+			<div 
+				zk:viewModel="@id('baseVM') @init('vn.hunasoft.web.vm.WebBaseViewModel')">
+				<z:include src="@load(baseVM.file)" />
+			</div> -->
+<!-- 			<z:include src="/WEB-INF/web/footer.zhtml"></z:include>
+			<z:include src="/WEB-INF/web/util.zhtml"></z:include> -->
+		</div>
+		<script src="/assets/web-assets/js/bootstrap.min.js" />
+		<script src="/assets/web-assets/js/bootstrap.bundle.min.js" /> 
+		<script
+			src="/assets/fe-assets/slick.min.js">
+		</script>
+		<!-- Google Tag Manager (noscript) -->
+  		<noscript>
+  			<iframe
+  				src="https://www.googletagmanager.com/ns.html?id=GTM-W3CT5CL"
+  				height="0" width="0" style="display:none;visibility:hidden">
+  			</iframe>
+  		</noscript>
+  		<!-- End Google Tag Manager (noscript) -->
+	</body>
+	<script type="text/javascript">
+		 function createEmbeddedScript(data) {
+		 	var script = document.createElement("script");
+		 	script.innerHTML = data;
+		 	console.log(script);
+		 	document.head.appendChild(script);
+		 }
+		 
+		 function createNoScript(data) {
+		 	var noscript = document.createElement("noscript");
+		 	noscript.innerHTML = data;
+		 	console.log(noscript);
+		 	document.head.appendChild(noscript);
+		 }
+		 
+		  function createInlineScript(data) {
+		 	 var scriptElement = document.createElement("script");
+		 	 
+		 	 var deferMatch = data.match(/defer/i);
+			 if (deferMatch) {
+			    scriptElement.defer=true;
+			 }
+		 	 
+		 	 var asyncMatch = data.match(/async/i);
+			 if (asyncMatch) {
+			    scriptElement.async = true;
+			 }
+		 	
+		 	var srcMatch = data.match(/src="([^"]+)"/);
+		 	if (srcMatch) {
+		    	var srcValue = srcMatch[1];
+		    	scriptElement.src = srcValue;
+		  	}	
+		  	
+		  	var crossoriginMatch = data.match(/crossorigin\s*=\s*"([^"]+)"/);
+			if (crossoriginMatch) {
+			   scriptElement.crossOrigin = crossoriginMatch[1];
+			}
+			
+			var integrityMatch = data.match(/integrity\s*=\s*"([^"]+)"/);
+			if (integrityMatch) {
+			   scriptElement.integrity = integrityMatch[1];
+			}
+			
+			var nonceMatch = data.match(/nonce\s*=\s*"([^"]+)"/);
+			if (nonceMatch) {
+			   	var nonceValue = nonceMatch[1];
+   				scriptElement.setAttribute('nonce', nonceValue);
+			}
+			
+			var referrerpolicyMatch = data.match(/referrerpolicy\s*=\s*"([^"]+)"/);
+			if (nonceMatch) {
+			   	var referrerpolicyValue = referrerpolicyMatch[1];
+   				scriptElement.setAttribute('referrerpolicy', referrerpolicyValue);
+			}
+			
+		  	console.log(scriptElement)
+		 	document.head.appendChild(scriptElement);
+		 }
+	</script>
+</html>

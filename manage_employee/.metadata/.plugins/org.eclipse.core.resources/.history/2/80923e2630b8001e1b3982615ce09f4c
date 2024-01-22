@@ -1,0 +1,32 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?style href="/assets/manage_employee.css" ?>
+<zk xmlns:n="native" xmlns:zk="zk" xmlns:x="xhtml" xmlns:ca="client/attribute">
+<?link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet"?>
+ 	<div  width="80%" border="normal" onOK="@Command('search')"
+ 	viewModel="@id('vm') @init('huana.com.vn.manage_employees.view_model.EmployeesViewModel') ">
+ 	Keyword:
+	<textbox value="@save(vm.nameSearch)" />
+	<button label="Search" iconSclass="z-icon-search" onClick="@command('search')" style="margin: 0 0 5px 5px"/>
+	<listbox model="@init(vm.employees)" emptyMessage="No employee found in the result" rows="5">
+		<listhead sizable="true">
+			<listheader label="ID" />
+			<listheader label="NAME" />
+			<listheader label="Address" />
+			<listheader label="Phone" />
+			<listheader label="Salary" />
+			<listheader label="Action" />
+		</listhead>
+		<template name="model">
+			<listitem>
+				<listcell label="@init(each.id)"></listcell>
+				<listcell label="@init(each.name)"></listcell>
+				<listcell label="@init(each.address)"></listcell>
+				<listcell label="@init(each.phone)"></listcell>
+				<listcell label="@init(each.salary)"></listcell>
+				<listcell >
+				
+				</listcell>
+			</listitem>
+		</template>
+	</listbox>
+</zk>

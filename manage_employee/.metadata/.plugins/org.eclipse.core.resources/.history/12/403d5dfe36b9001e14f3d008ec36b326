@@ -1,0 +1,19 @@
+package huana.com.vn.manage_employees.view_model;
+
+import org.zkoss.bind.annotation.Init;
+import org.zkoss.zk.ui.annotation.Command;
+
+import huana.com.vn.manage_employees.model.Employee;
+
+
+public class AddEmployeeViewModel {
+	private Employee employee;
+	@Init
+	public void init() {
+		
+	}
+	@Command
+	public void submit() {
+		
+	}
+}

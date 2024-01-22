@@ -1,0 +1,102 @@
+package richlet;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.GenericRichlet;
+import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.RichletConfig;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listhead;
+import org.zkoss.zul.Listheader;
+import org.zkoss.zul.Listitem;
+import org.zkoss.zul.ListitemRenderer;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
+
+import huana.com.vn.manage_employees.model.Employee;
+import huana.com.vn.manage_employees.service.EmployeeServiceImpl;
+import huana.com.vn.manage_employees.service.IEmployeeService;
+
+//public class EmployeeRichlet extends GenericRichlet{
+//	
+//	private EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
+//	@Override
+//	public void service(Page page) throws Exception {
+//		
+//		
+//	}
+//	private Component buildEmployeeInterface() {
+//		final Textbox nameSearchBox = new Textbox();
+//		Button searchButton = new Button("Search");
+//		searchButton.setImage("/img/search.png");
+//		Hbox searchArea = new Hbox();
+//		searchArea.setAlign("center");
+//		searchArea.appendChild(new Label("Keyword:"));
+//		searchArea.appendChild(nameSearchBox);
+//		searchArea.appendChild(searchButton);
+//		
+//		Listhead listhead = new Listhead();
+//		listhead.appendChild(new Listheader("ID"));
+//		listhead.appendChild(new Listheader("Name"));
+//		listhead.appendChild(new Listheader("Address"));
+//		listhead.appendChild(new Listheader("Phone"));
+//		listhead.appendChild(new Listheader("Salary"));
+//		listhead.appendChild(new Listheader("Action"));
+//		final Listbox employeeListbox = new Listbox();
+//		employeeListbox.setHeight("160px");
+//		employeeListbox.setEmptyMessage("No car found in the result");
+//		employeeListbox.setItemRenderer(new EmployeeRenderer());
+//		employeeListbox.appendChild(listhead);
+//		
+//		searchButton.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+//			//search
+//			@Override
+//			public void onEvent(Event event) throws Exception {
+//				String nameSearch = nameSearchBox.getValue();
+//				List<Employee> result = employeeService.searchEmployees(nameSearch);
+//				employeeListbox.setModel(new ListModelList<Employee>(result));
+//			}
+//			
+//		});
+//		Window window = new Window();
+//		window.setTitle("Search");
+//		window.setWidth("600px");
+//		window.setBorder("normal");
+//		window.appendChild(searchArea);
+//		window.appendChild(employeeListbox);
+//		return window;
+//	}
+//	@Override
+//	public void init(RichletConfig config) {
+//		//initialize resources, e.g. get initial parameters
+//	}
+//	
+//	@Override
+//	public void destroy() {
+//		//destroy resources
+//	}
+//	
+//}
+class EmployeeRenderer implements ListitemRenderer<Employee>{
+
+	@Override
+	public void render(Listitem listitem, Employee employee, int index) throws Exception {
+		
+		listitem.appendChild(new Listcell(employee.getId().toString()));
+		listitem.appendChild(new Listcell(employee.getName().toString()));
+		listitem.appendChild(new Listcell(employee.getPhone().toString()));
+		listitem.appendChild(new Listcell(employee.getAddress().toString()));
+		listitem.appendChild(new Listcell(employee.getSalary().toString()));
+	}
+}

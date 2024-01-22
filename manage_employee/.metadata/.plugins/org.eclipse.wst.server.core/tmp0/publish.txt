@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Tue Jan 23 01:01:54 ICT 2024
+org.eclipse.jst.j2ee.server\:/binary\:C\:\\Users\\ADMIN\\.m2\\repository\\org\\springframework\\spring-web\\4.3.20.RELEASE\\spring-web-4.3.20.RELEASE.jar=WEB-INF/lib/spring-web-4.3.20.RELEASE.jar
+org.eclipse.jst.j2ee.server\:/binary\:C\:\\Users\\ADMIN\\.m2\\repository\\org\\zkoss\\zk\\zkwebfragment\\9.6.0\\zkwebfragment-9.6.0.jar=WEB-INF/lib/zkwebfragment-9.6.0.jar
