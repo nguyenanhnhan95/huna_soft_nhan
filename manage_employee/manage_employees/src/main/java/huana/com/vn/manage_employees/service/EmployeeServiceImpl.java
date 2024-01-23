@@ -36,6 +36,7 @@ public class EmployeeServiceImpl {
 		return EmployeeServiceImpl.this.findAll();
 	}
 	public List<Employee> saveEmployee(Employee employee){
+		employee.setId(mapEmployeeMap.size()+1);
 		mapEmployeeMap.put(mapEmployeeMap.size()+1, employee);
 		return findAll();
 	}

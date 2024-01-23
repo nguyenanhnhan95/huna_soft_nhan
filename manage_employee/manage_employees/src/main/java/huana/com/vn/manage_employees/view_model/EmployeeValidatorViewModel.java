@@ -9,32 +9,34 @@ public class EmployeeValidatorViewModel extends AbstractValidator{
 
 	@Override
 	public void validate(ValidationContext ctx) {
-//		System.out.println(ctx.getProperties().size());
-//		Map<String,Property> beanProps = ctx.getProperties(ctx.getProperty().getBase());
-//		validateAddress(ctx,(String) beanProps.get("address").getValue());
-//		validateSalary(ctx,(Double) beanProps.get("salary").getValue());
-//		validateName(ctx,(String) beanProps.get("name").getValue());
+		System.out.println(ctx.getProperties().size());
+		Map<String,Property> beanProps = ctx.getProperties(ctx.getProperty().getBase());
+		validateAddress(ctx,(String) beanProps.get("address").getValue());
+		validateSalary(ctx,(Double) beanProps.get("salary").getValue());
+		validateName(ctx,(String) beanProps.get("name").getValue());
 	}
 	private void validateName(ValidationContext ctx,String name) {
 		if(name==null) {
 			this.addInvalidMessage(ctx, "Please, Enter your name");
 		}else if(!name.matches("^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$")){
-			this.addInvalidMessage(ctx, "Name is not match");
+			this.addInvalidMessage(ctx,"name", "Name is not match");
 		}else {
 			
 		}
 	}
 	private void validateAddress(ValidationContext ctx,String address) {
 		if(address==null) {
-			this.addInvalidMessage(ctx, "Please, Enter your address");
+			this.addInvalidMessage(ctx,"address", "Please, Enter your address");
 		}
 	}
 	private void validateSalary(ValidationContext ctx,Double salary) {
 		if(salary==null) {
-			this.addInvalidMessage(ctx, "Please, Enter your address");
+			this.addInvalidMessage(ctx,"salary", "Please, Enter your address");
+		}else {
+			if(salary<1000) {
+				this.addInvalidMessage(ctx,"salary", "Please, Enter salary is match");
+			}
 		}
-		if(salary<1000) {
-			this.addInvalidMessage(ctx, "Please, Enter salary is match");
-		}
+		
 	}
 }

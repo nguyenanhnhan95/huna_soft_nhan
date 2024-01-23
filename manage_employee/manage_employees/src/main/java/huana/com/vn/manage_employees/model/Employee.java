@@ -19,21 +19,15 @@ public class Employee {
 	private Date birthOfData;
 	private Date dateStartWork;
 	private Double salary;
+	private String avartar;
 	
-	
-	public Employee(String name, String address, String email, String phone, Date birthOfData,
-			Date dateStartWork, Double salary) {
-		this.name = name;
-		this.address = address;
-		this.email = email;
-		this.phone = phone;
-		this.birthOfData = birthOfData;
-		this.dateStartWork = dateStartWork;
-		this.salary = salary;
+	public Employee() {
 	}
-
+	
+	
 	public Employee(Integer id, String name, String address, String email, String phone, Date birthOfData,
-			Date dateStartWork, Double salary) {
+			Date dateStartWork, Double salary, String avartar) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -42,13 +36,8 @@ public class Employee {
 		this.birthOfData = birthOfData;
 		this.dateStartWork = dateStartWork;
 		this.salary = salary;
+		this.avartar = avartar;
 	}
-
-	public Employee() {
-	}
-	
-	
-	
 
 	
 	
@@ -68,4 +57,11 @@ public class Employee {
 			return false;
 		return true;
 	}
+
+
+
+
+
+
+	
 }

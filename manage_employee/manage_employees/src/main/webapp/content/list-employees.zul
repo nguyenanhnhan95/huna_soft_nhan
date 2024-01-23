@@ -43,7 +43,7 @@
 					<listcell label="@init(each.salary)"></listcell>
 					<listcell>
 						<n:a
-							href="${ctxPath}/admin/customer/detail?entityId=${each.id}">
+							href="${ctxPath}/admin/customer/detail?id=${each.id}">
 							<n:i class="fa fa-pencil mr-50"></n:i>
 							<n:span>Sửa</n:span>
 						</n:a>
