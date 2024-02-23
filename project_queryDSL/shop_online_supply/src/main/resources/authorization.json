@@ -1,0 +1,477 @@
+{
+  "roles": [
+    {
+      "name": "Admin",
+      "alias": "ADMIN",
+      "description": "Quản lý hệ thống",
+      "permissions": [
+        "dashboard:view",
+        "class:view",
+        "employee:view",
+        "sinhvien:view",
+        "student:view",
+        "library:view",
+        "system:view",
+        "webcontent:view",
+        "timetable:view",
+        "tution:view",
+        "daily-spend:view"
+      ]
+    },
+    {
+      "name": "Biên tập viên",
+      "alias": "BTV",
+      "description": "Biên tập viên của trường",
+      "permissions": [
+        "dashboard:view",
+        "website:view"
+      ]
+    },
+    {
+      "name": "Giáo viên",
+      "alias": "GV",
+      "description": "Giáo viên",
+      "permissions": [
+        "dashboard:view",
+        "class:view",
+        "student:view",
+        "library:view",
+        "timetable:view",
+        "daily-evaluation:view"
+      ]
+    },
+    {
+      "name": "Hiệu trưởng",
+      "alias": "HT",
+      "description": "Hiệu trưởng",
+      "permissions": [
+        "dashboard:view",
+        "class:view",
+        "student:view",
+        "library:view"
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "id": "dashboard",
+      "name": "Dashboard",
+      "scopes": [
+        {
+          "id": "dashboard:view",
+          "name": "Xem"
+        }
+      ]
+    },
+    {
+      "id": "daily-spend",
+      "name": "Quản lý Chi phí",
+      "scopes": [
+        {
+          "id": "daily-spend:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "daily-spend:view",
+          "name": "Xem"
+        },
+        {
+          "id": "daily-spend:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "daily-spend:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "daily-evaluation",
+      "name": "Quản lý đánh giá",
+      "scopes": [
+        {
+          "id": "daily-evaluation:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "daily-evaluation:view",
+          "name": "Xem"
+        },
+        {
+          "id": "daily-evaluation:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "daily-evaluation:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "timetable",
+      "name": "Quản lý chương trình học",
+      "scopes": [
+        {
+          "id": "timetable:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "timetable:view",
+          "name": "Xem"
+        },
+        {
+          "id": "timetable:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "timetable:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "student",
+      "name": "Quản lý học sinh",
+      "scopes": [
+        {
+          "id": "student:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "student:view",
+          "name": "Xem"
+        },
+        {
+          "id": "student:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "student:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "sinhvien",
+      "name": "Quản lý sinh viên",
+      "scopes": [
+        {
+          "id": "sinhvien:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "sinhvien:view",
+          "name": "Xem"
+        },
+        {
+          "id": "sinhvien:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "sinhvien:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "employee",
+      "name": "Quản lý nhân sự",
+      "scopes": [
+        {
+          "id": "employee:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "employee:view",
+          "name": "Xem"
+        },
+        {
+          "id": "employee:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "employee:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "class",
+      "name": "Quản lý lớp học",
+      "scopes": [
+        {
+          "id": "class:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "class:view",
+          "name": "Xem"
+        },
+        {
+          "id": "class:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "class:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "name": "Quản lý thư viện",
+      "scopes": [
+        {
+          "id": "library:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "library:view",
+          "name": "Xem"
+        },
+        {
+          "id": "library:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "library:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "webcontent",
+      "name": "Quản lý website",
+      "scopes": [
+        {
+          "id": "webcontent:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "webcontent:view",
+          "name": "Xem"
+        },
+        {
+          "id": "webcontent:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "webcontent:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "system",
+      "name": "Quản lý hệ thống",
+      "scopes": [
+        {
+          "id": "system:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "system:view",
+          "name": "Xem"
+        },
+        {
+          "id": "system:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "system:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "system-category",
+      "name": "Quản lý danh mục",
+      "scopes": [
+        {
+          "id": "system-category:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "system-category:view",
+          "name": "Xem"
+        },
+        {
+          "id": "system-category:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "system-category:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "muster",
+      "name": "Quản lý điểm danh",
+      "scopes": [
+        {
+          "id": "muster:view",
+          "name": "Xem"
+        },
+        {
+          "id": "muster:edit",
+          "name": "Cập nhật"
+        }
+      ]
+    },
+    {
+      "id": "menu",
+      "name": "Quản lý thực đơn",
+      "scopes": [
+        {
+          "id": "menu:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "menu:view",
+          "name": "Xem"
+        },
+        {
+          "id": "menu:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "menu:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "appointment",
+      "name": "Quản lý lịch hẹn",
+      "scopes": [
+        {
+          "id": "appointment:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "appointment:view",
+          "name": "Xem"
+        },
+        {
+          "id": "appointment:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "appointment:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "file",
+      "name": "Quản lý file",
+      "scopes": [
+        {
+          "id": "file:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "file:view",
+          "name": "Xem"
+        },
+        {
+          "id": "file:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "file:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "sale",
+      "name": "Quản lý phụ huynh tiềm năng",
+      "scopes": [
+        {
+          "id": "sale:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "sale:view",
+          "name": "Xem"
+        },
+        {
+          "id": "sale:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "sale:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "candidate",
+      "name": "Quản lý tuyển sinh",
+      "scopes": [
+        {
+          "id": "candidate:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "candidate:view",
+          "name": "Xem"
+        },
+        {
+          "id": "candidate:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "candidate:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "classdairy",
+      "name": "Quản lý nhật ký lớp",
+      "scopes": [
+        {
+          "id": "classdairy:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "classdairy:view",
+          "name": "Xem"
+        },
+        {
+          "id": "classdairy:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "classdairy:edit",
+          "name": "Sửa"
+        }
+      ]
+    },
+    {
+      "id": "tution",
+      "name": "Quản lý học phí",
+      "scopes": [
+        {
+          "id": "tution:add",
+          "name": "Thêm mới"
+        },
+        {
+          "id": "tution:view",
+          "name": "Xem"
+        },
+        {
+          "id": "tution:delete",
+          "name": "Xóa"
+        },
+        {
+          "id": "tution:edit",
+          "name": "Sửa"
+        }
+      ]
+    }
+  ]
+}
