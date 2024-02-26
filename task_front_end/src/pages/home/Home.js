@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react"
 import PersonIcon from '@mui/icons-material/Person';
 import { HomeIcon } from '@mui/icons-material';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEmployees, searchEmployee } from "../../slice/employee";
+import { findAllEmployees, searchEmployee } from "../../slice/employee";
 import { getEmployees } from "../../selector/employee";
 import { SEARCH_NAME_EMPLOYEE } from "../../constants/employee";
 export function Home() {
     const dispatch = useDispatch();
-    const [search,setSearch] = useState("")
-    const {employees,error,status} = useSelector((state) => state.employee)
+    const [name, setName] = useState("")
+    const { employees, error, status, search } = useSelector((state) => state.employee)
     useEffect(() => {
-        dispatch(fetchEmployees())
+        dispatch(findAllEmployees({ name: name }))
     }, [])
+    console.log(employees)
     return (
         <>
-        <div><input type="name" onChange={(event)=>setSearch(event.target.value)}/>
-        <button type="button" onClick={()=>dispatch(searchEmployee({
-            search
-        }))}>search</button></div>
+            <div><input type="name" onChange={(event) => setName(event.target.value)} />
+                <button type="button" onClick={() => dispatch(searchEmployee({
+                    name
+                }))}>search</button></div>
             <table>
                 <thead>
                     <th>STT</th>
@@ -26,7 +27,7 @@ export function Home() {
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    {employees && employees.map((employee) => (
+                    {employees.content && employees.content.map((employee) => (
                         <tr key={employee.id}>
                             <td>{employee.id}</td>
                             <td>{employee.name}</td>
