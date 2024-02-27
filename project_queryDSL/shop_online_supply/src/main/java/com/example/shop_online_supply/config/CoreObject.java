@@ -14,9 +14,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionOperations;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import jakarta.persistence.EntityManager;
 
 @Component
 public class CoreObject  implements ApplicationContextAware {
@@ -45,7 +43,7 @@ public class CoreObject  implements ApplicationContextAware {
         return new TransactionTemplate(transactionManager());
     }
     public JPAQueryFactory queries() {
-        return new JPAQueryFactory(em());
+        return new JPAQueryFactory((javax.persistence.EntityManager) em());
     }
     public PathBuilderFactory paths() {
         return new PathBuilderFactory();

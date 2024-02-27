@@ -28,22 +28,22 @@ public class InitialDataCreator implements ApplicationListener<ApplicationReadyE
     }
     public void initRole(){
         for (Role role: authorizationProperties.getRoles()) {
-            createUpdateRole(role);
+//            createUpdateRole(role);
         }
     }
-    private void createUpdateRole(Role role) {
-        Role current = roleService.findByAlias(role.getAlias());
-        if (current != null) {
-            current.setDescription(role.getDescription());
-            current.setName(role.getName());
-            if (current.getPermissions().isEmpty()) {
-                current.setPermissions(role.getPermissions());
-            }
-            roleService.saveModel(current);
-        } else {
-            roleService.saveModel(role);
-        }
-    }
+//    private void createUpdateRole(Role role) {
+//        Role current = roleService.findByAlias(role.getAlias());
+//        if (current != null) {
+//            current.setDescription(role.getDescription());
+//            current.setName(role.getName());
+//            if (current.getPermissions().isEmpty()) {
+//                current.setPermissions(role.getPermissions());
+//            }
+//            roleService.saveModel(current);
+//        } else {
+//            roleService.saveModel(role);
+//        }
+//    }
     @Override
     public boolean supportsAsyncExecution() {
         return ApplicationListener.super.supportsAsyncExecution();

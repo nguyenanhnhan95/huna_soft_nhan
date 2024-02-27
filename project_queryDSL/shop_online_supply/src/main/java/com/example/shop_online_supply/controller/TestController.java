@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,7 +14,6 @@ import javax.persistence.PersistenceContext;
 @RequestMapping("/test")
 public class TestController {
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
-
     @PersistenceContext
     private EntityManager entityManager;
 
