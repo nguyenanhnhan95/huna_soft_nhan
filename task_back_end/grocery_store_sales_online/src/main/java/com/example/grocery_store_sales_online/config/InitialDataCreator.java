@@ -12,8 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class InitialDataCreator implements ApplicationListener<ApplicationReadyEvent> {
     @Autowired
     private AuthorizationProperties authorizationProperties;
-//    @Autowired
-//    private RoleService roleService;
+
     @Override
     @Transactional
     public void onApplicationEvent(ApplicationReadyEvent event) {

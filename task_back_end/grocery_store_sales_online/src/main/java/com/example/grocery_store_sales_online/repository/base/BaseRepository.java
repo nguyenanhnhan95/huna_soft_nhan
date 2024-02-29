@@ -1,5 +1,6 @@
 package com.example.grocery_store_sales_online.repository.base;
 
+import com.example.grocery_store_sales_online.model.Model;
 import com.example.grocery_store_sales_online.model.QEmployee;
 import com.example.grocery_store_sales_online.util.QueryParameter;
 import com.querydsl.core.Fetchable;
@@ -8,24 +9,40 @@ import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.data.repository.core.EntityInformation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public abstract class BaseRepository <T,ID> extends SimpleJpaRepository<T,ID> implements IBaseRepository<T,ID> {
     protected EntityManager em;
     protected JPAQueryFactory jpaQueryFactory;
+    protected EntityInformation<T,ID> entityInformation;
     protected JPAQuery<T> jpaQuery;
     public BaseRepository(Class<T> domainClass, EntityManager em) {
         super(domainClass, em);
         this.em=em;
         this.jpaQueryFactory=new JPAQueryFactory(em);
         this.jpaQuery=new JPAQuery<>(em);
+    }
+    @Transactional
+    public void saveModel(final T obj) {
+       save((T) obj);
+    }
+    private void setMetaData(Model obj){
+        if (obj.getCreateDate()==null){
+            obj.setCreateDate(new Date());
+        }
+        obj.setEditDate(new Date());
     }
     @SuppressWarnings("unchecked")
     public <B, A extends SimpleQuery<?> & Fetchable<B>> A page(final A qry, int size, int page) {

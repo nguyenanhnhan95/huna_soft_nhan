@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class EmployeeRepository extends BaseRepository<Employee,Integer> implements IEmployeeRepository {
+public class EmployeeRepository extends BaseRepository<Employee,Integer>  {
     protected final QEmployee employee = QEmployee.employee;
 
     public EmployeeRepository( EntityManager em) {
@@ -30,6 +30,9 @@ public class EmployeeRepository extends BaseRepository<Employee,Integer> impleme
         long total = query.fetchCount();
         return QueryListResult.<Employee>builder().result(result).total(total).build();
     }
+
+
+
     public JPAQuery<Employee> search(Map<String, Object> params) {
         String keyword = MapUtils.getString(params, "keyword");
         if (StringUtils.isNotBlank(keyword)) {
