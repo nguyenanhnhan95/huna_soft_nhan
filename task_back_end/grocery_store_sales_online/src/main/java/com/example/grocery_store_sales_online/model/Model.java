@@ -14,7 +14,7 @@ import jakarta.persistence.*;
 @MappedSuperclass
 public class Model implements IModel {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String personEdit;
     private String personCreate;
