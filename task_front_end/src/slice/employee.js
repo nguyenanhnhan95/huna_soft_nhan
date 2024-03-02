@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
-import { FETCH_EMPLOYEES_FAILED, FETCH_EMPLOYEES_START, FETCH_EMPLOYEES_SUCCEEDED, SEARCH_NAME_EMPLOYEE } from "../constants/employee"
+import { FETCH_EMPLOYEES_FAILED, FETCH_EMPLOYEES_LOADING, FETCH_EMPLOYEES_SUCCEEDED, SEARCH_NAME_EMPLOYEE } from "../constants/employee"
 import EmployeeService from "../services/employee"
 const initialState = {
     status: 'uninitialized',

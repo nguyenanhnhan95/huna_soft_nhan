@@ -14,11 +14,11 @@ import java.util.List;
 public class Product extends Model{
     private String name;
     @Column(columnDefinition = "longtext")
-    private String desc;
+    private String description;
     private Long price;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviews;
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "product_image", joinColumns = { @JoinColumn(name = "product_id") },
             inverseJoinColumns = {@JoinColumn(name = "image_id") })
     private List<Image> images = new ArrayList<>();

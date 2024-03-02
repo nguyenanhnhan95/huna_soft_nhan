@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { findAllEmployees, searchEmployee } from "../../slice/employee";
 import { getEmployees } from "../../selector/employee";
 import { SEARCH_NAME_EMPLOYEE } from "../../constants/employee";
+import { findQueryProduct } from "../../slice/product";
 export function Home() {
     const dispatch = useDispatch();
     const [name, setName] = useState("")
-    const { employees, error, status, search } = useSelector((state) => state.employee)
+    const { products, error, status, queryParameter } = useSelector((state) => state.product)
     useEffect(() => {
-        dispatch(findAllEmployees({ name: name }))
+        dispatch(findQueryProduct(queryParameter))
     }, [])
-    console.log(employees)
+    console.log(products)
     return (
         <>
             <div><input type="name" onChange={(event) => setName(event.target.value)} />
@@ -23,15 +24,15 @@ export function Home() {
                 <thead>
                     <th>STT</th>
                     <th>Name</th>
-                    <th>Address</th>
+                    {/* <th>Address</th> */}
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    {employees.content && employees.content.map((employee) => (
-                        <tr key={employee.id}>
-                            <td>{employee.id}</td>
-                            <td>{employee.name}</td>
-                            <td>{employee.address}</td>
+                    {products.content && products.content.map((product) => (
+                        <tr key={product.id}>
+                            <td>{product.id}</td>
+                            <td>{product.name}</td>
+                            {/* <td>{employee.address}</td> */}
                             <td></td>
                         </tr>
                     ))}

@@ -11,5 +11,6 @@ import lombok.Setter;
 @Table(name = "brand_product")
 public class BrandProduct extends Model{
     private String name;
+    private String description;
     private String address;
 }

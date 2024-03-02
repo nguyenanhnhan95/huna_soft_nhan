@@ -17,6 +17,7 @@ import lombok.Setter;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.core.EntityInformation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,12 +39,7 @@ public abstract class BaseRepository <T,ID> extends SimpleJpaRepository<T,ID> im
     public void saveModel(final T obj) {
        save((T) obj);
     }
-    private void setMetaData(Model obj){
-        if (obj.getCreateDate()==null){
-            obj.setCreateDate(new Date());
-        }
-        obj.setEditDate(new Date());
-    }
+
     @SuppressWarnings("unchecked")
     public <B, A extends SimpleQuery<?> & Fetchable<B>> A page(final A qry, int size, int page) {
         if (size < 0) { // unlimited

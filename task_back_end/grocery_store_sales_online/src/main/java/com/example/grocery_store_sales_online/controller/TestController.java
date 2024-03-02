@@ -14,7 +14,7 @@ public class TestController {
     private TestService testService;
     @PostMapping
     public ResponseEntity<?> saveTestData(@RequestBody TestEntity testEntity){
-        if (testService.saveTest(null)){
+        if (testService.saveTest(testEntity)){
             return new ResponseEntity<>(HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

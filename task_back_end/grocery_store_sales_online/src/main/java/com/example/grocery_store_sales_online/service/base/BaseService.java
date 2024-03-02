@@ -65,5 +65,10 @@ public class BaseService {
         }
         return fixFromDate;
     }
-
+    protected void setMetaData(Model obj){
+        if (obj.getCreateDate()==null){
+            obj.setCreateDate(new Date());
+        }
+        obj.setEditDate(new Date());
+    }
 }

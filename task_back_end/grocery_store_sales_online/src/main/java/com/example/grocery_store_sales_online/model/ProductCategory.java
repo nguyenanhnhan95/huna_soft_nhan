@@ -1,9 +1,10 @@
 package com.example.grocery_store_sales_online.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "product_category")
@@ -11,6 +12,6 @@ import lombok.Setter;
 @Setter
 public class ProductCategory extends Model{
     private String name;
-    private String desc;
+    private String description;
 
 }

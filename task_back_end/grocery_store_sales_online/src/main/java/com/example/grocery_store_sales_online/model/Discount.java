@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Discount extends Model{
     private String name;
     @Column(columnDefinition = "longtext")
-    private String desc;
+    private String description;
     private Double discountPercent;
     boolean active;
 
