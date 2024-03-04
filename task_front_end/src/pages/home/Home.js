@@ -28,7 +28,7 @@ export function Home() {
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    {products.content && products.content.map((product) => (
+                    {products.result && products.result.map((product) => (
                         <tr key={product.id}>
                             <td>{product.id}</td>
                             <td>{product.name}</td>

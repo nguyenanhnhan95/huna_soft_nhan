@@ -16,6 +16,7 @@ public class QueryParameter {
     private int size;
     private int page;
 
+
     @Builder.Default
     private Map<String, Object> criterias = new HashMap<>();
 }

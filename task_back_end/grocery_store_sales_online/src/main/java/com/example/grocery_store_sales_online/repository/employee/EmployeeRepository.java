@@ -23,7 +23,7 @@ public class EmployeeRepository extends BaseRepository<Employee,Integer>  {
     public EmployeeRepository( EntityManager em) {
         super(Employee.class, em);
     }
-    @Override
+
     public QueryListResult<Employee> findAll(QueryParameter queryParameter) {
         JPAQuery<Employee> query = search(queryParameter.getCriterias());
         List<Employee> result = page(query, queryParameter.getSize(), queryParameter.getPage()).fetch();

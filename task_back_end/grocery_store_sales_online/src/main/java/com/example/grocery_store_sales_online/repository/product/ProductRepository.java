@@ -6,6 +6,7 @@ import com.example.grocery_store_sales_online.model.QProduct;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import com.example.grocery_store_sales_online.util.QueryListResult;
 import com.example.grocery_store_sales_online.util.QueryParameter;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
@@ -30,10 +31,10 @@ public class ProductRepository extends BaseRepository<Product,Long> {
         return QueryListResult.<Product>builder().result(result).total(total).build();
     }
     public JPAQuery<Product> search(Map<String, Object> params) {
-        String keyword = MapUtils.getString(params, "keyword");
+        String keyword = MapUtils.getString(params, "name");
         if (StringUtils.isNotBlank(keyword)) {
             keyword = "%" + keyword + "%";
-            return jpaQuery.select(product)
+            return jpaQuery.select(Projections.constructor(Product.class,product.id,product.name))
                     .from(product)
                     .where(product.name.like(keyword));
         } else {

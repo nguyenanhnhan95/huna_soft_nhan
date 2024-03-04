@@ -14,7 +14,7 @@ public class ProductService extends BaseService implements IBaseService<Product>
     @Autowired
     private ProductRepository productRepository;
     @Override
-    public QueryListResult<Product> finAll(QueryParameter queryParameter) {
-        return productRepository.findAll(queryParameter);
+    public QueryListResult<Product> finAll(String queryParameter) {
+        return productRepository.findAll(readJsonQuery(queryParameter));
     }
 }

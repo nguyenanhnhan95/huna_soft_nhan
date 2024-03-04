@@ -2,6 +2,7 @@ package com.example.grocery_store_sales_online.service.base;
 
 import com.example.grocery_store_sales_online.model.Model;
 import com.example.grocery_store_sales_online.util.QueryParameter;
+import com.google.gson.Gson;
 import com.querydsl.core.Fetchable;
 import com.querydsl.core.SimpleQuery;
 import com.querydsl.core.types.Expression;
@@ -70,5 +71,10 @@ public class BaseService {
             obj.setCreateDate(new Date());
         }
         obj.setEditDate(new Date());
+    }
+    protected QueryParameter readJsonQuery(String queryParameter){
+        Gson g = new Gson();
+        QueryParameter parameter = g.fromJson(queryParameter,QueryParameter.class);
+        return parameter;
     }
 }

@@ -13,7 +13,7 @@ public class TestRepository extends BaseRepository<TestEntity,Integer> {
         super(TestEntity.class,em);
     }
 
-    @Override
+
     public QueryListResult<TestEntity> findAll(QueryParameter queryParameter) {
         return null;
     }

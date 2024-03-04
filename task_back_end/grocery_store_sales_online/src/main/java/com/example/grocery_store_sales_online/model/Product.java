@@ -1,5 +1,6 @@
 package com.example.grocery_store_sales_online.model;
 
+import com.querydsl.core.annotations.QueryProjection;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,12 @@ public class Product extends Model{
     @Column(columnDefinition = "longtext")
     private String description;
     private Long price;
+    @QueryProjection
+    public Product(Long id,String name) {
+        this.setId(id);
+        this.name = name;
+    }
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviews;
     @ManyToMany

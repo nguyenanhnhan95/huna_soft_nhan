@@ -16,8 +16,9 @@ const initialState = {
     }
 }
 export const findQueryProduct = createAsyncThunk('product', async (queryParameter) => {
-    console.log(queryParameter)
-    return BaseService.findAll(http,queryParameter)
+    console.log(JSON.stringify(queryParameter))
+    const encodedQuery = encodeURIComponent(JSON.stringify(queryParameter));
+    return BaseService.findAll(http,encodedQuery)
 })
 // export const fetchProduct = createAsyncThunk('product/fetchEmployees')
 export const productSlice = createSlice({

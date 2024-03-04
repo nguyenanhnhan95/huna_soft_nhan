@@ -10,8 +10,8 @@ const getAll=async (http)=>{
 }
 const findAll=async (http,queryParam)=>{
     try{
-        console.log(queryParam)
-        const response = await axios.get(http,queryParam);
+       
+        const response = await axios.get(http+`?query=${queryParam}`);
         console.log(response)
         return response.data;
         
