@@ -23,7 +23,6 @@ public class ProductRepository extends BaseRepository<Product,Long> {
         super(Product.class, em);
     }
 
-    @Override
     public QueryListResult<Product> findAll(QueryParameter queryParameter) {
         JPAQuery<Product> query = search(queryParameter.getCriterias());
         List<Product> result = page(query, queryParameter.getSize(), queryParameter.getPage()).fetch();

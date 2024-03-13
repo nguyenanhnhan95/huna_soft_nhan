@@ -23,6 +23,9 @@ public class Product extends Model{
         this.name = name;
     }
 
+    public Product() {
+    }
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviews;
     @ManyToMany
@@ -35,4 +38,6 @@ public class Product extends Model{
     private Discount discount;
     @OneToOne
     private ProductInventory productInventory;
+
+
 }
