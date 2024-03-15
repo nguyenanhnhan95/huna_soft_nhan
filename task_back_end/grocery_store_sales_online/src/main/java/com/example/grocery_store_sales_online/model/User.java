@@ -25,6 +25,7 @@ public class User extends Model{
     private String email;
     private String imageUrl;
     private Boolean emailVerified = false;
+    private String providerId;
     @JsonIgnore
     private String password;
     @NotNull

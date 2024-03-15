@@ -1,7 +1,6 @@
 package com.example.grocery_store_sales_online.service.base;
 
-import com.example.grocery_store_sales_online.util.QueryListResult;
-import com.example.grocery_store_sales_online.util.QueryParameter;
+import com.example.grocery_store_sales_online.utils.QueryListResult;
 
 public interface IBaseService<T> {
     QueryListResult<T> finAll(String queryParameter);

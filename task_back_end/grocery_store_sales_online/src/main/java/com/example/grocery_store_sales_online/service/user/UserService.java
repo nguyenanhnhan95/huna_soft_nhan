@@ -18,6 +18,16 @@ public class UserService extends BaseService implements IUserService<User> {
 
     @Override
     public Boolean existsByEmail(String email) {
-        return null;
+        return findByEmail(email) != null;
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }

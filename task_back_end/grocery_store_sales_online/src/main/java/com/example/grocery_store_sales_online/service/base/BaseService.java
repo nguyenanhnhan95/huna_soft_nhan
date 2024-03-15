@@ -1,17 +1,11 @@
 package com.example.grocery_store_sales_online.service.base;
 
 import com.example.grocery_store_sales_online.model.Model;
-import com.example.grocery_store_sales_online.util.QueryParameter;
+import com.example.grocery_store_sales_online.utils.QueryParameter;
 import com.google.gson.Gson;
-import com.querydsl.core.Fetchable;
-import com.querydsl.core.SimpleQuery;
-import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 

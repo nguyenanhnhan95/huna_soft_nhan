@@ -1,11 +1,10 @@
 package com.example.grocery_store_sales_online.repository.product;
 
-import com.example.grocery_store_sales_online.model.Employee;
 import com.example.grocery_store_sales_online.model.Product;
 import com.example.grocery_store_sales_online.model.QProduct;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
-import com.example.grocery_store_sales_online.util.QueryListResult;
-import com.example.grocery_store_sales_online.util.QueryParameter;
+import com.example.grocery_store_sales_online.utils.QueryListResult;
+import com.example.grocery_store_sales_online.utils.QueryParameter;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import io.micrometer.common.util.StringUtils;

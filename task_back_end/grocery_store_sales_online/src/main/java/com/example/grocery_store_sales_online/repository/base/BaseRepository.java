@@ -1,28 +1,17 @@
 package com.example.grocery_store_sales_online.repository.base;
 
-import com.example.grocery_store_sales_online.model.Model;
-import com.example.grocery_store_sales_online.model.QEmployee;
-import com.example.grocery_store_sales_online.util.QueryParameter;
+import com.google.common.base.Optional;
 import com.querydsl.core.Fetchable;
 import com.querydsl.core.SimpleQuery;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.core.EntityInformation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 public abstract class BaseRepository <T,ID> extends SimpleJpaRepository<T,ID> implements IBaseRepository<T,ID> {
     protected EntityManager em;

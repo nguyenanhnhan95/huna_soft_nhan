@@ -1,4 +1,4 @@
-package com.example.grocery_store_sales_online.util;
+package com.example.grocery_store_sales_online.utils;
 
 import lombok.Builder;
 import lombok.Getter;
