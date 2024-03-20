@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react"
-import PersonIcon from '@mui/icons-material/Person';
-import { HomeIcon } from '@mui/icons-material';
 import { useDispatch, useSelector } from "react-redux";
-import { findAllEmployees, searchEmployee } from "../../slice/employee";
-import { getEmployees } from "../../selector/employee";
-import { SEARCH_NAME_EMPLOYEE } from "../../constants/employee";
 import { findQueryProduct } from "../../slice/product";
-export function Home() {
+import Cookies from "js-cookie";
+function Home() {
     const dispatch = useDispatch();
     const [name, setName] = useState("")
     const { products, error, status, queryParameter } = useSelector((state) => state.product)
@@ -41,3 +37,4 @@ export function Home() {
         </>
     )
 }
+export default Home;

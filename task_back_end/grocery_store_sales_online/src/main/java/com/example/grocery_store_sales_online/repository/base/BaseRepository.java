@@ -25,8 +25,9 @@ public abstract class BaseRepository <T,ID> extends SimpleJpaRepository<T,ID> im
         this.jpaQuery=new JPAQuery<>(em);
     }
     @Transactional
-    public void saveModel(final T obj) {
-       save((T) obj);
+    public T saveModel(final T obj) {
+        T a = (T) obj;
+       return save((T) obj);
     }
 
     @SuppressWarnings("unchecked")

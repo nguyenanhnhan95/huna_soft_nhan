@@ -3,6 +3,7 @@ import LoginForm from "./LoginForm";
 import { Link } from "react-router-dom";
 import '../login/login.css';
 function Login(){
+    console.log()
     return (
         <div className="login-container">
             <div className="login-content">

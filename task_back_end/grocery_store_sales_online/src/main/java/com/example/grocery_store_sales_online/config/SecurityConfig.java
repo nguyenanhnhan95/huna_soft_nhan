@@ -14,23 +14,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.BeanIds;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -41,7 +36,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         jsr250Enabled = true,
         prePostEnabled = true
 )
-public class SecurityConfig  {
+public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
 
@@ -70,27 +65,31 @@ public class SecurityConfig  {
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(){
+    public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(customUserDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(authProvider);
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
-                .exceptionHandling(exception->exception.authenticationEntryPoint(new RestAuthenticationEntryPoint()))
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(new RestAuthenticationEntryPoint()))
+                .authorizeHttpRequests(request -> request.requestMatchers(new AntPathRequestMatcher("/home/**"))
+                        .permitAll())
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/",
                                 "/error",
@@ -108,22 +107,22 @@ public class SecurityConfig  {
                         .anyRequest()
                         .authenticated()
                 )
+
                 .oauth2Login((oauth2Login) -> oauth2Login
-                        .authorizationEndpoint((authorizationEndpoint)->
+                        .authorizationEndpoint((authorizationEndpoint) ->
                                 authorizationEndpoint.baseUri("/oauth2/authorize")
                                         .authorizationRequestRepository(cookieAuthorizationRequestRepository())
-                                        ).redirectionEndpoint((redirectionEndpoint)->
+                        ).redirectionEndpoint((redirectionEndpoint) ->
                                 redirectionEndpoint.baseUri("/oauth2/callback/*"))
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(customOAuth2UserService))
                         .successHandler(oAuth2AuthenticationSuccessHandler)
                         .failureHandler(oAuth2AuthenticationFailureHandler)
-                ).addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                )
+                .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
         // Add our custom Token based authentication filter
         return http.build();
     }
-
-
 
 }

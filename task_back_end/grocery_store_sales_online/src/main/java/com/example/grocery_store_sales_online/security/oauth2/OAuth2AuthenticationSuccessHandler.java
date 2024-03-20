@@ -38,10 +38,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
 
         String token = tokenProvider.createToken(authentication);
-
-        return UriComponentsBuilder.fromUriString(targetUrl)
-                .queryParam("token", token)
-                .build().toUriString();
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/home");
+//        return UriComponentsBuilder.fromUriString("/home")
+////                .queryParam("token", token)
+//                .build().toUriString();
+        return builder.build().toUriString();
     }
     protected void clearAuthenticationAttributes(HttpServletRequest request, HttpServletResponse response) {
         super.clearAuthenticationAttributes(request);
