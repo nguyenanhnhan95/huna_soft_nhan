@@ -4,8 +4,8 @@ import com.example.grocery_store_sales_online.components.IEnumComboItem;
 import lombok.Getter;
 
 public enum EUserStatus implements IEnumComboItem {
-    ACTIVATED("Đã kích hoạt","success"),
-    INACTIVE("Chưa kích hoạt","secondary"),
+    ACTIVATED("Đã kích hoạt","Active"),
+    INACTIVE("Chưa kích hoạt","Not Active"),
     Lock("Đã khóa","locked");
     @Getter
     private String text;
@@ -17,6 +17,6 @@ public enum EUserStatus implements IEnumComboItem {
     }
     @Override
     public String getLabel() {
-        return null;
+        return text;
     }
 }

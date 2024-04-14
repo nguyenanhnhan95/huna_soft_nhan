@@ -1,33 +1,41 @@
 import axios from "axios";
-const getAll=async (http)=>{
-    try{
+const getAll = async (http) => {
+    try {
         const response = await axios.get(http);
         return response.data;
-        
-    } catch (error){
+
+    } catch (error) {
 
     }
 }
-const findAll=async (http,queryParam)=>{
-    try{
-       
-        const response = await axios.get(http+`?query=${queryParam}`);
+const findAll = async (http, queryParam) => {
+    try {
+
+        const response = await axios.get(http + `?query=${queryParam}`);
         console.log(response)
         return response.data;
-        
-    } catch (error){
 
+    } catch (error) {
+        console.log(error.response.data)
     }
 }
-const findByID=async(http,id)=>{
-    try{
-        const response = await axios.get(http+`/?id=${id}`);
+const findByUser = async (http, headers) => {
+    try {
+        const response = await axios.get(http, headers);
         return response.data;
-    } catch (error){
+    } catch (error) {
+        console.log(error)
+    }
+}
+const findByID = async (http, id) => {
+    try {
+        const response = await axios.get(http + `/?id=${id}`);
+        return response.data;
+    } catch (error) {
 
     }
 }
-const update=async(id,data)=>{
+const update = async (id, data) => {
     // try {
     //     const response = await axios.put(http+""+id,data)
     //     return response.data
@@ -35,7 +43,7 @@ const update=async(id,data)=>{
 
     // }
 }
-const create=async(data)=>{
+const create = async (data) => {
     // try{
     //     const response = await axios.post(http,data)
     //     return response.data;
@@ -49,5 +57,6 @@ const BaseService = {
     findByID,
     create,
     update,
+    findByUser
 };
 export default BaseService;

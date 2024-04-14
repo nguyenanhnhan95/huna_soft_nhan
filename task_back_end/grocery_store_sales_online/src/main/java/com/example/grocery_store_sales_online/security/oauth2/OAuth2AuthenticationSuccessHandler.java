@@ -3,6 +3,7 @@ package com.example.grocery_store_sales_online.security.oauth2;
 import com.example.grocery_store_sales_online.config.AppProperties;
 import com.example.grocery_store_sales_online.exception.BadRequestException;
 import com.example.grocery_store_sales_online.security.TokenProvider;
+import com.example.grocery_store_sales_online.service.user.UserService;
 import com.example.grocery_store_sales_online.utils.CookieUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,11 +39,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
 
         String token = tokenProvider.createToken(authentication);
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:3000/home");
-//        return UriComponentsBuilder.fromUriString("/home")
-////                .queryParam("token", token)
-//                .build().toUriString();
-        return builder.build().toUriString();
+        return UriComponentsBuilder.fromUriString(targetUrl)
+                .queryParam("token", token)
+                .build().toUriString();
+
     }
     protected void clearAuthenticationAttributes(HttpServletRequest request, HttpServletResponse response) {
         super.clearAuthenticationAttributes(request);

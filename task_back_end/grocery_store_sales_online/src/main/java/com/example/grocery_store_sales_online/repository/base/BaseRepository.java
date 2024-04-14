@@ -9,11 +9,13 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 
+import jakarta.persistence.PersistenceContext;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.core.EntityInformation;
 import org.springframework.transaction.annotation.Transactional;
 
 public abstract class BaseRepository <T,ID> extends SimpleJpaRepository<T,ID> implements IBaseRepository<T,ID> {
+
     protected EntityManager em;
     protected JPAQueryFactory jpaQueryFactory;
     protected EntityInformation<T,ID> entityInformation;

@@ -1,19 +1,21 @@
 package com.example.grocery_store_sales_online.security;
 
+import com.example.grocery_store_sales_online.enums.AuthProvider;
+import com.example.grocery_store_sales_online.model.Employee;
+import com.example.grocery_store_sales_online.model.Person;
+import com.example.grocery_store_sales_online.model.Role;
 import com.example.grocery_store_sales_online.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
     private Long id;
     private String email;
+
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
@@ -25,21 +27,30 @@ public class UserPrincipal implements OAuth2User, UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserPrincipal create(User user) {
+    public static UserPrincipal create(Person  person,String role) {
         List<GrantedAuthority> authorities = Collections.
-                singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+                singletonList(new SimpleGrantedAuthority(role));
 
         return new UserPrincipal(
-                user.getId(),
-                user.getEmail(),
-                user.getPassword(),
+                person.getId(),
+                person.getEmail(),
+                person.getPassword(),
                 authorities
         );
     }
 
-    public static UserPrincipal create(User user, Map<String, Object> attributes) {
-        UserPrincipal userPrincipal = UserPrincipal.create(user);
-        userPrincipal.setAttributes(attributes);
+    public static UserPrincipal create(Person  person, Map<String, Object> attributes) {
+        UserPrincipal userPrincipal = null;
+        if(person.getProviderId().equals(AuthProvider.local.toString())){
+            Employee employee = (Employee) person;
+            Set<Role> roles = employee.getRoles();
+            for (Role role: roles) {
+                userPrincipal = UserPrincipal.create(person, role.getAlias());
+            }
+        }else{
+            userPrincipal = UserPrincipal.create(person,"ROLE_USER");
+            userPrincipal.setAttributes(attributes);
+        }
         return userPrincipal;
     }
 

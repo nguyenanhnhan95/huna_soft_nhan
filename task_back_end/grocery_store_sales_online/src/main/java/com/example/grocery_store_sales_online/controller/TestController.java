@@ -1,5 +1,7 @@
 package com.example.grocery_store_sales_online.controller;
 
+import com.example.grocery_store_sales_online.enums.ErrorCode;
+import com.example.grocery_store_sales_online.exception.ActiveException;
 import com.example.grocery_store_sales_online.model.TestEntity;
 import com.example.grocery_store_sales_online.service.test.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +21,9 @@ public class TestController {
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
+    }
+    @GetMapping
+    public ResponseEntity<?> test(){
+        throw new ActiveException(ErrorCode.ACCOUNT_NOT_ACTIVE);
     }
 }

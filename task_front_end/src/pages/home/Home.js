@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { findQueryProduct } from "../../slice/product";
-import Cookies from "js-cookie";
+import Test from "../../components/test";
+import Stomp from "stompjs"
 function Home() {
     const dispatch = useDispatch();
     const [name, setName] = useState("")
+    const [data, setData] = useState([]);
     const { products, error, status, queryParameter } = useSelector((state) => state.product)
     useEffect(() => {
         dispatch(findQueryProduct(queryParameter))
     }, [])
+    console.log(data)
     console.log(products)
     return (
         <>

@@ -3,11 +3,15 @@
 		{
 			"name": "Admin",
 			"alias": "ROLE_ADMIN",
-            "permissions": []
+			"description": "Quản lý hệ thống ",
+            "permissions": [
+				"user:view"
+			]
 		},
         {
             "name": "User",
             "alias": "ROLE_USER",
+			"description": "Khách hàng",
             "permissions": []
         }
 	],

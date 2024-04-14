@@ -1,14 +1,13 @@
-import fbLogo from '../../img/fb-logo.png';
-import googleLogo from '../../img/google-logo.png';
+import logo_google from "../../img/google-logo.png"
+import logo_facebook from "../../img/fb-logo.png"
 import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, ACCESS_TOKEN } from '../../constants/login';
-function SocialLogin(){
-    return(
-        <div className="social-login">
-                <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
-                    <img src={googleLogo} alt="Google" /> Log in with Google</a>
-                <a className="btn btn-block social-btn facebook" href={FACEBOOK_AUTH_URL}>
-                    <img src={fbLogo} alt="Facebook" /> Log in with Facebook</a>
-            </div>
+import { Link } from "react-router-dom";
+function SocialLogin() {
+    return (
+        <div className="login__left-input-name login__left-input-name-logo">
+            <Link to={GOOGLE_AUTH_URL}><img src={logo_google} /></Link>
+            <Link to={FACEBOOK_AUTH_URL}><img src={logo_facebook} /></Link>
+        </div>
     )
 }
 export default SocialLogin;

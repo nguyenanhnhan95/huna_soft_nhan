@@ -8,6 +8,9 @@ import com.example.grocery_store_sales_online.utils.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EmployeeService extends BaseService implements IEmployeeService<Employee>{
     @Autowired
@@ -16,7 +19,28 @@ public class EmployeeService extends BaseService implements IEmployeeService<Emp
 
 
     @Override
-    public QueryListResult<Employee> getAll(QueryParameter queryParameter) {
+    public QueryListResult<Employee> findAllSearch(QueryParameter queryParameter) {
         return employeeRepository.findAll(queryParameter);
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        setMetaData(employee);
+        employeeRepository.saveModel(employee);
+    }
+
+    @Override
+    public Employee findByUserName(String name) {
+        return employeeRepository.findByUserName(name);
+    }
+
+    @Override
+    public Optional<Employee> findById(Long id) {
+        return employeeRepository.findById(id);
     }
 }

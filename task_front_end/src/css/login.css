@@ -1,0 +1,153 @@
+.login__wrap {
+    width: 100%;
+    height: auto;
+}
+
+.login__all__screen {
+    display: flex;
+    margin-top: 5%;
+}
+
+.login__right {
+    width: 65%;
+}
+
+.login__left {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login__left-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 20px 50px;
+    padding-left: 170px;
+}
+
+.login__left-input-name {
+    margin: 10px 85px;
+    font-size: 1.2em;
+}
+
+.login__left-title-input {
+    position: relative;
+}
+
+.login__left-title-error {
+    position: absolute;
+    color: red;
+    margin-left: 10px;
+    font-size: small;
+}
+
+.login__left-title-input input {
+    margin-top: 10px;
+    width: 340px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #9a9090;
+    padding-left: 10px;
+    font-size: 1.1em;
+}
+
+.login__left-title-input-password {
+    position: fixed;
+}
+
+.login__left-title-input-password i {
+    position: absolute;
+    top: 40%;
+    right: 2%;
+}
+
+.login__left-title-input-password i:hover {
+    color: #9a9090;
+    cursor: pointer;
+}
+
+.login__left-title-input-password input::placeholder {
+    margin-bottom: 20px;
+}
+
+.login__left-title-input input:focus {
+    outline: 1px solid #0F6DEE;
+}
+
+.login__left-input-name-checkbox input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+.login__left-input-name-checkbox input:hover {
+    cursor: pointer;
+}
+
+.login__left-input-name-checkbox span {
+    font-size: 0.9em;
+    padding-bottom: 10px;
+}
+
+.login__left-input-name-button button {
+    width: 355px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #FB5533;
+    border: none;
+    margin-top: 30px;
+    text-align: center;
+    color: white;
+    font-size: 1em;
+}
+
+.login__left-input-name-button button:hover {
+    background-color: #EA3612;
+    cursor: pointer;
+}
+
+.login__left-input-name-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 355px;
+}
+
+.login__left-input-name-separator::before,
+.login__left-input-name-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.login__left-input-name-separator:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.login__left-input-name-separator:not(:empty)::after {
+    margin-left: .25em;
+}
+
+.login__left-input-name-logo {
+    padding-left: 120px;
+}
+
+.login__left-input-name-logo img {
+    height: 40px;
+    width: 40px;
+    margin-right: 30px;
+}
+
+.login__left-input-name-logo img:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 1440px) {
+    .login__right {
+        width: 0;
+    }
+
+    .login__left {
+        width: 100%;
+    }
+}

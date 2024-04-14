@@ -1,6 +1,7 @@
 package com.example.grocery_store_sales_online.model;
 
 import com.example.grocery_store_sales_online.enums.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,17 +12,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "employee",uniqueConstraints = @UniqueConstraint(columnNames = {"nameLogin"}))
+@Table(name = "employee",uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Getter
 @Setter
-public class Employee extends AbstractPerson implements Serializable{
+public class Employee extends Person  implements Serializable{
     private static final long serialVersionUID=1479437896339057579L;
-    private Date birthOfDate;
+
     private String idCard;
-    private String Avatar;
+    private String avatar;
+    private boolean corruption;
     @Column(length = 1000)
     private String culture;
-
     @Column(length = 1000)
     private String language;
     private boolean firstLogin;
@@ -36,9 +37,6 @@ public class Employee extends AbstractPerson implements Serializable{
     private EResignEmployeeStatus resignEmployeeStatus;
     @Enumerated(EnumType.STRING)
     private EEmployeeStatus employeeStatus;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private EUserStatus statusUser;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "employee_role",joinColumns = {@JoinColumn(name="employee_id")
     },inverseJoinColumns = {@JoinColumn(name="role_id")})
@@ -47,16 +45,10 @@ public class Employee extends AbstractPerson implements Serializable{
     public Employee() {
         super();
     }
-    public Employee(final String nameLogin,final String name){
-        super(nameLogin,name);
-    }
 
     @Override
     public String toString() {
         return super.toString()+""+this.getName()+""+this.getRoles();
     }
-    @Transient
-    public boolean isActive(){
-        return  EUserStatus.ACTIVATED.equals(this.getStatusUser());
-    }
+
 }

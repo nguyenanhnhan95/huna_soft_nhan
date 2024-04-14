@@ -1,7 +1,10 @@
 package com.example.grocery_store_sales_online.config;
 
 
+import com.example.grocery_store_sales_online.enums.ERole;
+import com.example.grocery_store_sales_online.model.Role;
 import com.example.grocery_store_sales_online.security.CustomUserDetailsService;
+import com.example.grocery_store_sales_online.security.LogoutSuccessHandler;
 import com.example.grocery_store_sales_online.security.RestAuthenticationEntryPoint;
 import com.example.grocery_store_sales_online.security.TokenAuthenticationFilter;
 import com.example.grocery_store_sales_online.security.oauth2.CustomOAuth2UserService;
@@ -23,9 +26,14 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.crypto.spec.SecretKeySpec;
 
 
 @Configuration
@@ -45,11 +53,13 @@ public class SecurityConfig {
 
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
-
     private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
-
+    private  final LogoutSuccessHandler logoutSuccessHandler;
     private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+
+    private final String[] PUBLIC_ENDPOINTS={"/", "/error", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg",
+            "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js", "/home/**", "/product/**","/auth/**", "/oauth2/**","/auth/login/**"};
 
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {
@@ -78,7 +88,6 @@ public class SecurityConfig {
         authProvider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(authProvider);
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -88,26 +97,16 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(new RestAuthenticationEntryPoint()))
-                .authorizeHttpRequests(request -> request.requestMatchers(new AntPathRequestMatcher("/home/**"))
-                        .permitAll())
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/",
-                                "/error",
-                                "/favicon.ico",
-                                "/**/*.png",
-                                "/**/*.gif",
-                                "/**/*.svg",
-                                "/**/*.jpg",
-                                "/**/*.html",
-                                "/**/*.css",
-                                "/**/*.js")
+                        .requestMatchers(PUBLIC_ENDPOINTS)
                         .permitAll()
-                        .requestMatchers("/auth/**", "/oauth2/**")
-                        .permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest()
                         .authenticated()
                 )
-
+                .logout((logout)->logout.logoutUrl("/logout")
+                        .logoutSuccessHandler(logoutSuccessHandler)
+                        .permitAll())
                 .oauth2Login((oauth2Login) -> oauth2Login
                         .authorizationEndpoint((authorizationEndpoint) ->
                                 authorizationEndpoint.baseUri("/oauth2/authorize")
