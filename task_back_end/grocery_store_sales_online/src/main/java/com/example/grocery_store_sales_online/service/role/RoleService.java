@@ -15,11 +15,7 @@ public class RoleService extends BaseService implements IRoleService<Role> {
     private  final RoleRepository roleRepository;
     @Override
     public Role findByAlias(String alias) {
-        Role role = roleRepository.findByAlias(alias);
-        if(role==null){
-            System.out.println("loi");
-        }
-        return role;
+        return roleRepository.findByAlias(alias);
     }
 
     @Override

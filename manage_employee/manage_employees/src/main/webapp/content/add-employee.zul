@@ -1,5 +1,0 @@
-<?page title="" contentType="text/html;charset=UTF-8"?>
-<?component name="form" inline="true" macroURI="./form.zul"?>
-<zk>
-	<form title="Add new Employee"></form>
-</zk>

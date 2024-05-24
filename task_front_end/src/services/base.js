@@ -22,6 +22,7 @@ const findAll = async (http, queryParam) => {
 const findByUser = async (http, headers) => {
     try {
         const response = await axios.get(http, headers);
+        console.log(response.data)
         return response.data;
     } catch (error) {
         console.log(error)

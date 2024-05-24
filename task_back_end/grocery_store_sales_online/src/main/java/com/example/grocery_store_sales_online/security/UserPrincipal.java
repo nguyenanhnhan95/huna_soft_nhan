@@ -11,46 +11,60 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
     private Long id;
     private String email;
-
+    private String name;
+    private  String avatar;
     private String password;
+    private AuthProvider provider;
     private Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
 
-    public UserPrincipal(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id,String name, String email,String avatar,String password, AuthProvider provider, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
+        this.name=name;
         this.email = email;
-        this.password = password;
+        this.avatar=avatar;
+        this.password=password;
+        this.provider = provider;
         this.authorities = authorities;
     }
 
-    public static UserPrincipal create(Person  person,String role) {
+    public static UserPrincipal createUser(User  user,String role) {
         List<GrantedAuthority> authorities = Collections.
                 singletonList(new SimpleGrantedAuthority(role));
 
         return new UserPrincipal(
-                person.getId(),
-                person.getEmail(),
-                person.getPassword(),
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getImageUrl(),
+                user.getPassword(),
+                user.getProvider(),
+                authorities
+        );
+    }
+    public static UserPrincipal createEmployee(Employee  employee,Set<Role> roles) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+//                Collections.singletonList(new SimpleGrantedAuthority(role));
+        roles.forEach(role->authorities.add(new SimpleGrantedAuthority(role.getAlias())));
+        return new UserPrincipal(
+                employee.getId(),
+                employee.getName(),
+                employee.getEmail(),
+                employee.getAvatar(),
+                employee.getPassword(),
+                employee.getProvider(),
                 authorities
         );
     }
 
-    public static UserPrincipal create(Person  person, Map<String, Object> attributes) {
-        UserPrincipal userPrincipal = null;
-        if(person.getProviderId().equals(AuthProvider.local.toString())){
-            Employee employee = (Employee) person;
-            Set<Role> roles = employee.getRoles();
-            for (Role role: roles) {
-                userPrincipal = UserPrincipal.create(person, role.getAlias());
-            }
-        }else{
-            userPrincipal = UserPrincipal.create(person,"ROLE_USER");
-            userPrincipal.setAttributes(attributes);
-        }
+    public static UserPrincipal create(User user, Map<String, Object> attributes) {
+        UserPrincipal userPrincipal = UserPrincipal.createUser(user, "ROLE_USER");
+        userPrincipal.setAttributes(attributes);
         return userPrincipal;
     }
 
@@ -60,11 +74,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     public String getEmail() {
         return email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -98,6 +107,20 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    public AuthProvider getProvider() {
+        return provider;
+    }
+
+    @Override
+    public <A> A getAttribute(String name) {
+        return OAuth2User.super.getAttribute(name);
+    }
+
+    @Override
     public Map<String, Object> getAttributes() {
         return attributes;
     }
@@ -108,6 +131,10 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     @Override
     public String getName() {
-        return String.valueOf(id);
+        return this.name;
+    }
+
+    public String getAvatar() {
+        return avatar;
     }
 }

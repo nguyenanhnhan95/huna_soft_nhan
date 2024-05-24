@@ -8,6 +8,12 @@
 				"user:view"
 			]
 		},
+		{
+			"name": "Manager",
+			"alias": "ROLE_MANAGER",
+			"description": "Quản lý",
+			"permissions": []
+		},
         {
             "name": "User",
             "alias": "ROLE_USER",

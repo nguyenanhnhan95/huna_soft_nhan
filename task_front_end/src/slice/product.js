@@ -31,6 +31,7 @@ export const productSlice = createSlice({
         builder
             .addCase(findQueryProduct.pending, (state, action) => {
                 state.status = FETCH_PRODUCT_LOADING
+                state.products = []
             })
             .addCase(findQueryProduct.fulfilled, (state, action) => {
                 state.status = FETCH_PRODUCT_SUCCEEDED

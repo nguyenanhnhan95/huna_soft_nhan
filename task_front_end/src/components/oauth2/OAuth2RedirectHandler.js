@@ -3,6 +3,8 @@ import { ACCESS_TOKEN, PROVIDER_ID, PROVIDER_SOCIAL } from "../../constants/logi
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { findByUser } from "../../slice/user";
+import { createHeader } from "../../config/common";
+const http = "http://localhost:8080/user/me";
 function OAuth2RedirectHandle() {
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
@@ -12,8 +14,9 @@ function OAuth2RedirectHandle() {
         const error = searchParams.get('error');
         if (token) {
             localStorage.setItem(ACCESS_TOKEN, token);
-            localStorage.setItem(PROVIDER_ID, PROVIDER_SOCIAL);
-            navigate("/home")
+            dispatch(findByUser(http, createHeader(token))).then((user) => {
+                navigate("/home")
+        })
         } else {
             console.log(error)
             navigate("/login")

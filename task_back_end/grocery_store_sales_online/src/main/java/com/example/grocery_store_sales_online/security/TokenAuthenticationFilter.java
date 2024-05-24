@@ -1,5 +1,8 @@
 package com.example.grocery_store_sales_online.security;
 
+import com.example.grocery_store_sales_online.enums.AuthProvider;
+import com.example.grocery_store_sales_online.exception.InvalidException;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,31 +15,43 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private  TokenProvider tokenProvider;
+    private HandlerExceptionResolver exceptionResolver;
+
     @Autowired
     private  CustomUserDetailsService customUserDetailsService;
+
+    public TokenAuthenticationFilter(HandlerExceptionResolver exceptionResolver) {
+        this.exceptionResolver = exceptionResolver;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
-
-            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-                Long userId = tokenProvider.getUserIdFromToken(jwt);
-                UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+            Claims claims = tokenProvider.validateToken(jwt);
+            if (StringUtils.hasText(jwt) && claims!=null ) {
+                Long userId = Long.valueOf(claims.getSubject());
+                String provider = (String) claims.get("provider");
+                UserDetails userDetails = null;
+                if (AuthProvider.local.toString().equals(provider)) {
+                    userDetails = customUserDetailsService.loadEmployeeById(userId);
+                } else {
+                    userDetails = customUserDetailsService.loadUserById(userId);
+                }
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception ex) {
-            logger.error("Could not set user authentication in security context", ex);
+            logger.error("Could not set user authentication in security context", new InvalidException(ex.getMessage()));
         }
-
         filterChain.doFilter(request, response);
     }
     private String getJwtFromRequest(HttpServletRequest request) {

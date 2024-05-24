@@ -1,6 +1,7 @@
 package com.example.grocery_store_sales_online.security.oauth2;
 
 import com.example.grocery_store_sales_online.config.AppProperties;
+import com.example.grocery_store_sales_online.enums.AuthProvider;
 import com.example.grocery_store_sales_online.exception.BadRequestException;
 import com.example.grocery_store_sales_online.security.TokenProvider;
 import com.example.grocery_store_sales_online.service.user.UserService;
@@ -38,7 +39,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
 
-        String token = tokenProvider.createToken(authentication);
+        String token = tokenProvider.createToken(authentication, AuthProvider.social);
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", token)
                 .build().toUriString();

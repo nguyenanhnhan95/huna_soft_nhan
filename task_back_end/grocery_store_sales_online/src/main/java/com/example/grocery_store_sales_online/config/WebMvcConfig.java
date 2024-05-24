@@ -13,7 +13,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/admin")
+        registry.addMapping("/admin/**")
                 .allowedOrigins(allowedOrigins)
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
@@ -29,11 +29,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedOrigins(allowedOrigins)
                 .allowedMethods("GET")
                 .allowedHeaders("*")
-                .allowCredentials(false)
+                .allowCredentials(true)
                 .maxAge(MAX_AGE_SECS);
-        registry.addMapping("/auth/login/**")
+        registry.addMapping("/auth/**")
                 .allowedOrigins(allowedOrigins)
-                .allowedMethods("POST")
+                .allowedMethods("POST,GET")
                 .allowedHeaders("*")
                 .allowCredentials(false)
                 .maxAge(MAX_AGE_SECS);

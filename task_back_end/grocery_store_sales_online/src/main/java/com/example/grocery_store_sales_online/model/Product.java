@@ -17,11 +17,6 @@ public class Product extends Model{
     @Column(columnDefinition = "longtext")
     private String description;
     private Long price;
-    @QueryProjection
-    public Product(Long id,String name) {
-        this.setId(id);
-        this.name = name;
-    }
 
     public Product() {
     }

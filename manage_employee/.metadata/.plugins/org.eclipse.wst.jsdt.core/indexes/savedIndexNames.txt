@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+D:\start_zk\manage_employee\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2525324728.index
-171027794.index
-2781019257.index
-3915404571.index
-550525012.index
-286167817.index

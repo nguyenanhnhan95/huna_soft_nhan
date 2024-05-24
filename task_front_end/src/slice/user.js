@@ -1,18 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ACCESS_TOKEN } from "../constants/login";
+import { ACCESS_TOKEN, USER_LOGIN } from "../constants/login";
 import { FETCH_USER_FAILED, FETCH_USER_LOADING, FETCH_USER_SUCCEEDED } from "../constants/user";
 import BaseService from "../services/base";
 import { createHeader } from "../config/common";
+import axios from "axios";
 const initialState = {
-    Authenticate: false,
+    authenticate: false,
     user: null,
     status: null,
+    loading: false,
     error: null,
 }
 export const findByUser = createAsyncThunk('user', async (http) => {
     console.log(http)
-    const header = createHeader(localStorage.getItem(ACCESS_TOKEN));
-    return BaseService.findByUser(http + "/me", header)
+    const headers = createHeader(localStorage.getItem(ACCESS_TOKEN));
+    console.log(headers)
+    const response = await axios.get(http, headers);
+    console.log(response.data)
+    localStorage.setItem(USER_LOGIN, JSON.stringify(response.data));
+    return response;
 })
 export const userSlice = createSlice({
     name: 'user',
@@ -22,16 +28,25 @@ export const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(findByUser.pending, (state, action) => {
-                state.status = FETCH_USER_LOADING
+                state.authenticate = false;
+                state.user = null;
+                state.loading = true;
+                state.status = FETCH_USER_LOADING;
+                state.error = null;
             })
             .addCase(findByUser.fulfilled, (state, action) => {
-                state.status = FETCH_USER_SUCCEEDED
-                state.user = action.payload
-                state.Authenticate = true;
+                state.authenticate = false;
+                state.user = action.payload;
+                state.loading = false;
+                state.status = FETCH_USER_SUCCEEDED;
+                state.error = null;
             })
             .addCase(findByUser.rejected, (state, action) => {
-                state.status = FETCH_USER_FAILED
-                state.error = action.error
+                state.authenticate = false;
+                state.user = null;
+                state.loading = false;
+                state.status = FETCH_USER_FAILED;
+                state.error = action.error;
             })
     }
 })

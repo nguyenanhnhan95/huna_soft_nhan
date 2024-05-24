@@ -31,6 +31,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin("http://localhost:3000")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationManager authenticationManager;
@@ -52,7 +53,7 @@ public class AuthController {
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = tokenProvider.createToken(authentication);
+        String token = tokenProvider.createToken(authentication,AuthProvider.local);
         return ResponseEntity.ok(new AuthResponse(token));
     }
     @PostMapping("/signup")
@@ -86,5 +87,10 @@ public class AuthController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+    @GetMapping("/refresh")
+    public void refreshToken(){
+        Authentication authentication =SecurityContextHolder.getContext().getAuthentication();
+
     }
 }

@@ -12,8 +12,10 @@ import com.example.grocery_store_sales_online.repository.user.UserRepository;
 import com.example.grocery_store_sales_online.security.UserPrincipal;
 import com.example.grocery_store_sales_online.security.oauth2.user.OAuth2UserInfo;
 import com.example.grocery_store_sales_online.security.oauth2.user.OAuth2UserInfoFactory;
+import com.example.grocery_store_sales_online.service.email.EmailSenderService;
 import com.example.grocery_store_sales_online.service.role.RoleService;
 import com.example.grocery_store_sales_online.service.user.UserService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -24,6 +26,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
@@ -34,6 +37,8 @@ import java.util.Set;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private final UserService userService;
     private final RoleService roleService;
+
+    private final EmailSenderService emailSenderService;
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
@@ -47,7 +52,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
         }
     }
-    private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
+    private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) throws MessagingException, IOException {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
         if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
@@ -70,9 +75,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         return UserPrincipal.create(user, oAuth2User.getAttributes());
     }
-    private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
+    private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) throws MessagingException, IOException {
         User user = new User();
-
         user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setProviderId(oAuth2UserInfo.getId());
         user.setName(oAuth2UserInfo.getName());
@@ -84,6 +88,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Set<Role> setRole = new HashSet<>();
         setRole.add(roleService.findByAlias("ROLE_USER"));
         user.setRoles(setRole);
+        if(AuthProvider.google.toString().equals(AuthProvider.google.toString())){
+            emailSenderService.sendEmail(user.getEmail(), user.getName(), "Bạn đã đăng ký thành công tài khoản ");
+        }
         return userService.save(user);
     }
 

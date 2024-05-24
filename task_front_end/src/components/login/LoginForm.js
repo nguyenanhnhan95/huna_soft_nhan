@@ -5,27 +5,25 @@ import { loginAuth } from "../../services/login";
 import axios from "axios";
 import { ACCESS_TOKEN, PROVIDER_ID, PROVIDER_LOCAL } from "../../constants/login";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginFormAuth } from "../../slice/login";
+import { findByUser } from "../../slice/user";
+import { createHeader } from "../../config/common";
+const http = "http://localhost:8080/user/me";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
+    const { loading, error } = useSelector((state) => state.loginForm)
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleLogin = async (loginRequest, setErrors) => {
-        // setErrors({ name: "Tên đăng nhập hoặc mật khẩu không đúng." });
-        try {
-            const response = await loginAuth(loginRequest)
-            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-            localStorage.setItem(PROVIDER_ID, PROVIDER_LOCAL);
-            navigate("/home")
-        } catch (error) {
-            setErrors(error.response.data.result);
-        }
-        // try {
-        //     console.log(loginRequest)
-        //     const response = await axios.post("http://localhost:8080/auth/login", loginRequest)
-        //     console.log(response);
-        // } catch (error) {
-        //     setErrors(error.response.data.result);
-        // }
-
+    const handleLogin = (loginRequest, setErrors) => {
+        dispatch(loginFormAuth(loginRequest)).then((result) => {
+            dispatch(findByUser(http, createHeader(result.payload.accessToken))).then((user) => {
+                navigate("/admin")
+            })
+        })
+            .catch((error) => {
+                setErrors(error);
+            })
     }
     return (
         <>
@@ -42,35 +40,27 @@ function LoginForm() {
                 }
             >
                 <Form>
-                    <div className="login__left-input-name">
-                        <div className="login__left-title-name">
-                            <label htmlFor="name">Tên đăng nhập</label>
+                    <div className="form-login">
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Tên đăng nhập</label>
+                            <Field type="text" name="name" className="form-control" id="name" placeholder="join" />
+                            <ErrorMessage className="form-text form-error" name='name' component='div' />
                         </div>
-                        <div className="login__left-title-input">
-                            <Field name="name" id="name" type="text" placeholder="join" />
-                            <ErrorMessage className="login__left-title-error" name='name' component='div' />
-                        </div>
-                    </div>
-                    <div className="login__left-input-name">
-                        <div className="login__left-title-name">
-                            <label htmlFor="password">Mật khẩu</label>
-                        </div>
-                        <div className="login__left-title-input login__left-title-input-password">
-                            <Field name='password' id="password" type={showPassword ? "text" : "password"} placeholder="........" />
-                            <ErrorMessage name='password' className="login__left-title-error" component='div' />
+                        <div className="mb-3 form-password">
+                            <label htmlFor="password" className="form-label">Mật khẩu</label>
+                            <Field type="password" name="password" className="form-control " id="password" placeholder="············" />
+                            <ErrorMessage name='password' className="form-text form-error" component='div' />
                             {showPassword ?
                                 <i className="fa-solid fa-eye-slash" onClick={() => setShowPassword(false)} />
                                 :
                                 <i className="fa-solid fa-eye" onClick={() => setShowPassword(true)}></i>
                             }
                         </div>
-                    </div>
-                    <div className="login__left-input-name login__left-input-name-checkbox">
-                        <input type="checkbox" defaultChecked="true" />
-                        <span>Duy trì đăng nhập</span>
-                    </div>
-                    <div className="login__left-input-name login__left-input-name-button">
-                        <button type='submit'>Đăng nhập</button>
+                        <div className="mb-3 form-check d-flex align-items-center">
+                            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                            <label className="form-check-label" htmlFor="exampleCheck1">Duy trì đăng nhập</label>
+                        </div>
+                        <button type="submit" className="form-submit mb-3">{loading ? 'Loading....' : 'Đăng nhập'}</button>
                     </div>
                 </Form>
             </Formik>

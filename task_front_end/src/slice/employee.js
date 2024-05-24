@@ -27,7 +27,7 @@ export const employeesSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(findAllEmployees.pending, (state, action) => {
-                state.status = FETCH_EMPLOYEES_START
+                state.status = FETCH_EMPLOYEES_LOADING
             })
             .addCase(findAllEmployees.fulfilled, (state, action) => {
                 state.status = FETCH_EMPLOYEES_SUCCEEDED

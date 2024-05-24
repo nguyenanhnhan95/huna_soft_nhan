@@ -10,6 +10,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import org.apache.commons.collections4.MapUtils;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
@@ -46,9 +47,6 @@ public class EmployeeRepository extends BaseRepository<Employee,Long>  {
             return jpaQuery.select(employee).from(employee);
         }
     }
-
-
-
 
 
 }

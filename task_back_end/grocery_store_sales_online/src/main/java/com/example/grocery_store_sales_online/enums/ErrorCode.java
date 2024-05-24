@@ -5,10 +5,13 @@ import com.example.grocery_store_sales_online.components.IEnumComboItem;
 public enum ErrorCode implements IEnumComboItem {
     UNCATEGORIZED_EXCEPTION(9999,"Uncategorized error"),
     USER_EXISTED(1001,"User existed"),
+    MAIN_MENU_NOT_FOUND(1002,"menu main no found"),
     ACCOUNT_NOT_ACTIVE(4001,"Account not active"),
-    USER_NOT_FOUND(40401,"User not found"),
-    VIOLATION_CONSTRAIN(40422,"Validation error"),
-    BadCredential(40423,"Sai tài khoản hoặc mật khẩu ")
+    USER_NOT_FOUND(4002,"User not found"),
+    VIOLATION_CONSTRAIN(4003,"Validation error"),
+    BAD_CREDENTIAL(4004,"Sai tài khoản hoặc mật khẩu "),
+    INVALID_TOKEN(4005,"Invalid Token"),
+    UNAUTHENTICATED(4006,"Tài khoản chưa được xác thực")
     ;
     private int code;
     private String message;

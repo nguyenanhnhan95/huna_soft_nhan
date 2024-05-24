@@ -2,6 +2,7 @@ package com.example.grocery_store_sales_online.model;
 
 import com.example.grocery_store_sales_online.enums.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,9 @@ public class Employee extends Person  implements Serializable{
     @Column
     @Enumerated(EnumType.STRING)
     private EDepartment department;
+
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
     @Enumerated(EnumType.STRING)
     private ECountry country;
     @Enumerated(EnumType.STRING)

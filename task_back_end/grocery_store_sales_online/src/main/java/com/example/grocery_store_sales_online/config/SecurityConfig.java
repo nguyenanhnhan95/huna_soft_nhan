@@ -1,8 +1,6 @@
 package com.example.grocery_store_sales_online.config;
 
 
-import com.example.grocery_store_sales_online.enums.ERole;
-import com.example.grocery_store_sales_online.model.Role;
 import com.example.grocery_store_sales_online.security.CustomUserDetailsService;
 import com.example.grocery_store_sales_online.security.LogoutSuccessHandler;
 import com.example.grocery_store_sales_online.security.RestAuthenticationEntryPoint;
@@ -26,14 +24,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import javax.crypto.spec.SecretKeySpec;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 
 @Configuration
@@ -50,7 +43,7 @@ public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
 
-
+    private final HandlerExceptionResolver handlerExceptionResolver;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
     private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
@@ -58,12 +51,13 @@ public class SecurityConfig {
     private  final LogoutSuccessHandler logoutSuccessHandler;
     private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
-    private final String[] PUBLIC_ENDPOINTS={"/", "/error", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg",
-            "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js", "/home/**", "/product/**","/auth/**", "/oauth2/**","/auth/login/**"};
+
+    private final String[] PUBLIC_ENDPOINTS={"/", "/error", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg","/auth/refresh",
+            "/**/*.jpg", "/**/*.html", "/**/*.css", "/**/*.js", "/home/**", "/product/**","/auth/**", "/oauth2/**","/auth/login/**","/category/**"};
 
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter();
+        return new TokenAuthenticationFilter(handlerExceptionResolver);
     }
 
     /*
@@ -101,7 +95,7 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ENDPOINTS)
                         .permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .anyRequest()
+                        .requestMatchers("/user/**")
                         .authenticated()
                 )
                 .logout((logout)->logout.logoutUrl("/logout")

@@ -1,5 +1,0 @@
-.search_employee{
-	display:flex;
-	justify-content:space-between;
-	color:black;
-}

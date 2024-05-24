@@ -1,24 +1,28 @@
 import "../../css/login.css"
 import LoginForm from "./LoginForm";
 import SocialLogin from "./SocialLogin";
-function Login(){
-    return (
-        <div className="login__wrap">
-        <div className="login__pc login__all__screen">
-          <div className="login__right">
-          </div>
-          <div className="login__left">
-            <div className="login__left-title">
-              Đăng Nhập
+import BackgroundImg from "../../img/background_img_login.png"
+function Login() {
+  return (
+    <div className="container-fluid login">
+      <div className="row">
+        <div className="col-0 col-sm-0 col-md-0 col-lg-0 col-xl-8 loin-img">
+          <img src={BackgroundImg} />
+        </div>
+        <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4  d-flex align-items-center justify-content-center login-form">
+          <div className="card card-login">
+            <div className="card-header">
+              Đăng nhập
             </div>
-            <LoginForm/>
-            <div className="login__left-input-name login__left-input-name-separator">
-              Hoặc
+            <div className="card-body">
+              <LoginForm/>
+              <div className="separator mb-3">Hoặc</div>
+              <SocialLogin/>
             </div>
-            <SocialLogin/>
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 }
 export default Login;
