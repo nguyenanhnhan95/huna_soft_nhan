@@ -1,12 +1,9 @@
 package com.example.grocery_store_sales_online.repository.user;
-
-import com.example.grocery_store_sales_online.model.QUser;
-import com.example.grocery_store_sales_online.model.User;
+import com.example.grocery_store_sales_online.model.person.QUser;
+import com.example.grocery_store_sales_online.model.person.User;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 public class UserRepository extends BaseRepository<User,Long> {

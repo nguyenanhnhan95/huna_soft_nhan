@@ -4,19 +4,22 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { findByUser } from "../../slice/user";
 import { createHeader } from "../../config/common";
+import Cookies from 'js-cookie'
 const http = "http://localhost:8080/user/me";
 function OAuth2RedirectHandle() {
     const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+   
     useEffect(() => {
+        const keepLogin=Cookies.get('keepLogin')
+        console.log(keepLogin)
         const token = searchParams.get('token');
         const error = searchParams.get('error');
         if (token) {
             localStorage.setItem(ACCESS_TOKEN, token);
-            dispatch(findByUser(http, createHeader(token))).then((user) => {
-                navigate("/home")
-        })
+            Cookies.remove('keepLogin', { domain: 'localhost', path: '/' });
+            navigate("/home")
         } else {
             console.log(error)
             navigate("/login")

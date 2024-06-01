@@ -1,17 +1,15 @@
 package com.example.grocery_store_sales_online.security;
 
 import com.example.grocery_store_sales_online.enums.AuthProvider;
-import com.example.grocery_store_sales_online.model.Employee;
-import com.example.grocery_store_sales_online.model.Person;
-import com.example.grocery_store_sales_online.model.Role;
-import com.example.grocery_store_sales_online.model.User;
+import com.example.grocery_store_sales_online.model.person.Employee;
+import com.example.grocery_store_sales_online.model.account.Role;
+import com.example.grocery_store_sales_online.model.person.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
     private Long id;

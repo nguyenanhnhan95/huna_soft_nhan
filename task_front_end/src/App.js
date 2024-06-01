@@ -5,6 +5,7 @@ import Header from "./components/header/Header";
 import OAuth2RedirectHandle from "./components/oauth2/OAuth2RedirectHandler";
 import Test from "./components/test";
 import Admin from "./pages/admin/Admin";
+import { useEffect } from "react";
 
 function App() {
   return (

@@ -1,7 +1,6 @@
 package com.example.grocery_store_sales_online.service.productCategoryService;
 
-import com.example.grocery_store_sales_online.config.CategoryProductProperties;
-import com.example.grocery_store_sales_online.model.ProductCategory;
+import com.example.grocery_store_sales_online.model.product.ProductCategory;
 import com.example.grocery_store_sales_online.repository.productCategory.ProductCategoryRepository;
 import com.example.grocery_store_sales_online.service.base.BaseService;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +38,7 @@ public class ProductCategoryService extends BaseService implements IProductCateg
         List<ProductCategory> productCategories =productCategoryRepository.findAllParent();
         productCategories.forEach(each->{
             this.listProductCategoryChildren(each).forEach(children->{
-                children.setParent(null);
+                children.setParentCategory(null);
             });
             each.setChildren(this.listProductCategoryChildren(each));
         });

@@ -3,8 +3,7 @@ package com.example.grocery_store_sales_online.controller;
 import com.example.grocery_store_sales_online.enums.AuthProvider;
 import com.example.grocery_store_sales_online.enums.ErrorCode;
 import com.example.grocery_store_sales_online.exception.AppException;
-import com.example.grocery_store_sales_online.exception.BadRequestException;
-import com.example.grocery_store_sales_online.model.User;
+import com.example.grocery_store_sales_online.model.person.User;
 import com.example.grocery_store_sales_online.payload.ApiResponse;
 import com.example.grocery_store_sales_online.payload.AuthResponse;
 import com.example.grocery_store_sales_online.payload.LoginRequest;
@@ -13,8 +12,12 @@ import com.example.grocery_store_sales_online.security.CustomUserDetailsService;
 import com.example.grocery_store_sales_online.security.TokenProvider;
 import com.example.grocery_store_sales_online.security.UserPrincipal;
 import com.example.grocery_store_sales_online.service.user.UserService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,12 +29,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationManager authenticationManager;
@@ -49,12 +51,22 @@ public class AuthController {
         } catch (DisabledException e) {
             throw new DisabledException("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Sai tài khoản hoặc mật khẩu");
+            throw new BadCredentialsException("Tài khoản hoặc mật khẩu không tồn tại");
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = tokenProvider.createToken(authentication,AuthProvider.local);
+        String token = tokenProvider.createToken(authentication,AuthProvider.local,loginRequest.isFlagKeep());
         return ResponseEntity.ok(new AuthResponse(token));
+    }
+    @GetMapping("/refresh-token")
+    public ResponseEntity<?> refreshToken(@PathParam("token") String token){
+        String newToken = tokenProvider.refreshToken(token);
+        if(newToken!=null){
+            return ResponseEntity.ok(new AuthResponse(newToken));
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
     }
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {

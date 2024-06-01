@@ -2,10 +2,10 @@ package com.example.grocery_store_sales_online.config;
 
 
 import com.example.grocery_store_sales_online.enums.AuthProvider;
-import com.example.grocery_store_sales_online.enums.EUserStatus;
-import com.example.grocery_store_sales_online.model.Employee;
-import com.example.grocery_store_sales_online.model.ProductCategory;
-import com.example.grocery_store_sales_online.model.Role;
+import com.example.grocery_store_sales_online.enums.EAccountStatus;
+import com.example.grocery_store_sales_online.model.person.Employee;
+import com.example.grocery_store_sales_online.model.product.ProductCategory;
+import com.example.grocery_store_sales_online.model.account.Role;
 import com.example.grocery_store_sales_online.service.employee.EmployeeService;
 import com.example.grocery_store_sales_online.service.productCategoryService.IProductCategoryService;
 
@@ -61,7 +61,7 @@ public class InitialDataCreator implements ApplicationListener<ApplicationReadyE
             Employee admin = new Employee();
             admin.setName("Admin");
             admin.setPassword(passwordEncoder.encode("123123"));
-            admin.setStatusUser(EUserStatus.ACTIVATED);
+            admin.setAccountStatus(EAccountStatus.ACTIVATED);
             admin.setProvider(AuthProvider.local);
             Role roleAdmin = roleService.findByAlias("ROLE_ADMIN");
             Role roleManager = roleService.findByAlias("ROLE_MANAGER");
@@ -95,9 +95,9 @@ public class InitialDataCreator implements ApplicationListener<ApplicationReadyE
             current.setHref(productCategory.getHref());
             current.setDescription(productCategory.getDescription());
             current.setName(productCategory.getName());
-            if (current.getParent() == null && !productCategory.getChildren().isEmpty()) {
+            if (current.getParentCategory() == null && !productCategory.getChildren().isEmpty()) {
                 for (ProductCategory each : productCategory.getChildren()) {
-                    each.setParent(current);
+                    each.setParentCategory(current);
                     createUpdateProductCategory(each);
                 }
                 ;
@@ -110,7 +110,7 @@ public class InitialDataCreator implements ApplicationListener<ApplicationReadyE
                 ProductCategory parent = productCategoryService.saveProductCategory(productCategory);
                 if (parent != null) {
                     for (ProductCategory each : productCategory.getChildren()) {
-                        each.setParent(parent);
+                        each.setParentCategory(parent);
                         productCategoryService.saveProductCategory(each);
                     }
                 }

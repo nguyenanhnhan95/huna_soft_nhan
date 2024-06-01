@@ -2,6 +2,7 @@ package com.example.grocery_store_sales_online.exception;
 
 import com.example.grocery_store_sales_online.enums.ErrorCode;
 import com.example.grocery_store_sales_online.payload.ApiResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,9 +67,9 @@ public class GlobalExceptionHandler{
     ResponseEntity<ApiResponse<Map<String,String>>> handleBadCredential(BadCredentialsException e){
         ApiResponse<Map<String,String>> apiResponse = new ApiResponse<>();
         apiResponse.setCode(ErrorCode.VIOLATION_CONSTRAIN.getCode());
-        apiResponse.setMessage(ErrorCode.VIOLATION_CONSTRAIN.getLabel());
+        apiResponse.setMessage(e.getMessage());
         Map<String, String> errors = new HashMap<>();
-        errors.put("name",e.getMessage());
+        errors.put("password",e.getMessage());
         apiResponse.setResult(errors);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
@@ -82,7 +83,7 @@ public class GlobalExceptionHandler{
         Map<String, String> errors = new HashMap<>();
         errors.put("password","Tài khoản hoặc mật khẩu không tồn tại");
         apiResponse.setResult(errors);
-        return  ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiResponse);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
     }
     @ExceptionHandler(value = AuthenticationException.class)
     ResponseEntity<ApiResponse> handleActiveException(AuthenticationException exception){
@@ -97,13 +98,13 @@ public class GlobalExceptionHandler{
         ErrorCode errorCode = ErrorCode.INVALID_TOKEN;
         apiResponse.setCode(errorCode.getCode());
         apiResponse.setMessage(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponse);
+    }
+    @ExceptionHandler(value = ExpiredJwtException.class)
+    ResponseEntity<ApiResponse> handleAccessDeniedException(ExpiredJwtException exception){
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setCode(100000000);
+        apiResponse.setMessage(exception.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiResponse);
     }
-//    @ExceptionHandler(value = AccessDeniedException.class)
-//    ResponseEntity<ApiResponse> handleAccessDeniedException(AccessDeniedException exception){
-//        ApiResponse apiResponse = new ApiResponse();
-//        apiResponse.setCode(100000000);
-//        apiResponse.setMessage(exception.getMessage());
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiResponse);
-//    }
 }

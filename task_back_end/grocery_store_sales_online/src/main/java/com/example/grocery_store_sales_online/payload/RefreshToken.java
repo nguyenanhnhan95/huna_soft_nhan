@@ -1,5 +1,12 @@
 package com.example.grocery_store_sales_online.payload;
 
-public class RefreshToken {
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Builder
+public class RefreshToken {
+    private String token;
 }

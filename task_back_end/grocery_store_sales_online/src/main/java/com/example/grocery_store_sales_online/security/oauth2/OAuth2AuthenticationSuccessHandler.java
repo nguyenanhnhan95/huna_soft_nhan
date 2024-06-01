@@ -32,14 +32,16 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
-
+        Optional<String> keepCookie = CookieUtils.getCookie(request,"keepLogin").map(Cookie::getValue);
         if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
             throw new BadRequestException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication");
         }
-
+        boolean flagKeep=false;
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
-        String token = tokenProvider.createToken(authentication, AuthProvider.social);
+        if(keepCookie.isPresent() && keepCookie.get().trim().equals("true")){
+            flagKeep=true;
+        }
+        String token = tokenProvider.createToken(authentication, AuthProvider.social,flagKeep);
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", token)
                 .build().toUriString();

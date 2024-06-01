@@ -1,8 +1,6 @@
 package com.example.grocery_store_sales_online.config;
-
-
 import com.example.grocery_store_sales_online.model.Permission;
-import com.example.grocery_store_sales_online.model.Role;
+import com.example.grocery_store_sales_online.model.account.Role;
 import com.example.grocery_store_sales_online.utils.ResourceJsonLoader;
 import lombok.Getter;
 import org.slf4j.Logger;

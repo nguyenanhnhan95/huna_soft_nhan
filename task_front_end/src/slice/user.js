@@ -11,14 +11,18 @@ const initialState = {
     loading: false,
     error: null,
 }
-export const findByUser = createAsyncThunk('user', async (http) => {
-    console.log(http)
-    const headers = createHeader(localStorage.getItem(ACCESS_TOKEN));
-    console.log(headers)
-    const response = await axios.get(http, headers);
-    console.log(response.data)
-    localStorage.setItem(USER_LOGIN, JSON.stringify(response.data));
-    return response;
+export const findByUser = createAsyncThunk('user', async (http,{rejectWithValue}) => {
+    try{
+        const headers = createHeader(localStorage.getItem(ACCESS_TOKEN));
+        const response = await axios.get(http, headers);
+        console.log(response.data)
+        localStorage.setItem(USER_LOGIN, JSON.stringify(response.data));
+        return response.data;
+    }catch(error){
+        console.log(error)
+        console.log(rejectWithValue(error.response.data))
+        return rejectWithValue(error.response.data)
+    }
 })
 export const userSlice = createSlice({
     name: 'user',

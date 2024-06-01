@@ -1,6 +1,6 @@
 package com.example.grocery_store_sales_online.service.product;
 
-import com.example.grocery_store_sales_online.model.Product;
+import com.example.grocery_store_sales_online.model.product.Product;
 import com.example.grocery_store_sales_online.repository.product.ProductRepository;
 import com.example.grocery_store_sales_online.service.base.BaseService;
 import com.example.grocery_store_sales_online.service.base.IBaseService;

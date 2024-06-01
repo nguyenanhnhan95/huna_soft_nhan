@@ -11,7 +11,9 @@ public enum ErrorCode implements IEnumComboItem {
     VIOLATION_CONSTRAIN(4003,"Validation error"),
     BAD_CREDENTIAL(4004,"Sai tài khoản hoặc mật khẩu "),
     INVALID_TOKEN(4005,"Invalid Token"),
-    UNAUTHENTICATED(4006,"Tài khoản chưa được xác thực")
+    UNAUTHENTICATED(4006,"Tài khoản chưa được xác thực"),
+    EXPIRED_TOKEN(4007,"Token đã hết hạn"),
+    REFRESH_TOKEN(4008,"Refresh token")
     ;
     private int code;
     private String message;

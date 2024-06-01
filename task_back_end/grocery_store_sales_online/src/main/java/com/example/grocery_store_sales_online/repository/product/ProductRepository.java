@@ -1,7 +1,7 @@
 package com.example.grocery_store_sales_online.repository.product;
 
-import com.example.grocery_store_sales_online.model.Product;
-import com.example.grocery_store_sales_online.model.QProduct;
+import com.example.grocery_store_sales_online.model.product.Product;
+import com.example.grocery_store_sales_online.model.product.QProduct;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import com.example.grocery_store_sales_online.utils.QueryListResult;
 import com.example.grocery_store_sales_online.utils.QueryParameter;

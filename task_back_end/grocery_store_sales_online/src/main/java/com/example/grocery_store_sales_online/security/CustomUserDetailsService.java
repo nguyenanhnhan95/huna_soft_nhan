@@ -1,35 +1,27 @@
 package com.example.grocery_store_sales_online.security;
 
-import com.example.grocery_store_sales_online.enums.EUserStatus;
 import com.example.grocery_store_sales_online.enums.ErrorCode;
-import com.example.grocery_store_sales_online.exception.ActiveException;
 import com.example.grocery_store_sales_online.exception.ResourceNotFoundException;
-import com.example.grocery_store_sales_online.model.Employee;
-import com.example.grocery_store_sales_online.model.Role;
-import com.example.grocery_store_sales_online.model.User;
+import com.example.grocery_store_sales_online.model.person.Employee;
+import com.example.grocery_store_sales_online.model.person.User;
 
 import com.example.grocery_store_sales_online.service.employee.EmployeeService;
-import com.example.grocery_store_sales_online.service.role.RoleService;
 import com.example.grocery_store_sales_online.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringJoiner;
-
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserService userService;
     private final EmployeeService employeeService;
-
-    private final RoleService roleService;
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
     @Override
     @Transactional

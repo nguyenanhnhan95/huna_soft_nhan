@@ -1,9 +1,8 @@
 package com.example.grocery_store_sales_online.service.role;
 
-import com.example.grocery_store_sales_online.model.Role;
+import com.example.grocery_store_sales_online.model.account.Role;
 import com.example.grocery_store_sales_online.repository.role.RoleRepository;
 import com.example.grocery_store_sales_online.service.base.BaseService;
-import com.querydsl.jpa.impl.JPAQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-import "../../css/main/dashBoard.css"
+import "../../css/admin/dashBoard.css"
 function DashBoard(){
     return(
         <div className="container-fluid container-dashboard">

@@ -16,11 +16,11 @@ public enum ERating implements IEnumComboItem {
 
     @Getter
     private Integer star;
-    @Getter
+
     private String text;
 
     @Override
     public String getLabel() {
-        return null;
+        return text;
     }
 }

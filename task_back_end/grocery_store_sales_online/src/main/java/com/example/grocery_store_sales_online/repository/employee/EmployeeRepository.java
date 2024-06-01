@@ -1,7 +1,7 @@
 package com.example.grocery_store_sales_online.repository.employee;
 
-import com.example.grocery_store_sales_online.model.Employee;
-import com.example.grocery_store_sales_online.model.QEmployee;
+import com.example.grocery_store_sales_online.model.person.Employee;
+import com.example.grocery_store_sales_online.model.person.QEmployee;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import com.example.grocery_store_sales_online.utils.QueryListResult;
 import com.example.grocery_store_sales_online.utils.QueryParameter;
@@ -10,7 +10,6 @@ import com.querydsl.jpa.impl.JPAQuery;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import org.apache.commons.collections4.MapUtils;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 

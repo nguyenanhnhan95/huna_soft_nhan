@@ -107,20 +107,6 @@
           ]
         },
         {
-          "title": "Sản phẩm",
-          "href": "/admin/shop-product",
-          "resources": [
-            "shop-product",
-            "shop-product/add",
-            "shop-product/detail",
-            "shop-product/edit"
-          ],
-          "iconClass": "fa-regular fa-circle",
-          "requiredPermissions": [
-            "classdairy:view"
-          ]
-        },
-        {
           "title": "Đơn hàng",
           "href": "/admin/shop-order",
           "resources": [
@@ -165,375 +151,7 @@
       ]
     },
     {
-      "title": "Điểm danh",
-      "href": "/admin/muster",
-      "resources": [
-        "muster"
-      ],
-      "iconClass": "users",
-      "requiredPermissions": [
-        "muster:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Điểm danh hôm nay",
-          "href": "/admin/muster",
-          "resources": [
-            "muster"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "muster:view"
-          ]
-        },
-        {
-          "title": "Lịch sử điểm danh",
-          "href": "/admin/muster-history",
-          "resources": [
-            "muster-history"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "muster:view"
-          ]
-        },
-        {
-          "title": "Tổng hợp điểm danh",
-          "href": "/admin/muster-all",
-          "resources": [
-            "muster-all",
-            "muster-all/detail",
-            "muster-all/list-date"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "muster:view"
-          ]
-        },
-        {
-          "title": "Danh sách ăn tối hôm nay",
-          "href": "/admin/muster-dinner",
-          "resources": [
-            "muster-dinner"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "muster:view"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Chấm công",
-      "href": "/admin/time-keeping",
-      "resources": [
-        "time-keeping"
-      ],
-      "iconClass": "users",
-      "requiredPermissions": [
-        "time-keeping:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Chấm công hôm nay",
-          "href": "/admin/time-keeping",
-          "resources": [
-            "time-keeping"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "time-keeping:view"
-          ]
-        },
-        {
-          "title": "Lịch sử chấm công",
-          "href": "/admin/time-keeping/history",
-          "resources": [
-            "time-keeping/history"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "time-keeping:view"
-          ]
-        },
-        {
-          "title": "Tổng hợp chấm công",
-          "href": "/admin/time-keeping/all",
-          "resources": [
-            "time-keeping/all",
-            "time-keeping/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "time-keeping:view"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Chương trình học",
-      "href": "",
-      "resources": [
-        "teachingplan",
-        "timetable",
-        "activity",
-        "lesson",
-        "main-topic",
-        "monthly-plan",
-        "annualgoal",
-        "chuongtrinhhoc"
-      ],
-      "iconClass": "calendar",
-      "requiredPermissions": [
-        "timetable:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Tổng quan",
-          "href": "/admin/chuongtrinhhoc",
-          "resources": [
-            "timetable",
-            "timetable/add",
-            "timetable/detail",
-            "timetable/schedule",
-            "monthly-plan",
-            "monthly-plan/add",
-            "monthly-plan/detail",
-            "annual-plan",
-            "annual-plan/detail",
-            "annualgoal",
-            "annualgoal/detail",
-            "chuongtrinhhoc"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "timetable:view"
-          ]
-        },
-        {
-          "title": "Giáo án",
-          "href": "/admin/teachingplan",
-          "resources": [
-            "teachingplan",
-            "teachingplan/add",
-            "teachingplan/detail",
-            "teachingplan/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "timetable:view"
-          ]
-        },
-        {
-          "title": "Tên hoạt động",
-          "href": "/admin/activity",
-          "resources": [
-            "activity",
-            "activity/add",
-            "activity/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "timetable:view"
-          ]
-        },
-        {
-          "title": "Lịch sinh hoạt",
-          "href": "/admin/lesson",
-          "resources": [
-            "lesson",
-            "lesson/add",
-            "lesson/edit",
-            "lesson/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "timetable:view"
-          ]
-        },
-        {
-          "title": "Chủ đề lớn",
-          "href": "/admin/main-topic",
-          "resources": [
-            "main-topic"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "timetable:view"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Thực đơn",
-      "href": "",
-      "resources": [
-        "menu"
-      ],
-      "iconClass": "list",
-      "requiredPermissions": [
-        "menu:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Thực đơn hằng tuần",
-          "href": "/admin/menu",
-          "resources": [
-            "menu",
-            "menu/add",
-            "menu/detail",
-            "menu/view"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "menu:view"
-          ]
-        },
-        {
-          "title": "Món ăn",
-          "href": "/admin/dish",
-          "resources": [
-            "dish",
-            "dish/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "menu:view"
-          ]
-        },
-        {
-          "title": "Bữa ăn",
-          "href": "/admin/meal",
-          "resources": [
-            "meal"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "menu:view"
-          ]
-        }
-      ]
-    },{
-      "title": "Nhân sự",
-      "href": "",
-      "resources": [
-        "teacher",
-        "employee"
-      ],
-      "iconClass": "users",
-      "requiredPermissions": [
-        "employee:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Giáo viên",
-          "href": "/admin/teacher",
-          "resources": [
-            "teacher",
-            "teacher/add",
-            "teacher/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "employee:view"
-          ]
-        },
-        {
-          "title": "Nhân viên",
-          "href": "/admin/employee",
-          "resources": [
-            "employee",
-            "employee/add",
-            "employee/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "employee:view"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Học phí",
-      "href": "",
-      "resources": [
-        "tution"
-      ],
-      "iconClass": "book-open",
-      "requiredPermissions": [
-        "tution:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Danh sách học phí",
-          "href": "/admin/hocphi",
-          "resources": [
-            "hocphi",
-            "hocphi/edit",
-            "hocphi/detail",
-            "hocphi/edit-all",
-            "hocphi/pay-tuition"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "tution:view"
-          ]
-        },
-        {
-          "title": "DS giảm học phí",
-          "href": "/admin/danh-sach-giam-hoc-phi",
-          "resources": [
-            "danh-sach-giam-hoc-phi",
-            "danh-sach-giam-hoc-phi/edit",
-            "danh-sach-giam-hoc-phi/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "tution:view"
-          ]
-        },
-        {
-          "title": "Quyết định",
-          "href": "/admin/tution-monthly",
-          "resources": [
-            "tution-monthly",
-            "tution-monthly/add",
-            "tution-monthly/edit",
-            "tution-monthly/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "tution:view"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Quản lý đánh giá",
-      "href": "",
-      "resources": [
-        "daily-evaluation"
-      ],
-      "iconClass": "list",
-      "requiredPermissions": [
-        "daily-evaluation:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Checklist công việc hằng ngày",
-          "href": "/admin/daily-evaluation",
-          "resources": [
-            "daily-evaluation"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "daily-evaluation:view"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "TUYỂN SINH",
+      "title": "Sản phẩm",
       "href": "",
       "header": true,
       "resources": [
@@ -541,87 +159,66 @@
         "parent"
       ],
       "requiredPermissions": [
-        "candidate:view"
+        "student:view"
       ]
     },
     {
-      "title": "DS nộp hồ sơ",
-      "href": "/admin/candidate",
-      "resources": [
-        "candidate",
-        "candidate/add",
-        "candidate/detail"
-      ],
-      "iconClass": "users",
-      "requiredPermissions": [
-        "candidate:view"
-      ]
-    },
-    {
-      "title": "PH Tiềm năng",
-      "href": "/admin/parent-potential",
-      "resources": [
-        "parent-potential",
-        "parent-potential/add",
-        "parent-potential/detail",
-        "parent-potential/edit"
-      ],
-      "iconClass": "users",
-      "requiredPermissions": [
-        "sale:view"
-      ]
-    },
-    {
-      "title": "DS tham quan trường",
-      "href": "/admin/visit",
-      "resources": [
-        "visit",
-        "visit/add",
-        "visit/detail",
-        "visit/edit"
-      ],
-      "iconClass": "users",
-      "requiredPermissions": [
-        "appointment:view"
-      ]
-    },
-    {
-      "title": "THƯ VIỆN",
+      "title": "Quản lý sản phẩm",
       "href": "",
-      "header": true,
-      "resources": [],
-      "requiredPermissions": [
-        "library:view"
-      ]
-    },
-    {
-      "title": "Bài giảng",
-      "href": "/admin/lessonplan",
       "resources": [
-        "lessonplan",
-        "lessonplan/add",
-        "lessonplan/detail",
-        "lessonplan/edit"
+        "time-keeping"
       ],
-      "iconClass": "folder",
+      "iconClass": "fa-solid  fa-folder-tree",
       "requiredPermissions": [
-        "library:view"
-      ]
-    },
-    {
-      "title": "Video",
-      "href": "/admin/video",
-      "resources": [
-        "video",
-        "video/add",
-        "video/detail",
-        "video/edit",
-        "video/listvideo",
-        "video/view"
+        "time-keeping:view"
       ],
-      "iconClass": "folder",
-      "requiredPermissions": [
-        "library:view"
+      "subMenus": [
+        {
+          "title": "Tất cả sản phẩm",
+          "href": "/admin/products",
+          "resources": [
+            "time-keeping"
+          ],
+          "iconClass": "fa-regular fa-circle",
+          "requiredPermissions": [
+            "time-keeping:view"
+          ]
+        },
+        {
+          "title": "Sản phẩm đã bán",
+          "href": "/admin/products-sold",
+          "resources": [
+            "time-keeping/history"
+          ],
+          "iconClass": "fa-regular fa-circle",
+          "requiredPermissions": [
+            "time-keeping:view"
+          ]
+        },
+        {
+          "title": "Sản phẩm nhập hàng",
+          "href": "/admin/products-import",
+          "resources": [
+            "time-keeping/all",
+            "time-keeping/detail"
+          ],
+          "iconClass": "fa-regular fa-circle",
+          "requiredPermissions": [
+            "time-keeping:view"
+          ]
+        },
+        {
+          "title": "Sản phẩm tồn kho",
+          "href": "/admin/products-inventory",
+          "resources": [
+            "time-keeping/all",
+            "time-keeping/detail"
+          ],
+          "iconClass": "fa-regular fa-circle",
+          "requiredPermissions": [
+            "time-keeping:view"
+          ]
+        }
       ]
     },
     {
@@ -634,7 +231,7 @@
         "album/edit",
         "album/view"
       ],
-      "iconClass": "folder",
+      "iconClass": "fa-solid fa-file-image",
       "requiredPermissions": [
         "library:view"
       ]
@@ -647,7 +244,7 @@
         "files/add",
         "files/detail"
       ],
-      "iconClass": "folder",
+      "iconClass": "fa-solid fa-solid fa-folder-open",
       "requiredPermissions": [
         "file:view"
       ]
@@ -669,7 +266,7 @@
         "topic",
         "featured-post"
       ],
-      "iconClass": "users",
+      "iconClass": "fa-brands fa-edge-legacy",
       "requiredPermissions": [
         "webcontent:view"
       ],
@@ -682,7 +279,7 @@
             "post/add",
             "post/detail"
           ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "webcontent:view"
           ]
@@ -696,7 +293,7 @@
             "topic/detail",
             "topic/edit"
           ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "webcontent:view"
           ]
@@ -707,7 +304,7 @@
           "resources": [
             "featured-post"
           ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "webcontent:view"
           ]
@@ -720,7 +317,7 @@
       "resources": [
         "websetting"
       ],
-      "iconClass": "settings",
+      "iconClass": "fa-solid fa-gear",
       "requiredPermissions": [
         "webcontent:view"
       ],
@@ -731,7 +328,7 @@
           "resources": [
             "websetting/general"
           ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "webcontent:view"
           ]
@@ -742,7 +339,7 @@
           "resources": [
             "websetting/homepage"
           ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "webcontent:view"
           ]
@@ -753,59 +350,11 @@
           "resources": [
             "websetting/news"
           ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "webcontent:view"
-          ]
-        },
-        {
-          "title": "Tuyển sinh",
-          "href": "/admin/websetting/tuyensinh",
-          "resources": [
-            "websetting/tuyensinh"
-          ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "webcontent:view"
           ]
         }
-      ]
-    },
-    {
-      "title": "Chi phí",
-      "href": "",
-      "header": true,
-      "resources": [],
-      "requiredPermissions": [
-        "daily-spend:view"
-      ]
-    },
-    {
-      "title": "Chi tiêu hằng ngày",
-      "href": "/admin/daily-spend",
-      "resources": [
-        "daily-spend",
-        "daily-spend/add",
-        "daily-spend/detail",
-        "daily-spend/edit"
-      ],
-      "iconClass": "folder",
-      "requiredPermissions": [
-        "daily-spend:view"
-      ]
-    },
-    {
-      "title": "Loại chi tiêu",
-      "href": "/admin/daily-spend-type",
-      "resources": [
-        "daily-spend-type",
-        "daily-spend-type/add",
-        "daily-spend-type/detail",
-        "daily-spend-type/edit"
-      ],
-      "iconClass": "folder",
-      "requiredPermissions": [
-        "daily-spend:view"
       ]
     },
     {
@@ -842,194 +391,6 @@
       ]
     },
     {
-      "title": "Danh mục",
-      "href": "/admin/category",
-      "resources": [
-        "video-type",
-        "title",
-        "department",
-        "grade",
-        "relationship",
-        "meal",
-        "dish",
-        "activity",
-        "lesson"
-      ],
-      "iconClass": "menu",
-      "requiredPermissions": [
-        "system-category:view"
-      ],
-      "subMenus": [
-        {
-          "title": "Loại video",
-          "href": "/admin/video-type",
-          "resources": [
-            "video-type",
-            "video-type/add",
-            "video-type/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view",
-            "library:view"
-          ]
-        },
-        {
-          "title": "Năm học",
-          "href": "/admin/school-year",
-          "resources": [
-            "school-year",
-            "school-year/add",
-            "school-year/detail",
-            "school-year/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view"
-          ]
-        },
-        {
-          "title": "Nhóm lớp",
-          "href": "/admin/group",
-          "resources": [
-            "group",
-            "group/add",
-            "group/detail",
-            "group/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view"
-          ]
-        },
-        {
-          "title": "Khối lớp",
-          "href": "/admin/grade",
-          "resources": [
-            "grade",
-            "grade/add",
-            "grade/detail",
-            "grade/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view"
-          ]
-        },
-        {
-          "title": "Trình độ chuyên môn",
-          "href": "/admin/qualification",
-          "resources": [
-            "qualification",
-            "qualification/add",
-            "qualification/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view",
-            "employee:view"
-          ]
-        },
-        {
-          "title": "Mối quan hệ",
-          "href": "/admin/relationship",
-          "resources": [
-            "relationship",
-            "relationship/add",
-            "relationship/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view"
-          ]
-        },
-        {
-          "title": "Trình độ văn hóa",
-          "href": "/admin/educational-level",
-          "resources": [
-            "educational-level",
-            "educational-level/add",
-            "educational-level/detail",
-            "educational-level/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view",
-            "employee:view"
-          ]
-        },
-        {
-          "title": "Chủ đề bài giảng",
-          "href": "/admin/lecturetopic",
-          "resources": [
-            "lecturetopic",
-            "lecturetopic/add",
-            "lecturetopic/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view",
-            "library:view"
-          ]
-        },
-        {
-          "title": "Công việc",
-          "href": "/admin/task",
-          "resources": [
-            "task",
-            "task/add",
-            "task/edit"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view",
-            "daily-evaluation:view"
-          ]
-        },
-        {
-          "title": "Loại học phí",
-          "href": "/admin/tution-type",
-          "resources": [
-            "tution-type",
-            "tution-type/add"
-
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "tution:view"
-          ]
-        },
-        {
-          "title": "Loại giảm",
-          "href": "/admin/discount",
-          "resources": [
-            "discount",
-            "discount/add",
-            "discount/edit",
-            "discount/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "tution:view"
-          ]
-        },
-        {
-          "title": "Ngày lễ",
-          "href": "/admin/calendar",
-          "resources": [
-            "calendar",
-            "calendar/add",
-            "calendar/edit",
-            "calendar/detail"
-          ],
-          "iconClass": "circle",
-          "requiredPermissions": [
-            "system:view"
-          ]
-        }
-      ]
-    },
-    {
       "title": "Hệ thống",
       "href": "",
       "resources": [
@@ -1049,7 +410,7 @@
             "user/add",
             "user/edit"
           ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "system:view"
           ]
@@ -1063,7 +424,7 @@
             "role/edit",
             "role/detail"
           ],
-          "iconClass": "circle",
+          "iconClass": "fa-regular fa-circle",
           "requiredPermissions": [
             "system:view"
           ]

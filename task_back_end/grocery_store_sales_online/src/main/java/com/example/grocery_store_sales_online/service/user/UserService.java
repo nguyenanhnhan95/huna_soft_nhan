@@ -1,6 +1,6 @@
 package com.example.grocery_store_sales_online.service.user;
 
-import com.example.grocery_store_sales_online.model.User;
+import com.example.grocery_store_sales_online.model.person.User;
 import com.example.grocery_store_sales_online.repository.user.UserRepository;
 import com.example.grocery_store_sales_online.service.base.BaseService;
 import lombok.RequiredArgsConstructor;

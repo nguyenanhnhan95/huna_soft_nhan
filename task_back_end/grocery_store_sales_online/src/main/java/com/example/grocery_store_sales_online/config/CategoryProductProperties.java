@@ -1,6 +1,6 @@
 package com.example.grocery_store_sales_online.config;
 
-import com.example.grocery_store_sales_online.model.ProductCategory;
+import com.example.grocery_store_sales_online.model.product.ProductCategory;
 import com.example.grocery_store_sales_online.utils.ResourceJsonLoader;
 import lombok.Getter;
 import org.slf4j.Logger;

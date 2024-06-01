@@ -14,7 +14,6 @@ function Header() {
     useEffect(()=>{
         dispatch(findAllCategoryMenus())
     },[])
-    console.log(productCategories)
     return (
         <div className="header">
             <div className="container-fluid container-header ">

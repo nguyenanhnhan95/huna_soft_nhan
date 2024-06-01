@@ -1,7 +1,6 @@
 package com.example.grocery_store_sales_online.repository.role;
-
-import com.example.grocery_store_sales_online.model.QRole;
-import com.example.grocery_store_sales_online.model.Role;
+import com.example.grocery_store_sales_online.model.account.QRole;
+import com.example.grocery_store_sales_online.model.account.Role;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;

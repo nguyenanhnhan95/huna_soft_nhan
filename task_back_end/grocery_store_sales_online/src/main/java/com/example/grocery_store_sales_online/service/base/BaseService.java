@@ -1,6 +1,6 @@
 package com.example.grocery_store_sales_online.service.base;
 
-import com.example.grocery_store_sales_online.model.Model;
+import com.example.grocery_store_sales_online.model.common.Model;
 import com.example.grocery_store_sales_online.utils.QueryParameter;
 import com.google.gson.Gson;
 import jakarta.annotation.Nullable;

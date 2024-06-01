@@ -16,7 +16,9 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         logger.error("Responding with unauthorized error. Message - {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+        System.out.println(authException.getLocalizedMessage());
+        response.sendError(response.getStatus(),
                 authException.getLocalizedMessage());
+
     }
 }

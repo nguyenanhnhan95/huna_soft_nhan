@@ -1,8 +1,7 @@
 package com.example.grocery_store_sales_online.repository.productCategory;
 
-import com.example.grocery_store_sales_online.model.ProductCategory;
-import com.example.grocery_store_sales_online.model.QProductCategory;
-import com.example.grocery_store_sales_online.model.Role;
+import com.example.grocery_store_sales_online.model.product.ProductCategory;
+import com.example.grocery_store_sales_online.model.product.QProductCategory;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
@@ -25,11 +24,11 @@ public class ProductCategoryRepository extends BaseRepository<ProductCategory,Lo
     public List<ProductCategory> findAllParent(){
         JPAQuery<ProductCategory> jpaQuery = new JPAQuery<>(em);
         return jpaQuery.select(productCategory).from(productCategory)
-                .where(productCategory.parent.isNull()).fetch();
+                .where(productCategory.parentCategory.isNull()).fetch();
     }
     public List<ProductCategory> listProductCategoryChildren(ProductCategory category) {
         JPAQuery<ProductCategory> jpaQuery = new JPAQuery<>(em);
         return jpaQuery.select(productCategory).from(productCategory)
-                .where(productCategory.parent.id.eq(category.getId())).fetch();
+                .where(productCategory.parentCategory.id.eq(category.getId())).fetch();
     }
 }

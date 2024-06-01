@@ -1,7 +1,7 @@
 package com.example.grocery_store_sales_online.repository.notification;
 
 import com.example.grocery_store_sales_online.model.Notification;
-import com.example.grocery_store_sales_online.model.QUser;
+import com.example.grocery_store_sales_online.model.person.QUser;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

@@ -2,7 +2,7 @@ import oneSlider from "../../img/home/one_slider.jpg"
 import twoSlider from "../../img/home/two_slider.jpg"
 import threeSlider from "../../img/home/three_slider.jpg"
 import "../../css/sliderHome.css"
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 function HomeSlider() {
     const [active, setActive] = useState(0);
     const listRef = useRef(null);
@@ -79,4 +79,4 @@ function HomeSlider() {
         </div>
     )
 }
-export default HomeSlider;
+export default memo(HomeSlider);
