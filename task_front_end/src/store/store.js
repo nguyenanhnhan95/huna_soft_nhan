@@ -7,25 +7,26 @@ import overPlayMenuMainSlice from "../slice/main/overPlayMenu";
 import menuContentMainSlice from "../slice/main/menuContentMain";
 import logger from 'redux-logger'
 import { thunk } from "redux-thunk";
-const staticReducers = {
-    // product: productSlice.reducer,
-    loginForm:loginForm.reducer,
+import { actionReducerStore } from "../constants/reducerSlice";
+export const staticReducers = {
+    product: productSlice.reducer,
     user: userSlice.reducer,
-    productCategoryMenus: getAllCategoryMenus.reducer,
-    overPlayMenuMain: overPlayMenuMainSlice.reducer,
-    menuContentMain: menuContentMainSlice.reducer,
+    loginForm:loginForm.reducer
+    // productCategoryMenus: getAllCategoryMenus.reducer,
+    // overPlayMenuMain: overPlayMenuMainSlice.reducer,
+    // menuContentMain: menuContentMainSlice.reducer,
 }
 // const createReducer = (asyncReducers) => combineReducers({
 //     ...staticReducers,
 //     ...asyncReducers
 // });
-export function createReducerManager(initialReducers) {
+export function createReducerManager() {
+    console.log()
     // Create an object which maps keys to reducers
-    const reducers = { ...initialReducers }
+    const reducers = { ...staticReducers }
 
     // Create the initial combinedReducer
     let combinedReducer = combineReducers(reducers)
-
     // An array which is used to delete state keys when reducers are removed
     let keysToRemove = []
 
@@ -38,6 +39,7 @@ export function createReducerManager(initialReducers) {
             // If any reducers have been removed, clean up their state first
             if (keysToRemove.length > 0) {
                 state = { ...state }
+
                 for (let key of keysToRemove) {
                     delete state[key]
                 }
@@ -56,7 +58,6 @@ export function createReducerManager(initialReducers) {
 
             // Add the reducer to the reducer mapping
             reducers[key] = reducer
-
             // Generate a new combined reducer
             combinedReducer = combineReducers(reducers)
         },
@@ -66,7 +67,7 @@ export function createReducerManager(initialReducers) {
             if (!key || !reducers[key]) {
                 return
             }
-
+            console.log(key)
             // Remove it from the reducer mapping
             delete reducers[key]
 
@@ -76,32 +77,33 @@ export function createReducerManager(initialReducers) {
             // Generate a new combined reducer
             combinedReducer = combineReducers(reducers)
         }
+        , clear: () => {
+            combinedReducer = combineReducers(staticReducers)
+        }
     }
 }
-console.log(createReducerManager(staticReducers).getReducerMap())
-// export const store = configureStore({
-//     reducer: {
-//         product: productSlice.reducer,
-//         user: userSlice.reducer,
-//         loginForm: loginForm.reducer,
-//         productCategoryMenus: getAllCategoryMenus.reducer,
-//         overPlayMenuMain: overPlayMenuMainSlice.reducer,
-//         menuContentMain: menuContentMainSlice.reducer,
-//     },
-//     middleware: () => new Tuple(...[thunk])
-// })
-
+const reducerManager = createReducerManager()
 export const store = configureStore({
-    reducer: createReducer({}),
+    reducer: reducerManager.reduce,
     middleware: () => new Tuple(...[thunk])
 })
 
 store.asyncReducers = {};
 
-store.injectReducer = (key, asyncReducer) => {
-    console.log(key)
-    store.asyncReducers[key] = asyncReducer;
-    // store.replaceReducer(createReducer(store.asyncReducers));
-    store.replaceReducer(createReducerManager(store.asyncReducers).getReducerMap());
+store.injectReducer = (action, key, asyncReducer) => {
+    switch (action) {
+        case actionReducerStore.add:
+            store.asyncReducers[key] = asyncReducer;
+            reducerManager.add(key, asyncReducer);
+            break;
+        case actionReducerStore.remove:
+            store.asyncReducers[key] = asyncReducer;
+            reducerManager.remove(key, asyncReducer);
+            break;
+        case actionReducerStore.clear:
+            reducerManager.clear()
+            break;
+    }
+    store.replaceReducer(reducerManager.reduce);
 };
 export default store;

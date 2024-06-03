@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import LogoSky from "../../img/header/logo-sky.png"
 import zIndex from "@mui/material/styles/zIndex";
+import store from "../../store/store";
 function HeaderMenusPc() {
     const { loading, productCategories, error } = useSelector((state) => state.productCategoryMenus)
     return (

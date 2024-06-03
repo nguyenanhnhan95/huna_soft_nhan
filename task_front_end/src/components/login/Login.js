@@ -2,6 +2,12 @@ import "../../css/login.css"
 import LoginForm from "./LoginForm";
 import SocialLogin from "./SocialLogin";
 import BackgroundImg from "../../img/background_img_login.png"
+import { loginForm } from "../../slice/login";
+import store from "../../store/store";
+import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
+import { useEffect } from "react";
+store.injectReducer(actionReducerStore.clear,"","")
+store.injectReducer(actionReducerStore.add,reducerSliceKey.loginForm,loginForm.reducer)
 function Login() {
   return (
     <div className="container-fluid login">

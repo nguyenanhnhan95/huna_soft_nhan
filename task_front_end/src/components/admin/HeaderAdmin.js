@@ -19,7 +19,7 @@ function HeaderAdmin() {
                     <div className=" navbar-collapse">
                         <ul className="navbar-nav ">
                             <li className="nav-item main-content-header-list" >
-                                <i class="fa-solid fa-bars fa-2x" onClick={handleOpenMenuMainOnClick} ref={overPlayMenuMainRef}></i>
+                                <i className="fa-solid fa-bars fa-2x" onClick={handleOpenMenuMainOnClick} ref={overPlayMenuMainRef}></i>
                             </li>
                             <MainSearchHeader />
                         </ul>

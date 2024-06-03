@@ -4,27 +4,24 @@ import * as yup from "yup";
 import { loginAuth } from "../../services/login";
 import axios from "axios";
 import Cookies from 'js-cookie'
-import { ACCESS_TOKEN, PROVIDER_ID, PROVIDER_LOCAL } from "../../constants/login";
+import { constLogin } from "../../constants/login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginForm, loginFormAuth } from "../../slice/login";
-import { findByUser } from "../../slice/user";
-import { createHeader } from "../../config/common";
-import { current } from "@reduxjs/toolkit";
-import store, { createReducer } from "../../store/store";
-const http = "http://localhost:8080/user/me";
+import store from "../../store/store";
+import { linkHttp } from "../../constants/htttp";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
     const [keepLogin,setKeepLogin] = useState(false)
-    console.log(store.getState())
     const { loading, error,accessToken } = useSelector((state) => state.loginForm)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogin = async (loginRequest, setErrors) => {
         try{
             const token= await dispatch(loginFormAuth({...loginRequest,flagKeep:keepLogin})).unwrap();
-            localStorage.setItem(ACCESS_TOKEN,token.accessToken);
-            Cookies.remove('keepLogin', { domain: 'localhost', path: '/' });
+            localStorage.setItem(constLogin.ACCESS_TOKEN,token.accessToken);
+            Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
+
             navigate("/admin")
         } catch(error){
             console.log(error)
@@ -34,11 +31,11 @@ function LoginForm() {
     const handleKeepLogin=(currentKeepLogin)=>{
         if(currentKeepLogin){
             setKeepLogin(false);
-            Cookies.remove('keepLogin', { domain: 'localhost', path: '/' });
-            Cookies.set('keepLogin',false,{ domain: 'localhost', path: ''  })
+            Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
+            Cookies.set(constLogin.keepLogin,false,{ domain: linkHttp.domain, path: ''  })
         }else{
-            Cookies.remove('keepLogin', { domain: 'localhost', path: '/' });
-            Cookies.set('keepLogin',true,{ domain: 'localhost', path: '' })
+            Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
+            Cookies.set(constLogin.keepLogin,true,{ domain: linkHttp.domain, path: '' })
             setKeepLogin(true);
         }
     }
@@ -65,7 +62,7 @@ function LoginForm() {
                         </div>
                         <div className="mb-3 form-password">
                             <label htmlFor="password" className="form-label">Mật khẩu</label>
-                            <Field type={showPassword ? 'text':'password'} name="password" className="form-control " id="password" placeholder="············" />
+                            <Field type={showPassword ? 'text':'password'} name="password" className="form-control " autoComplete="username password"  id="password" placeholder="············" />
                             <ErrorMessage name='password' className="form-text form-error" component='div' />
                             {showPassword ?
                                 <i className="fa-solid fa-eye" onClick={() => setShowPassword(false)} />

@@ -7,9 +7,11 @@ import HeaderUser from "./HeaderUser";
 import HeaderMenusMB from "./HeaderMenusMB";
 import HeaderMenusPc from "./HeaderMenusPC";
 import { useDispatch, useSelector } from "react-redux";
-import { findAllCategoryMenus } from "../../slice/productCategoty";
+import { findAllCategoryMenus, getAllCategoryMenus } from "../../slice/productCategoty";
+import store from "../../store/store";
+import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
+store.injectReducer(actionReducerStore.add,reducerSliceKey.productCategoryMenus,getAllCategoryMenus.reducer)
 function Header() {
-    const { loading,productCategories, error } = useSelector((state) => state.productCategoryMenus)
     const dispatch = useDispatch();
     useEffect(()=>{
         dispatch(findAllCategoryMenus())

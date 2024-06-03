@@ -7,6 +7,9 @@ import "../../css/headerUser.css"
 import { createHeader } from "../../config/common";
 import { getRefreshToken } from "../../services/token";
 import store from "../../store/store";
+import { linkHttp } from "../../constants/htttp";
+import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
+import { loginForm } from "../../slice/login";
 function HeaderUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -15,7 +18,6 @@ function HeaderUser() {
     const [isModalUserVisible, setIsModalUserVisible] = useState(false);
     const headerUserRef = useRef(null);
     const headerUserModalRef = useRef(null);
-    const http = "http://localhost:8080/user/me";
     useEffect(() => {
         function handleClickOutside(event) {
             if (headerUserRef.current && !headerUserRef.current.contains(event.target)) {
@@ -40,7 +42,7 @@ function HeaderUser() {
     }, [])
     const getUserData = async (access) => {
         try {
-            const response = await dispatch(findByUser(http, createHeader(access))).unwrap();
+            const response = await dispatch(findByUser(linkHttp.getUserHeader, createHeader(access))).unwrap();
             setPerson(response)
         } catch (error) {
             if (error.status) {
@@ -61,7 +63,7 @@ function HeaderUser() {
     const handleRefreshToken = async () => {
         try {
             const response = await getRefreshToken(localStorage.getItem(ACCESS_TOKEN))
-            localStorage.setItem(ACCESS_TOKEN,response.accessToken)
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken)
             getUserData(response.accessToken)
 
         } catch (error) {
@@ -77,21 +79,20 @@ function HeaderUser() {
         localStorage.removeItem(USER_LOGIN);
         window.location.href = `http://localhost:8080/logout?token=${token}`;
     }
-    console.log(person)
     return (
         <>
-            <>
-                {person ?
-                    <div className="header-user dropdown d-flex justify-content-center" ref={headerUserRef} onClick={handleHeaderUserClick}>
-                        <div className="header-user-item"><span>{person.name.toLowerCase().substr(0, 1)}</span></div>
-                        <div className={`dropdown-menu dropdown-menu-user ${isModalUserVisible ? 'show' : 'close'}`} ref={headerUserModalRef}>
-                            <div className="dropdown-item"><i className="fa-solid fa-user-gear mr-1"></i>Cập nhập tài khoản</div>
-                            <div className="dropdown-item" onClick={() => handleLogout()}><i className="fa-solid fa-power-off mr-2"></i>Đăng xuất</div>
-                        </div>
+
+            { person ?
+                <div className="header-user dropdown d-flex justify-content-center" ref={headerUserRef} onClick={handleHeaderUserClick}>
+                    <div className="header-user-item"><span>{person.name.toLowerCase().substr(0, 1)}</span></div>
+                    <div className={`dropdown-menu dropdown-menu-user ${isModalUserVisible ? 'show' : 'close'}`} ref={headerUserModalRef}>
+                        <div className="dropdown-item"><i className="fa-solid fa-user-gear mr-1"></i>Cập nhập tài khoản</div>
+                        <div className="dropdown-item" onClick={() => handleLogout()}><i className="fa-solid fa-power-off mr-2"></i>Đăng xuất</div>
                     </div>
-                    : <div className="header-user-login" onClick={() => navigate("/login")}>Đăng nhập</div>
-                }
-            </>
+                </div>
+                : <div className="header-user-login" onClick={() => navigate("/login")}>Đăng nhập</div>
+            }
+
 
         </>
     )

@@ -25,6 +25,7 @@ function AdminMenu({ resource }) {
       let data = await getListMainMenu(header);
       setMenus(data)
     } catch (error) {
+      console.log(error)
       // alert("nhan")
       console.log(error.response.data.status)
       if(error.response.data){
@@ -48,7 +49,7 @@ function AdminMenu({ resource }) {
     }
   }
   return (
-    <div className={`main-menu  menu-fixed menu-light menu-accordion menu-shadow expanded ${isOpen ? `open` : ``}`} data-scroll-to-active="true">
+    <div className={`main-menu  menu-fixed menu-light menu-accordion menu-shadow menu-native-scroll expanded ${isOpen ? `open` : ``}`} data-scroll-to-active="true">
       <div className="row">
         <div className="col-8">
           <div className="menu-logo">
@@ -56,7 +57,7 @@ function AdminMenu({ resource }) {
           </div>
         </div>
         <div className="col-4 close-overPlay">
-          <i class="fa-solid fa-xmark fa-2x" onClick={() => dispatch(onClickHandleOverPlay(false))}></i>
+          <i className="fa-solid fa-xmark fa-2x" onClick={() => dispatch(onClickHandleOverPlay(false))}></i>
         </div>
       </div>
       <div className="main-menu-content ps ps--active-y">

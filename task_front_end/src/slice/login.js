@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ACCESS_TOKEN, PROVIDER_ID, PROVIDER_LOCAL, USER_LOGIN } from "../constants/login";
+import { linkHttp } from "../constants/htttp";
 
 export const loginFormAuth = createAsyncThunk('auth/login',
     async (account,{rejectWithValue}) => {
         try {
             console.log(account)
-            const response = await axios.post("http://localhost:8080/auth/login", account);
+            const response = await axios.post(linkHttp.authLogin, account);
             localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
             return response.data;
         } catch(error) {

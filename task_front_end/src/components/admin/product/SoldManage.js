@@ -1,7 +1,6 @@
 import SearchContentAdmin from "../SearchContentAdmin";
 import MainSectionAction from "../SectionActionAdmin";
-
-function ProductManage() {
+function SoldManage() {
     return (
         <>
             <MainSectionAction />
@@ -9,4 +8,4 @@ function ProductManage() {
         </>
     )
 }
-export default ProductManage;
+export default SoldManage;

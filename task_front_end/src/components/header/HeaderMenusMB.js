@@ -5,7 +5,6 @@ function HeaderMenusMB() {
     const [isSidebarActive, setSidebarActive] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState(null);
     const { loading,productCategories, error } = useSelector((state) => state.productCategoryMenus)
-    console.log(productCategories)
     const toggleSidebar = () => {
         setSidebarActive(!isSidebarActive);
     };
