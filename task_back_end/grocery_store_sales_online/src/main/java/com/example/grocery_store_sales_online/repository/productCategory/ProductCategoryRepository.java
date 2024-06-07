@@ -31,4 +31,5 @@ public class ProductCategoryRepository extends BaseRepository<ProductCategory,Lo
         return jpaQuery.select(productCategory).from(productCategory)
                 .where(productCategory.parentCategory.id.eq(category.getId())).fetch();
     }
+
 }

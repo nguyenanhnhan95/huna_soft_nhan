@@ -82,7 +82,7 @@ public class AuthController {
         user.setProvider(AuthProvider.local);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User result = userService.save(user);
+        User result = userService.saveModel(user);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/user/me")

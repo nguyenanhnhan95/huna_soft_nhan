@@ -1,15 +1,16 @@
-import { columnAllProduct } from "../../../constants/product/columnAllProduct";
-import SearchContentAdmin from "../SearchContentAdmin";
-import MainSectionAction from "../SectionActionAdmin";
-import TableManage from "./TableManage";
+
+import { columnAllProduct, dataActions, manageSearch, manageSectionAction } from "../../../constants/product/manage";
+import TableManage from "../../common/TableManage";
+import SearchContentAdmin from "../common/SearchContentAdmin";
+import SectionActionAdmin from "../common/SectionActionAdmin";
+
 
 function Manage() {
-    
     return (
         <>
-            <MainSectionAction />
-            <SearchContentAdmin/>
-            <TableManage nameColumn={columnAllProduct} />
+            <SectionActionAdmin itemAction={manageSectionAction}/>
+            <SearchContentAdmin itemSearch={manageSearch}/>
+            <TableManage nameColumn={columnAllProduct} dataActions={dataActions}/>
         </>
     )
 }

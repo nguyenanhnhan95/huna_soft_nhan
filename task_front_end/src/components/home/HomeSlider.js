@@ -1,7 +1,7 @@
 import oneSlider from "../../img/home/one_slider.jpg"
 import twoSlider from "../../img/home/two_slider.jpg"
 import threeSlider from "../../img/home/three_slider.jpg"
-import "../../css/sliderHome.css"
+import "../../css/slider/sliderHome.css"
 import { memo, useEffect, useRef, useState } from "react";
 function HomeSlider() {
     const [active, setActive] = useState(0);

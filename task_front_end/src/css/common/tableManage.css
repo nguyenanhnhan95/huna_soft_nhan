@@ -1,0 +1,53 @@
+.main-content-data {
+    background-color: white;
+    margin: 15px;
+    /*border-radius: 0 5px;*/
+}
+
+.main-content-data .container-content-data{
+    padding-bottom: 70px !important;
+}
+.main-content-data .container-content-data tbody .table-action i:hover{
+    cursor: pointer;
+}
+.main-content-data .container-content-data{
+    padding: 0;
+}
+.main-content-data .container-content-data .table .table-thead{
+    background-color: #0693e3;
+    color: white;
+}
+.main-content-data .container-content-data-page {
+    color: #7b7883;
+}
+.main-content-data .container-content-data-page-item {
+    margin-right: 10px;
+}
+.main-content-data .container-content-data-page-item select{
+    width: auto;
+    height: 26px;
+    margin-top: 7px;
+    border-color: #0693e3;
+    outline: none;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+.main-content-data .container-content-data-page-item select:hover{
+    cursor: pointer;
+}
+.main-content-data .table-items-page ul{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #0693e3;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.main-content-data .table-items-page ul:hover{
+    cursor: pointer;
+}
+.main-content-data .table-items-page ul>li{
+    padding: 1px 11px;
+    color: black;
+}

@@ -13,10 +13,7 @@ const initialState = {
 }
 export const findByUser = createAsyncThunk('user', async (http,{rejectWithValue}) => {
     try{
-        const headers = createHeader(localStorage.getItem(ACCESS_TOKEN));
-        const response = await axios.get(http, headers);
-        console.log(response.data)
-        localStorage.setItem(USER_LOGIN, JSON.stringify(response.data));
+        const response = await axios.get(http,createHeader());
         return response.data;
     }catch(error){
         console.log(error)

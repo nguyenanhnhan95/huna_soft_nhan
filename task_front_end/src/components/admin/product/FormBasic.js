@@ -1,8 +1,12 @@
-import SaveAction from "../SaveAction";
+import SaveAction from "../common/SaveAction";
+import ContentForm from "../product/ContentForm"
+function FormBasic() {
 
-function FormBasic(){
-    return(
-        <SaveAction/>
+    return (
+        <>
+            <SaveAction />
+            <ContentForm/>
+        </>
     )
 }
 export default FormBasic;

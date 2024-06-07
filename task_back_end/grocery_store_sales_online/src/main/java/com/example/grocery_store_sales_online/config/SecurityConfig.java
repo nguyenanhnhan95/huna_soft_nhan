@@ -95,6 +95,8 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ENDPOINTS)
                         .permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/products-variation/**")
+                        .authenticated()
                         .requestMatchers("/user/**")
                         .authenticated()
                 )

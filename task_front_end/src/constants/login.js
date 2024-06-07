@@ -1,5 +1,4 @@
 export const API_BASE_URL = 'http://localhost:8080';
-export const ACCESS_TOKEN = '';
 export const USER_LOGIN = "userLogin"
 export const PROVIDER_SOCIAL = "provider_social";
 export const PROVIDER_LOCAL = "provider_local";

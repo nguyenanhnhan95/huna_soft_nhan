@@ -13,8 +13,8 @@ import lombok.Setter;
 @Setter
 @Table(name = "variation_option")
 public class VariationOption extends Model {
-    private String value;
-
+    private String name;
+    private String description;
     @ManyToOne
     private Variation variation;
 }

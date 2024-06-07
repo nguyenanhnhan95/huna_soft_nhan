@@ -27,7 +27,7 @@ public class UserService extends BaseService implements IUserService<User> {
     }
 
     @Override
-    public User save(User user) {
+    public User saveModel(User user) {
         user.setPersonCreate(user.getName());
         setMetaData(user);
         return userRepository.saveModel(user);

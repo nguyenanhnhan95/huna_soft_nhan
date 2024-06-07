@@ -1,9 +1,12 @@
+
 export const reducerSliceKey={
     loginForm:"loginForm",
     user:"user",
     productCategoryMenus:"productCategoryMenus",
     overPlayMenuMain:"overPlayMenuMain",
-    menuContentMain:"menuContentMain"
+    menuContentMain:"menuContentMain",
+    actionAdmin:"actionAdmin",
+    loadingView:"loadingView"
 }
 export const actionReducerStore={
     add:"add",

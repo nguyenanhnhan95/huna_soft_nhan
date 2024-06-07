@@ -109,6 +109,7 @@ public class TokenProvider {
             logger.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
             logger.error("Invalid JWT token");
+            throw new InvalidException(ErrorCode.UNAUTHENTICATED.getLabel(),ErrorCode.UNAUTHENTICATED);
         } catch (ExpiredJwtException ex) {
             logger.error("Expired JWT token");
             throw new InvalidException(ErrorCode.EXPIRED_TOKEN.getLabel(),ErrorCode.EXPIRED_TOKEN);
@@ -137,6 +138,7 @@ public class TokenProvider {
             logger.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
             logger.error("Invalid JWT token");
+            throw new InvalidException(ErrorCode.UNAUTHENTICATED.getLabel(),ErrorCode.UNAUTHENTICATED);
         } catch (ExpiredJwtException ex) {
             logger.error("Expired JWT token");
             throw new InvalidException(ErrorCode.EXPIRED_TOKEN.getLabel(),ErrorCode.EXPIRED_TOKEN);

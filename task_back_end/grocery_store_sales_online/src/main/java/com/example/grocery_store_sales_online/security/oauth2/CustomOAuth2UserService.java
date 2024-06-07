@@ -89,13 +89,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         if(AuthProvider.google.toString().equals(AuthProvider.google.toString())){
             emailSenderService.sendEmail(user.getEmail(), user.getName(), "Bạn đã đăng ký thành công tài khoản ");
         }
-        return userService.save(user);
+        return userService.saveModel(user);
     }
 
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setName(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
         existingUser.setLastLogin(new Date());
-        return userService.save(existingUser);
+        return userService.saveModel(existingUser);
     }
 }

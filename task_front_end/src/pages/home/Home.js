@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { memo, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/header/Header";
 import HomeSlider from "../../components/home/HomeSlider";
-import "../../css/home.css"
+import "../../css/home/home.css"
 
 
 function Home() {
@@ -20,4 +20,4 @@ function Home() {
             
     )
 }
-export default Home;
+export default memo(Home);

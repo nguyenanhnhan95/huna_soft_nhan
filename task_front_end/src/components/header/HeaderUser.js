@@ -1,19 +1,15 @@
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findByUser, userSlice } from "../../slice/user";
-import { ACCESS_TOKEN, PROVIDER_ID, PROVIDER_LOCAL, USER_LOGIN } from "../../constants/login";
+import {  PROVIDER_ID, PROVIDER_LOCAL, USER_LOGIN, constLogin } from "../../constants/login";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../../css/headerUser.css"
+import "../../css/header/headerUser.css"
 import { createHeader } from "../../config/common";
 import { getRefreshToken } from "../../services/token";
-import store from "../../store/store";
 import { linkHttp } from "../../constants/htttp";
-import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
-import { loginForm } from "../../slice/login";
 function HeaderUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [person, setPerson] = useState(null)
     const { authenticate, user, status, loading, error } = useSelector((state) => state.user)
     const [isModalUserVisible, setIsModalUserVisible] = useState(false);
     const headerUserRef = useRef(null);
@@ -36,19 +32,18 @@ function HeaderUser() {
         setIsModalUserVisible(!isModalUserVisible);
     };
     useEffect(() => {
-        if (localStorage.getItem(ACCESS_TOKEN) !== null) {
-            getUserData(localStorage.getItem(ACCESS_TOKEN));
+        if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
+            getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
         }
     }, [])
-    const getUserData = async (access) => {
+    const getUserData = async () => {
         try {
-            const response = await dispatch(findByUser(linkHttp.getUserHeader, createHeader(access))).unwrap();
-            setPerson(response)
+            const response = await dispatch(findByUser(linkHttp.getUserHeader, createHeader())).unwrap();
         } catch (error) {
             if (error.status) {
                 switch (error.status) {
                     case 4007:
-                        localStorage.removeItem(ACCESS_TOKEN);
+                        localStorage.removeItem(constLogin.ACCESS_TOKEN);
                         navigate("/login");
                         break;
                     case 4008:
@@ -62,19 +57,19 @@ function HeaderUser() {
     }
     const handleRefreshToken = async () => {
         try {
-            const response = await getRefreshToken(localStorage.getItem(ACCESS_TOKEN))
-            localStorage.setItem(ACCESS_TOKEN, response.accessToken)
-            getUserData(response.accessToken)
+            const response = await getRefreshToken(localStorage.getItem(constLogin.ACCESS_TOKEN))
+            localStorage.setItem(constLogin.ACCESS_TOKEN, response.accessToken)
+            getUserData()
 
         } catch (error) {
-            localStorage.removeItem(ACCESS_TOKEN);
+            localStorage.removeItem(constLogin.ACCESS_TOKEN);
             navigate("/login");
         }
 
     }
     const handleLogout = () => {
-        let token = localStorage.getItem(ACCESS_TOKEN);
-        localStorage.removeItem(ACCESS_TOKEN);
+        let token = localStorage.getItem(constLogin.ACCESS_TOKEN);
+        localStorage.removeItem(constLogin.ACCESS_TOKEN);
         localStorage.removeItem(PROVIDER_ID);
         localStorage.removeItem(USER_LOGIN);
         window.location.href = `http://localhost:8080/logout?token=${token}`;
@@ -82,9 +77,9 @@ function HeaderUser() {
     return (
         <>
 
-            { person ?
+            { user ?
                 <div className="header-user dropdown d-flex justify-content-center" ref={headerUserRef} onClick={handleHeaderUserClick}>
-                    <div className="header-user-item"><span>{person.name.toLowerCase().substr(0, 1)}</span></div>
+                    <div className="header-user-item"><span>{user.name.toLowerCase().substr(0, 1)}</span></div>
                     <div className={`dropdown-menu dropdown-menu-user ${isModalUserVisible ? 'show' : 'close'}`} ref={headerUserModalRef}>
                         <div className="dropdown-item"><i className="fa-solid fa-user-gear mr-1"></i>Cập nhập tài khoản</div>
                         <div className="dropdown-item" onClick={() => handleLogout()}><i className="fa-solid fa-power-off mr-2"></i>Đăng xuất</div>

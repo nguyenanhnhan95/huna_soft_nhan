@@ -20,7 +20,7 @@ public class EmployeeService extends BaseService implements IEmployeeService<Emp
 
     @Override
     public QueryListResult<Employee> findAllSearch(QueryParameter queryParameter) {
-        return employeeRepository.findAll(queryParameter);
+        return null;
     }
 
     @Override

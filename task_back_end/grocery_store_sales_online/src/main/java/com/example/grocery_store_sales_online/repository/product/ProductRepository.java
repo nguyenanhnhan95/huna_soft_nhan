@@ -30,6 +30,7 @@ public class ProductRepository extends BaseRepository<Product,Long> {
     }
     public JPAQuery<Product> search(Map<String, Object> params) {
         String keyword = MapUtils.getString(params, "name");
+        JPAQuery<Product> jpaQuery = new JPAQuery<>(em);
         if (StringUtils.isNotBlank(keyword)) {
             keyword = "%" + keyword + "%";
             return jpaQuery.select(Projections.constructor(Product.class,product.id,product.name))

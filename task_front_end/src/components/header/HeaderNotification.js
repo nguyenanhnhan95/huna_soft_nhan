@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "../../css/headerNotification.css"
+import "../../css/header/headerNotification.css"
 function HeaderNotification() {
     const [isModalNotificationVisible, setIsModalNotificationVisible] = useState(false);
     const notifyHeaderRef = useRef(null);

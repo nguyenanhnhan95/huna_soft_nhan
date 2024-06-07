@@ -24,19 +24,21 @@ public class EmployeeRepository extends BaseRepository<Employee,Long>  {
         super(Employee.class, em);
     }
 
-    public QueryListResult<Employee> findAll(QueryParameter queryParameter) {
-        JPAQuery<Employee> query = search(queryParameter.getCriterias());
-        List<Employee> result = page(query, queryParameter.getSize(), queryParameter.getPage()).fetch();
-        long total = query.fetchCount();
-        return QueryListResult.<Employee>builder().result(result).total(total).build();
-    }
+//    public QueryListResult<Employee> findAll(QueryParameter queryParameter) {
+//        JPAQuery<Employee> query = search(queryParameter.getCriterias());
+//        List<Employee> result = page(query, queryParameter.getSize(), queryParameter.getPage()).fetch();
+//        long total = query.fetchCount();
+//        return QueryListResult.<Employee>builder().result(result).total(total).build();
+//    }
     public Employee findByUserName(String name){
+        JPAQuery<Employee> jpaQuery = new JPAQuery<>(em);
         return jpaQuery.select(employee).from(employee)
                 .where(employee.name.eq(name)).fetchFirst();
     }
 
     public JPAQuery<Employee> search(Map<String, Object> params) {
         String keyword = MapUtils.getString(params, "keyword");
+        JPAQuery<Employee> jpaQuery = new JPAQuery<>(em);
         if (StringUtils.isNotBlank(keyword)) {
             keyword = "%" + keyword + "%";
             return jpaQuery.select(employee)

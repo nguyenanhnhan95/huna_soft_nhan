@@ -1,7 +1,7 @@
 package com.example.grocery_store_sales_online.controller;
 
 import com.example.grocery_store_sales_online.model.product.ProductCategory;
-import com.example.grocery_store_sales_online.service.productCategoryService.IProductCategoryService;
+import com.example.grocery_store_sales_online.service.productCategory.IProductCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

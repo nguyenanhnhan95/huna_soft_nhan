@@ -1,11 +1,19 @@
 package com.example.grocery_store_sales_online.service.base;
 
 import com.example.grocery_store_sales_online.model.common.Model;
+import com.example.grocery_store_sales_online.security.UserPrincipal;
 import com.example.grocery_store_sales_online.utils.QueryParameter;
 import com.google.gson.Gson;
+import com.querydsl.core.Fetchable;
+import com.querydsl.core.SimpleQuery;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
@@ -21,11 +29,12 @@ public class BaseService {
     @Getter
     @Setter
     private QueryParameter queryParameter = QueryParameter.builder().size(DEFAULT_SIZE).page(DEFAULT_PAGE).build();
-    private static final List<Integer> PAGE_SIZE_OPTIONS = Arrays.asList(new Integer[] { 5, 10, 20, 30, 50, 70, 100 });
+    private static final List<Integer> PAGE_SIZE_OPTIONS = Arrays.asList(5, 10, 20, 30, 50, 70, 100);
 
     public List<Integer> getPageSizeOptions() {
         return PAGE_SIZE_OPTIONS;
     }
+
     public List<Integer> getListPageSizes() {
         List<Integer> list = new ArrayList<>();
         list.add(10);
@@ -34,6 +43,7 @@ public class BaseService {
         list.add(100);
         return list;
     }
+
     public @Nullable Date getFixToDate() {
         Date fixToDate = toDate;
         if (fixToDate != null) {
@@ -47,6 +57,7 @@ public class BaseService {
         }
         return fixToDate;
     }
+
     public @Nullable Date getFixFromDate() {
         Date fixFromDate = fromDate;
         if (getToDate() != null) {
@@ -60,15 +71,27 @@ public class BaseService {
         }
         return fixFromDate;
     }
-    protected void setMetaData(Model obj){
-        if (obj.getCreateDate()==null){
+
+    protected void setMetaData(Model obj) {
+        if (obj.getCreateDate() == null) {
             obj.setCreateDate(new Date());
         }
         obj.setEditDate(new Date());
     }
-    protected QueryParameter readJsonQuery(String queryParameter){
+
+    protected QueryParameter readJsonQuery(String queryParameter) {
         Gson g = new Gson();
-        QueryParameter parameter = g.fromJson(queryParameter,QueryParameter.class);
+        QueryParameter parameter = g.fromJson(queryParameter, QueryParameter.class);
         return parameter;
     }
+
+    protected UserPrincipal getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserPrincipal userPrincipal=null;
+        if (principal instanceof UserDetails) {
+             userPrincipal = (UserPrincipal) principal;
+        }
+        return userPrincipal;
+    }
+
 }

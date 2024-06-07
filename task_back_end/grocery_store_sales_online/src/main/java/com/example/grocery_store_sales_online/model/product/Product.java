@@ -29,5 +29,6 @@ public class Product extends Model {
     private List<Image> images = new ArrayList<>();
     @ManyToOne
     private ProductCategory productCategory;
-
+    @ManyToOne
+    private Variation variation;
 }

@@ -1,8 +1,8 @@
 import { Tuple, combineReducers, configureStore } from "@reduxjs/toolkit";
-import { productSlice } from "../slice/product";
+import { productSlice } from "../slice/product/product";
 import { userSlice } from "../slice/user";
-import { loginForm } from "../slice/login";
-import { getAllCategoryMenus } from "../slice/productCategoty";
+import { loginForm } from "../slice/login/login";
+import { getAllCategoryMenus } from "../slice/product/productCategoty";
 import overPlayMenuMainSlice from "../slice/main/overPlayMenu";
 import menuContentMainSlice from "../slice/main/menuContentMain";
 import logger from 'redux-logger'

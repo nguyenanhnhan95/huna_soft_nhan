@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ACCESS_TOKEN, PROVIDER_ID, PROVIDER_SOCIAL } from "../../constants/login";
-import { useEffect } from "react";
+import {  PROVIDER_ID, PROVIDER_SOCIAL, constLogin } from "../../constants/login";
+import { memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { findByUser } from "../../slice/user";
 import { createHeader } from "../../config/common";
@@ -17,7 +17,7 @@ function OAuth2RedirectHandle() {
         const token = searchParams.get('token');
         const error = searchParams.get('error');
         if (token) {
-            localStorage.setItem(ACCESS_TOKEN, token);
+            localStorage.setItem(constLogin.ACCESS_TOKEN, token);
             Cookies.remove('keepLogin', { domain: 'localhost', path: '/' });
             navigate("/home")
         } else {
@@ -41,4 +41,4 @@ function OAuth2RedirectHandle() {
         </>
     )
 }
-export default OAuth2RedirectHandle;
+export default memo(OAuth2RedirectHandle);

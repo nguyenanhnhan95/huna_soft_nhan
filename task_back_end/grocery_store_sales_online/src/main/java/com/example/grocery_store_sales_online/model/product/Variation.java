@@ -14,6 +14,6 @@ import lombok.Setter;
 @Table(name = "variation")
 public class Variation extends Model {
     private String name;
-    @ManyToOne
-    private Product product;
+    private String description;
+
 }

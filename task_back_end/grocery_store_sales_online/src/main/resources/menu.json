@@ -218,6 +218,29 @@
           "requiredPermissions": [
             "time-keeping:view"
           ]
+        },
+        {
+          "title": "Tùy Chọn Sản Phẩm",
+          "href": "/admin/products-variation",
+          "resources": [
+            "time-keeping"
+          ],
+          "iconClass": "fa-regular fa-circle",
+          "requiredPermissions": [
+            "time-keeping:view"
+          ]
+        }
+      ,
+        {
+          "title": "Gía trị Trị Tùy Chọn",
+          "href": "/admin/products-variation-option",
+          "resources": [
+            "time-keeping"
+          ],
+          "iconClass": "fa-regular fa-circle",
+          "requiredPermissions": [
+            "time-keeping:view"
+          ]
         }
       ]
     },

@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LogoSky from "../../img/header/logo-sky.png"
-import zIndex from "@mui/material/styles/zIndex";
-import store from "../../store/store";
 function HeaderMenusPc() {
+    const dispatch = useDispatch()
     const { loading, productCategories, error } = useSelector((state) => state.productCategoryMenus)
     return (
         <>
@@ -15,10 +14,10 @@ function HeaderMenusPc() {
                         <li className="nav-item category-item d-flex align-items-center dropdown" key={index}>
                             {category.name}
                             <ul className="dropdown-menu">
-                                {category.children.map((children,zIndex)=>(
-                                     <li key={zIndex}>
-                                     <div className="dropdown-item"><i className="fa-solid fa-caret-right" />{children.name}</div>
-                                 </li>
+                                {category.children.map((children, zIndex) => (
+                                    <li key={zIndex}>
+                                        <div className="dropdown-item"><i className="fa-solid fa-caret-right" />{children.name}</div>
+                                    </li>
                                 ))}
                             </ul>
                         </li>

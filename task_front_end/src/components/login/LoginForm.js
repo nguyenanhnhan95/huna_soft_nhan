@@ -7,8 +7,7 @@ import Cookies from 'js-cookie'
 import { constLogin } from "../../constants/login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginForm, loginFormAuth } from "../../slice/login";
-import store from "../../store/store";
+import { loginForm, loginFormAuth } from "../../slice/login/login";
 import { linkHttp } from "../../constants/htttp";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
@@ -21,7 +20,6 @@ function LoginForm() {
             const token= await dispatch(loginFormAuth({...loginRequest,flagKeep:keepLogin})).unwrap();
             localStorage.setItem(constLogin.ACCESS_TOKEN,token.accessToken);
             Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
-
             navigate("/admin")
         } catch(error){
             console.log(error)
