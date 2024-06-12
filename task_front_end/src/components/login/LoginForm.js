@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as yup from "yup";
-import { loginAuth } from "../../services/login";
-import axios from "axios";
 import Cookies from 'js-cookie'
 import { constLogin } from "../../constants/login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginForm, loginFormAuth } from "../../slice/login/login";
+import { loginFormAuth } from "../../slice/login/login";
 import { linkHttp } from "../../constants/htttp";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
     const [keepLogin,setKeepLogin] = useState(false)
-    const { loading, error,accessToken } = useSelector((state) => state.loginForm)
+    const { loading} = useSelector((state) => state.loginForm)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogin = async (loginRequest, setErrors) => {

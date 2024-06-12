@@ -84,7 +84,7 @@ function DashBoard(){
                 </div>
               </div>
               <div className="card-body">
-                <img style={{width: '100%', height: '250px'}} src="https://viqualita.com/wp-content/uploads/2019/01/image-27-425x270-1.png" />
+                <img style={{width: '100%', height: '250px'}} alt="" src="https://viqualita.com/wp-content/uploads/2019/01/image-27-425x270-1.png" />
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ function DashBoard(){
                 </div>
               </div>
               <div className="card-body">
-                <img style={{width: '100%', height: '250px'}} src="https://viqualita.com/wp-content/uploads/2019/01/image-27-425x270-1.png" />
+                <img style={{width: '100%', height: '250px'}} alt="" src="https://viqualita.com/wp-content/uploads/2019/01/image-27-425x270-1.png" />
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ function DashBoard(){
                 </div>
               </div>
               <div className="card-body">
-                <img style={{width: '100%', height: '250px'}} src="https://viqualita.com/wp-content/uploads/2019/01/image-27-425x270-1.png" />
+                <img style={{width: '100%', height: '250px'}} alt="" src="https://viqualita.com/wp-content/uploads/2019/01/image-27-425x270-1.png" />
               </div>
             </div>
           </div>

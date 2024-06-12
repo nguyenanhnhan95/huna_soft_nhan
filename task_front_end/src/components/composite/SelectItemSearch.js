@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from "react"
+import { memo, useCallback, useEffect, useState } from "react"
 import "../../css/composite/selectItemSearch.css"
 import BaseServiceAdmin from "../../services/admin/base";
 import InputLabel from '@mui/material/InputLabel';
@@ -9,14 +9,7 @@ import { validation } from "../../utils/validation";
 function SelectItemSearch(props) {
     const { handleSetQuery, item, query } = props;
     const [options, setOptions] = useState([]);
-    useEffect(() => {
-        if (item.callApi) {
-            getOptions()
-        } else {
-            return item.data;
-        }
-    }, [])
-    const getOptions = async () => {
+    const getOptions = useCallback( async () => {
         try {
             const response = await BaseServiceAdmin.getAll(item.data)
             setOptions(response.result)
@@ -24,7 +17,14 @@ function SelectItemSearch(props) {
             console.log(error)
             setOptions([]);
         }
-    }
+    },[item.callApi,item.data])
+    useEffect(() => {
+        if (item.callApi) {
+            getOptions()
+        } else {
+            return item.data;
+        }
+    }, [getOptions])
     const handleSelect = (value) => {
         const id = value.target.value;
         if (validation.isNumber(id)) {

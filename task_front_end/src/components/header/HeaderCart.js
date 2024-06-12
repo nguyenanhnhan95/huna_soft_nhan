@@ -42,7 +42,7 @@ function HeaderCart() {
                     <div className="card card-cart">
                         <div className="row card-cart-item">
                             <div className="col-4">
-                                <img src="logo-sky.png" />
+                                <img src="logo-sky.png" alt="" />
                             </div>
                             <div className="col-4 d-flex align-items-center justify-content-center">x2</div>
                             <div className="col-4 d-flex align-items-center justify-content-center">790.000VNĐ</div>
@@ -51,7 +51,7 @@ function HeaderCart() {
                     <div className="card card-cart">
                         <div className="row card-cart-item">
                             <div className="col-4">
-                                <img src="logo-sky.png" />
+                                <img src="logo-sky.png" alt="" />
                             </div>
                             <div className="col-4 d-flex align-items-center justify-content-center">x2</div>
                             <div className="col-4 d-flex align-items-center justify-content-center">790.000VNĐ</div>

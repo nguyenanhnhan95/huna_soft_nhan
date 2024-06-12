@@ -15,8 +15,7 @@ export const getAllCategoryMenus = createSlice({
         error:null
     },
     extraReducers:(builder)=>{
-        builder.
-        addCase(findAllCategoryMenus.pending,(state)=>{
+        builder.addCase(findAllCategoryMenus.pending,(state)=>{
             state.loading=true;
             state.productCategories=[];
             state.error=null;

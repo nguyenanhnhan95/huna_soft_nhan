@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import {  useState } from "react";
 import LogoSky from "../../img/header/logo-sky.png"
 import { useSelector } from "react-redux";
 function HeaderMenusMB() {
     const [isSidebarActive, setSidebarActive] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState(null);
-    const { loading,productCategories, error } = useSelector((state) => state.productCategoryMenus)
+    const { productCategories } = useSelector((state) => state.productCategoryMenus)
     const toggleSidebar = () => {
         setSidebarActive(!isSidebarActive);
     };
@@ -31,13 +31,13 @@ function HeaderMenusMB() {
                 <div className="header-item-mob-menu">
                     {productCategories && productCategories.map((category,index)=>(
                         <div className="header-item-mob-item" key={index}>
-                        <a className={`header-item-mob-item-subs ${activeSubmenu === index ? 'clicked' : ''}`} onClick={() => toggleSubmenu(index)}>
+                        <a href="javascript:void(0)" className={`header-item-mob-item-subs ${activeSubmenu === index ? 'clicked' : ''}`} onClick={() => toggleSubmenu(index)}>
                             <i className="fa-brands fa-product-hunt"></i>{category.name}
                             <i className={`fa-solid fa-angle-right dropdown ${activeSubmenu === index ? 'rotate' : ''}`}></i>
                         </a>
                         {category.children.map((children,zIndex)=>(
                              <div className={`header-item-mob-item-sub ${activeSubmenu === index ? 'show ' : ''}`} key={zIndex}>
-                             <a className="header-item-mob-item-sub-item"><i className="fa-solid fa-caret-right"></i>{children.name}</a>
+                             <a href="javascript:void(0)" className="header-item-mob-item-sub-item"><i className="fa-solid fa-caret-right"></i>{children.name}</a>
                          </div>
                         ))}
                        

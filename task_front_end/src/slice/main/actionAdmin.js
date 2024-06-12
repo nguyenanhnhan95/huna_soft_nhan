@@ -126,8 +126,7 @@ export const actionAdminSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.
-            addCase(saveDataAdmin.pending, (state) => {
+        builder.addCase(saveDataAdmin.pending, (state) => {
                 state.loading = true;
                 state.success = false;
                 state.error = null;
@@ -144,8 +143,7 @@ export const actionAdminSlice = createSlice({
                 state.success = false;
                 state.error = action.payload;
             })
-        builder.
-            addCase(editDataAdmin.pending, (state) => {
+        builder.addCase(editDataAdmin.pending, (state) => {
                 state.loading = true;
                 state.success = false;
                 state.error = null;
@@ -160,8 +158,7 @@ export const actionAdminSlice = createSlice({
                 state.success = false;
                 state.error = action.payload.result;
             })
-        builder.
-            addCase(deleteDataAdmin.pending, (state) => {
+        builder.addCase(deleteDataAdmin.pending, (state) => {
                 state.loading = true;
                 state.success = false;
                 state.error = null;
@@ -176,8 +173,7 @@ export const actionAdminSlice = createSlice({
                 state.success = false;
                 state.error = action.payload.result;
             })
-        builder.
-            addCase(searchDataAdmin.pending, (state) => {
+        builder.addCase(searchDataAdmin.pending, (state) => {
                 state.loading = true;
                 state.success = false;
                 state.error = null;
@@ -209,8 +205,7 @@ export const actionAdminSlice = createSlice({
                 // state.error = action.payload.result;
 
             })
-        builder.
-            addCase(getDataByIdAdmin.pending, (state) => {
+        builder.addCase(getDataByIdAdmin.pending, (state) => {
                 state.loading = true;
                 state.success = false;
                 state.error = null;

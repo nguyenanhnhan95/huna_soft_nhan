@@ -14,7 +14,7 @@ function TableManage() {
     }catch(error){
       console.log(error)
     }
-  },[httpApi,queryParameter])
+  },[httpApi,queryParameter,dispatch])
   useEffect(()=>{
     getListResult();
   },[getListResult])

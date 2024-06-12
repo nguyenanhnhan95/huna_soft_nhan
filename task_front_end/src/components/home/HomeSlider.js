@@ -2,7 +2,7 @@ import oneSlider from "../../img/home/one_slider.jpg"
 import twoSlider from "../../img/home/two_slider.jpg"
 import threeSlider from "../../img/home/three_slider.jpg"
 import "../../css/slider/sliderHome.css"
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 function HomeSlider() {
     const [active, setActive] = useState(0);
     const listRef = useRef(null);
@@ -14,31 +14,7 @@ function HomeSlider() {
         threeSlider
     ];
     const lengthItems = items.length;
-
-    useEffect(() => {
-        refreshSlider.current = setInterval(() => {
-            nextSlide();
-        }, 3000);
-        return () => clearInterval(refreshSlider.current); // Cleanup on unmount
-    }, []);
-    useEffect(() => {
-
-        reloadSlider();
-    }, [active]);
-
-    const prevSlide = () => {
-        setActive((prevActive) => (prevActive - 1 + lengthItems) % lengthItems);
-    };
-
-    const nextSlide = () => {
-        setActive((prevActive) => (prevActive + 1) % lengthItems);
-    };
-
-    const goToSlide = (index) => {
-        setActive(index);
-    };
-
-    const reloadSlider = () => {
+    const reloadSlider =useCallback(() => {
         const checkLeft = listRef.current.children[active].offsetLeft;
         listRef.current.style.left = -checkLeft + 'px';
         dotsRef.current.forEach((dot, index) => {
@@ -52,7 +28,30 @@ function HomeSlider() {
         refreshSlider.current = setInterval(() => {
             nextSlide();
         }, 3000);
+    },[active]);
+    useEffect(() => {
+        refreshSlider.current = setInterval(() => {
+            nextSlide();
+        }, 3000);
+        return () => clearInterval(refreshSlider.current); // Cleanup on unmount
+    }, [refreshSlider]);
+    useEffect(() => {
+
+        reloadSlider();
+    }, [reloadSlider]);
+
+    const prevSlide = () => {
+        setActive((prevActive) => (prevActive - 1 + lengthItems) % lengthItems);
     };
+
+    const nextSlide = () => {
+        setActive((prevActive) => (prevActive + 1) % lengthItems);
+    };
+
+    const goToSlide = (index) => {
+        setActive(index);
+    };
+
     return (
         <div className="slider container-lg">
             <div className="list" ref={listRef}>

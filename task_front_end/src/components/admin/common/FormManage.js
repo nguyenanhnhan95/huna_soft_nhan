@@ -6,21 +6,11 @@ import { toastError, toastSuccess } from "../../../config/toast";
 import { validation } from "../../../utils/validation";
 
 function FormManage({Form}){
-    const { loading,editForm,httpApi,httpNavigate,close,itemSearch} = useSelector((state) => state.actionAdmin)
+    const { editForm,httpApi,httpNavigate,close} = useSelector((state) => state.actionAdmin)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const buttonRef=useRef(null);
     const {id} = useParams();
-    useEffect(()=>{
-        console.log(id)
-        dispatch(onClickSaveAction({buttonSave:buttonRef.current}))
-        if(id!=undefined && validation.isNumber(id)){
-            console.log(id)
-            getDataEdit()
-        }else{
-            // dispatch(createDataEdit(initialForm))
-        }  
-    },[id])
     const getDataEdit=useCallback(async()=>{
         try{
             console.log(id)
@@ -32,14 +22,24 @@ function FormManage({Form}){
             toastError("Dữ liệu đang lỗi!")
         }
         
-    },[httpApi,id])
+    },[httpApi,id,dispatch])
+    useEffect(()=>{
+        console.log(id)
+        dispatch(onClickSaveAction({buttonSave:buttonRef.current}))
+        if(id!==undefined && validation.isNumber(id)){
+            console.log(id)
+            getDataEdit()
+        }else{
+            // dispatch(createDataEdit(initialForm))
+        }  
+    },[getDataEdit])
     const handleSave = useCallback(async (value, setErrors) => {
         try {
   
             if(id!=undefined && validation.isNumber(id)){
-                const response = await dispatch(editDataAdmin({ http: httpApi,id:id, data: value })).unwrap()
+                await dispatch(editDataAdmin({ http: httpApi,id:id, data: value })).unwrap()
             }else{
-                const response = await dispatch(saveDataAdmin({ http: httpApi, data: value })).unwrap()
+                 await dispatch(saveDataAdmin({ http: httpApi, data: value })).unwrap()
             }
             toastSuccess("Bạn đã lưu dữ liệu thành công")
             if (close) {
@@ -51,7 +51,7 @@ function FormManage({Form}){
         } catch (error) {
             setErrors(error.result)
         }
-    },[id,httpApi,close])
+    },[id,httpApi,close,dispatch])
     return(
         <Form buttonRef={buttonRef} initialForm={editForm} handleSave={handleSave}/>
     )

@@ -1,8 +1,8 @@
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect,useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findByUser, userSlice } from "../../slice/user";
-import {  PROVIDER_ID, PROVIDER_LOCAL, USER_LOGIN, constLogin } from "../../constants/login";
-import { useLocation, useNavigate } from "react-router-dom";
+import { findByUser } from "../../slice/user";
+import {  PROVIDER_ID,  USER_LOGIN, constLogin } from "../../constants/login";
+import {useNavigate } from "react-router-dom";
 import "../../css/header/headerUser.css"
 import { createHeader } from "../../config/common";
 import { getRefreshToken } from "../../services/token";
@@ -10,7 +10,7 @@ import { linkHttp } from "../../constants/htttp";
 function HeaderUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { authenticate, user, status, loading, error } = useSelector((state) => state.user)
+    const {  user, } = useSelector((state) => state.user)
     const [isModalUserVisible, setIsModalUserVisible] = useState(false);
     const headerUserRef = useRef(null);
     const headerUserModalRef = useRef(null);
@@ -31,14 +31,9 @@ function HeaderUser() {
     const handleHeaderUserClick = () => {
         setIsModalUserVisible(!isModalUserVisible);
     };
-    useEffect(() => {
-        if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
-            getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
-        }
-    }, [])
-    const getUserData = async () => {
+    const getUserData =useCallback( async () => {
         try {
-            const response = await dispatch(findByUser(linkHttp.getUserHeader, createHeader())).unwrap();
+            await dispatch(findByUser(linkHttp.getUserHeader, createHeader())).unwrap();
         } catch (error) {
             if (error.status) {
                 switch (error.status) {
@@ -54,7 +49,13 @@ function HeaderUser() {
                 }
             }
         }
-    }
+    },[])
+    useEffect(() => {
+        if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
+            getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
+        }
+    }, [getUserData])
+  
     const handleRefreshToken = async () => {
         try {
             const response = await getRefreshToken(localStorage.getItem(constLogin.ACCESS_TOKEN))

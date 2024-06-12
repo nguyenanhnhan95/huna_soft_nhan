@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import LogoSky from "../../img/header/logo-sky.png"
 function HeaderMenusPc() {
-    const dispatch = useDispatch()
-    const { loading, productCategories, error } = useSelector((state) => state.productCategoryMenus)
+    const {  productCategories } = useSelector((state) => state.productCategoryMenus)
     return (
         <>
             <div className="header-logo header-item">
-                <img src={LogoSky} />
+                <img src={LogoSky} alt="" />
             </div>
             <div className="drop-menu header-item ">
                 <ul className="nav" >

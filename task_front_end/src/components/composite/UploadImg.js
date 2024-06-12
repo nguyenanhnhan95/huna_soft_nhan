@@ -37,7 +37,7 @@ function UploadImg() {
                         alt="Selected"
                     />
                 ) : (
-                    <img style={{ display: 'none' }} />)}
+                    <img style={{ display: 'none' }} alt=""/>)}
             </div>
         </div>
     )
