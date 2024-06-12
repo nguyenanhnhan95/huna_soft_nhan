@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "../../css/composite/tableManage.css"
-import ActionDropdown from "../composite/ActionDropdown";
-import axios from "axios";
-import { choicePage, searchDataAdmin, selectSize } from "../../slice/main/actionAdmin";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { searchDataAdmin } from "../../slice/main/actionAdmin";
+import { memo, useCallback, useEffect } from "react";
 import PageManage from "./PageManage";
 function TableManage() {
   const{queryParameter,nameColumn,list,httpApi,TBodyTable} = useSelector((state)=>state.actionAdmin)

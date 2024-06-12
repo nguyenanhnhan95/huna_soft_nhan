@@ -1,7 +1,4 @@
-import { memo } from "react"
-import ActionDropdown from "../../components/composite/ActionDropdown"
-import { useSelector } from "react-redux"
-import { shopPromotionHttp, variationHttp } from "../htttp"
+
 
 export const shopPromotionAction = {
     add: {

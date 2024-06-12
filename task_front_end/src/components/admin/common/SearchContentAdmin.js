@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useRef, useState } from "react";
+import React, { memo, useCallback,  useState } from "react";
 import "../../../css/admin/common/searchContentAdmin.css"
 import { useDispatch, useSelector } from "react-redux";
 import { createQueryParameter } from "../../../slice/main/actionAdmin";

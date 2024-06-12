@@ -1,6 +1,6 @@
 import { memo } from "react"
 import ActionDropdown from "../../../composite/ActionDropdown"
-import { convertDate, getBeforeDateCurrent } from "../../../../utils/common"
+import { convertDate} from "../../../../utils/common"
 
 function TBodyTable({ list, queryParameter }) {
     
