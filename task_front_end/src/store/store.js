@@ -7,7 +7,7 @@ import { actionReducerStore } from "../constants/reducerSlice";
 export const staticReducers = {
     product: productSlice.reducer,
     user: userSlice.reducer,
-    loginForm:loginForm.reducer
+    loginForm: loginForm.reducer
     // productCategoryMenus: getAllCategoryMenus.reducer,
     // overPlayMenuMain: overPlayMenuMainSlice.reducer,
     // menuContentMain: menuContentMainSlice.reducer,
@@ -99,6 +99,8 @@ store.injectReducer = (action, key, asyncReducer) => {
         case actionReducerStore.clear:
             reducerManager.clear()
             break;
+        default:
+            reducerManager.clear()
     }
     store.replaceReducer(reducerManager.reduce);
 };
