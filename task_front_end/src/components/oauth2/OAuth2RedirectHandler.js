@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {  constLogin } from "../../constants/login";
 import { memo, useEffect } from "react";
 import Cookies from 'js-cookie'
 function OAuth2RedirectHandle() {
     const navigate = useNavigate();
-   
+   const searchParams = useSearchParams();
     useEffect(() => {
         const keepLogin=Cookies.get('keepLogin')
         console.log(keepLogin)
