@@ -1,9 +1,11 @@
 package com.example.grocery_store_sales_online.repository.variation;
 import com.example.grocery_store_sales_online.model.product.QVariation;
 import com.example.grocery_store_sales_online.model.product.Variation;
+import com.example.grocery_store_sales_online.projection.product.variation.VariationGetListResultProjection;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import com.example.grocery_store_sales_online.utils.QueryListResult;
 import com.example.grocery_store_sales_online.utils.QueryParameter;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
@@ -42,7 +44,7 @@ public class VariationRepository extends BaseRepository<Variation,Long> implemen
     public JPAQuery<Variation> search(Map<String, Object> params) {
         String keyword = MapUtils.getString(params, "name");
         JPAQuery<Variation> variationJPAQuery = new JPAQuery<>(em);
-        variationJPAQuery.select(variation).from(variation);
+        variationJPAQuery.select(Projections.constructor(Variation.class,variation.id, variation.name, variation.description)).from(variation);
         if (StringUtils.isNotBlank(keyword)) {
             keyword = "%" + keyword + "%";
             variationJPAQuery.where(variation.name.like(keyword));

@@ -22,7 +22,6 @@ function LoginForm() {
             Cookies.remove(constLogin.keepLogin, { domain: linkHttp.domain, path: '/' });
             navigate("/admin")
         } catch(error){
-            console.log(error)
             setErrors(error.result)
         }
     }

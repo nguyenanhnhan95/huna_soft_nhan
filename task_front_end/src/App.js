@@ -6,7 +6,7 @@ import OAuth2RedirectHandle from "./components/oauth2/OAuth2RedirectHandler";
 import Test from "./components/test";
 import Admin from "./pages/admin/Admin";
 import { useEffect, useState } from "react";
-import { Backdrop, CircularProgress } from "@mui/material";
+import BackdropLoading from "./utils/BackdropLoading";
 
 function App() {
   const [hidden, setHidden] = useState(true);
@@ -32,12 +32,7 @@ function App() {
       </BrowserRouter>
     </div>
    {hidden && (
-        <Backdrop
-          sx={{ color: '#78909C', zIndex: (theme) => theme.zIndex.drawer + 1 ,backgroundColor: 'rgba(0, 0, 0, 0.1)'}}
-          open={true}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+       <BackdropLoading/>
       )}
    </>
     

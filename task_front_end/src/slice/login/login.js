@@ -11,6 +11,7 @@ export const loginFormAuth = createAsyncThunk('auth/login',
             localStorage.setItem(constLogin.ACCESS_TOKEN, response.data.accessToken);
             return response.data;
         } catch(error) {
+            console.log(rejectWithValue(error.response.data))
             return rejectWithValue(error.response.data)
         }
     }

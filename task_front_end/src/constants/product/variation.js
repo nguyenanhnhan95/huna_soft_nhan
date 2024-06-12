@@ -1,3 +1,7 @@
+import { memo } from "react"
+import ActionDropdown from "../../components/composite/ActionDropdown"
+import { useSelector } from "react-redux"
+
 export const variationAction = {
     add: {
         icon: "fa-solid fa-plus fa-sm pr-1",
@@ -14,12 +18,14 @@ export const variationAction = {
         }
     }
 }
+export const initialForm={name:"",description:""}
 export const variationSearch = {
     searchAdvanced: {
         style: {
             display: "none"
         }
-    }
+    },
+    items:[]
 }
 export const columnVariation = [
     {
@@ -54,7 +60,7 @@ export const dataActions = [
     }
 ]
 export const queryParameter = {
-    size: 5,
+    size: 2,
     page: 0,
     criterias: {
         name: ""

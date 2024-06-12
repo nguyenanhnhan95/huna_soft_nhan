@@ -2,6 +2,7 @@ package com.example.grocery_store_sales_online.model.product;
 
 import com.example.grocery_store_sales_online.model.Image;
 import com.example.grocery_store_sales_online.model.common.Model;
+import com.example.grocery_store_sales_online.model.shop.Promotion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,8 @@ public class Product extends Model {
     private String name;
     @Column(columnDefinition = "longtext")
     private String description;
+    @Column(unique = true)
+    private String sky;
     private Long qtyInStock;
     private Long price;
     @ManyToMany

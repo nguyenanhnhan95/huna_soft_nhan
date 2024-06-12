@@ -1,9 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../../../css/admin/common/sectionActionAdmin.css"
 import { Link } from "react-router-dom";
-function SectionActionAdmin(props) {
-  const {itemAction} = props;
+import { memo, useCallback, useEffect } from "react";
+import { createDataEdit } from "../../../slice/main/actionAdmin";
+function SectionActionAdmin() {
+  const {itemAction,initialForm ,httpNavigate} = useSelector((state) => state.actionAdmin);
   const {menu} = useSelector((state) => state.menuContentMain)
+  const dispatch=useDispatch()
+  const handleDirectSave=()=>{
+    dispatch(createDataEdit(initialForm))
+  }
   return (
     <>
       <div className="row main-content-title">
@@ -14,8 +20,8 @@ function SectionActionAdmin(props) {
       <div className="main-content-action">
         <div className="container-fluid container-content-action">
           <div className="row">
-            <div className="col-12 col-md-6 d-flex justify-content-start">
-              <Link to={`${window.location.href}/add`} style={{display:itemAction.add.style.display}}><button type="button"><i className={itemAction.add.icon} />{itemAction.add.name}</button>
+            <div className="col-12 col-md-6 d-flex justify-content-start ">
+              <Link to={`${httpNavigate}/add`} onClick={handleDirectSave} style={{display:itemAction.add.style.display}}><button type="button"><i className={itemAction.add.icon} />{itemAction.add.name}</button>
               </Link>
             </div>
             <div className="col-12 col-md-6 d-flex justify-content-end">
@@ -28,4 +34,4 @@ function SectionActionAdmin(props) {
 
   )
 }
-export default SectionActionAdmin;
+export default memo(SectionActionAdmin);

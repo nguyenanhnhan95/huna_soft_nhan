@@ -1,8 +1,8 @@
 package com.example.grocery_store_sales_online.controller;
 
-import com.example.grocery_store_sales_online.dto.VariationDto;
+import com.example.grocery_store_sales_online.dto.product.VariationDto;
+import com.example.grocery_store_sales_online.enums.EResponseStatus;
 import com.example.grocery_store_sales_online.model.product.Variation;
-import com.example.grocery_store_sales_online.model.product.VariationOption;
 import com.example.grocery_store_sales_online.payload.ApiResponse;
 import com.example.grocery_store_sales_online.service.variation.IVariationService;
 import com.example.grocery_store_sales_online.utils.QueryListResult;
@@ -33,11 +33,21 @@ public class VariationController {
         if (variations.getResult().isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            result = new ApiResponse<>(200, "Lấy dữ liệu thành công", variations);
+            result = new ApiResponse<>(EResponseStatus.FETCH_DATA_SUCCESS.getCode(), EResponseStatus.FETCH_DATA_SUCCESS.getLabel(), variations);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
-
+    @GetMapping("")
+    public ResponseEntity<ApiResponse<List<Variation>>> findAll() {
+        List<Variation> variations = variationService.findAll();
+        ApiResponse<List<Variation>> result = new ApiResponse<>();
+        if (variations.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            result = new ApiResponse<>(EResponseStatus.FETCH_DATA_SUCCESS.getCode(), EResponseStatus.FETCH_DATA_SUCCESS.getLabel(), variations);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
     @PostMapping("")
     public ResponseEntity<?> saveModel(@Valid @RequestBody VariationDto variationDto, BindingResult bindingResult) {
         if (variationService.findByName(variationDto.getName().trim()).isPresent()) {
@@ -48,19 +58,20 @@ public class VariationController {
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            ApiResponse apiResponse = new ApiResponse<>(400,"Nhập không phù hợp",errors);
+            ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.ENTER_DATA_FAIL.getCode(), EResponseStatus.ENTER_DATA_FAIL.getLabel(),errors);
             return ResponseEntity.badRequest().body(apiResponse);
         }
         Variation variation = new Variation();
         variation.setName(variationDto.getName());
         variation.setDescription(variationDto.getDescription());
         variationService.saveModel(variation);
-        return ResponseEntity.ok().body("Đã lưu thành công");
+        ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.SAVE_SUCCESS.getCode(), EResponseStatus.SAVE_SUCCESS.getLabel());
+        return ResponseEntity.ok().body(apiResponse);
     }
     @PatchMapping("/")
     public ResponseEntity<?> editModel(@PathParam("id") Long id, @Valid @RequestBody VariationDto variationDto, BindingResult bindingResult) {
         if (id==null || variationService.findById(id).isEmpty()) {
-            ApiResponse apiResponse = new ApiResponse<>(400,"Dữ liệu không tồn tại!");
+            ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.NO_EXISTING.getCode(), EResponseStatus.NO_EXISTING.getLabel());
             return new ResponseEntity<>(apiResponse,HttpStatus.BAD_REQUEST);
         }
         if (bindingResult.hasErrors()) {
@@ -68,24 +79,25 @@ public class VariationController {
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-            ApiResponse apiResponse = new ApiResponse<>(400,"Nhập không phù hợp",errors);
+            ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.ENTER_DATA_FAIL.getCode(), EResponseStatus.ENTER_DATA_FAIL.getLabel(),errors);
             return ResponseEntity.badRequest().body(apiResponse);
         }
         Variation variation = new Variation();
         variation.setName(variationDto.getName());
         variation.setDescription(variationDto.getDescription());
         variationService.updateModel(id,variation);
-        return ResponseEntity.ok().body("Đã lưu thành công");
+        ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.EDIT_SUCCESS.getCode(), EResponseStatus.EDIT_SUCCESS.getLabel());
+        return ResponseEntity.ok().body(apiResponse);
     }
     @DeleteMapping("/")
     public ResponseEntity<?> deleteModel(@RequestParam("id") Long id){
         Optional<Variation> variation = variationService.findById(id);
         if(variation.isPresent()){
             variationService.deleteModel(variation.get());
-            ApiResponse apiResponse = new ApiResponse<>(200,"Bạn xóa "+variation.get().getName()+" thành công!");
+            ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.DELETE_SUCCESS.getCode(),EResponseStatus.DELETE_SUCCESS.getLabel());
             return new ResponseEntity<>(apiResponse,HttpStatus.OK);
         }else {
-            ApiResponse apiResponse = new ApiResponse<>(400,"Bạn xóa "+variation.get().getName().toLowerCase()+"không thành công!");
+            ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.DELETE_FAIL.getCode(), EResponseStatus.DELETE_FAIL.getLabel());
             return new ResponseEntity<>(apiResponse,HttpStatus.BAD_REQUEST);
         }
     }
@@ -93,10 +105,10 @@ public class VariationController {
     public ResponseEntity<?> findByIdModel(@RequestParam("id") Long id){
         Optional<Variation> variation = variationService.findById(id);
         if(variation.isPresent()){
-            ApiResponse apiResponse = new ApiResponse<>(200,"Lấy dữ liệu thành công ",variation);
+            ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.FETCH_DATA_SUCCESS.getCode(), EResponseStatus.FETCH_DATA_SUCCESS.getLabel(),variation);
             return new ResponseEntity<>(apiResponse,HttpStatus.OK);
         }else {
-            ApiResponse apiResponse = new ApiResponse<>(400,"Lỗi try vấn dữ liệu sever!");
+            ApiResponse apiResponse = new ApiResponse<>(EResponseStatus.FETCH_DATA_FAIL.getCode(), EResponseStatus.FETCH_DATA_FAIL.getLabel());
             return new ResponseEntity<>(apiResponse,HttpStatus.BAD_REQUEST);
         }
     }

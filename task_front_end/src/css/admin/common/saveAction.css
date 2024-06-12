@@ -1,28 +1,58 @@
-.main-content-action-save{
+.main-content-action-save {
     background-color: white;
     margin: 15px;
     border-radius: 5px;
 }
-.main-content-action-save .container-content-action-save{
+
+.main-content-action-save .container-content-action-save {
     height: auto;
 }
-.main-content-action-save .container-content-action-save .d-flex{
-    height: 70px;
+
+.main-content-action-save .container-content-action-save .d-flex {
+    height: 80px;
 }
-.main-content-action-save .container-content-action-save .content-action-save-button{
+
+.main-content-action-save .container-content-action-save .content-action-save-button {
     margin-right: 20px;
     border-radius: 5px;
+    height: 45px;
+    width: auto;
     outline: none;
     border: none;
     color: white;
     background-color: #0693e3;
     padding: 5px 13px;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 500;
 }
-.main-content-action-save .container-content-action-save .content-action-save-button:hover{
+
+.main-content-action-save .container-content-action-save .content-action-save-button:hover {
     background-color: #0672af;
 }
-.main-content-action-save .container-content-action-save .content-action-save-button i{
+
+.main-content-action-save .container-content-action-save .content-action-save-button i {
     margin-right: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .main-content-action-save .container-content-action-save .d-flex {
+        font-size: 0.8em;
+    }
+
+    .main-content-action-save .container-content-action-save .content-action-save-button {
+        margin-right: 10px;
+        border-radius: 5px;
+        height: 35px;
+        width: auto;
+        outline: none;
+        border: none;
+        color: white;
+        background-color: #0693e3;
+        padding: 5px 13px;
+        font-size: 1em;
+        font-weight: 500;
+    }
+    .main-content-action-save .container-content-action-save .d-flex {
+        height: 60px;
+    }
 }

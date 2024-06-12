@@ -93,5 +93,17 @@ public class BaseService {
         }
         return userPrincipal;
     }
+    protected void setPersonCreate(Model model){
+        UserPrincipal userPrincipal =getCurrentUser();
+        if(userPrincipal!=null){
+            model.setPersonCreate(userPrincipal.getName());
+        }
 
+    }
+    protected void setPersonEdit(Model model){
+        UserPrincipal userPrincipal =getCurrentUser();
+        if(userPrincipal!=null){
+            model.setPersonEdit(userPrincipal.getName());
+        }
+    }
 }

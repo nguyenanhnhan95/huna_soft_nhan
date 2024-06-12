@@ -136,7 +136,7 @@
         },
         {
           "title": "Khuyến mãi",
-          "href": "/admin/shop-discount",
+          "href": "/admin/shop-promotion",
           "resources": [
             "shop-discount",
             "shop-discount/add",
@@ -232,7 +232,7 @@
         }
       ,
         {
-          "title": "Gía trị Trị Tùy Chọn",
+          "title": "Giá Trị Tùy Chọn",
           "href": "/admin/products-variation-option",
           "resources": [
             "time-keeping"

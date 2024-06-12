@@ -33,6 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         } else {
             Employee employee = employeeService.findByUserName(email);
             if(employee!=null){
+                UserDetails UserDetails = UserPrincipal.createEmployee(employee, employee.getRoles());
                 return UserPrincipal.createEmployee(employee, employee.getRoles());
             }
             throw new UsernameNotFoundException("User not found with : " + email);
