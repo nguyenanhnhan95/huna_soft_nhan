@@ -15,14 +15,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Test Build
+      - name: Install dependencies
         run: |
           if [ -e yarn.lock ]; then
-            yarn install --frozen-lockfile
+          yarn install --frozen-lockfile
           elif [ -e package-lock.json ]; then
-            npm ci
+          npm ci
           else
-            npm install
+          npm i
+          fi
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
