@@ -24,6 +24,7 @@ jobs:
           else
           npm i
           fi
+          npm run build
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
