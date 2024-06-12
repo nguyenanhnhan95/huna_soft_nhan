@@ -1,14 +1,10 @@
-import React, { memo, useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
+import React, { memo, useEffect} from "react"
 import Header from "../../components/header/Header";
 import HomeSlider from "../../components/home/HomeSlider";
 import "../../css/home/home.css"
 
 
 function Home() {
-    const dispatch = useDispatch();
-    const [name, setName] = useState("")
-    const [data, setData] = useState([]);
     useEffect(() => {
         // dispatch(findQueryProduct(queryParameter))
     }, [])

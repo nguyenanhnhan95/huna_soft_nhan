@@ -1,14 +1,8 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import {  PROVIDER_ID, PROVIDER_SOCIAL, constLogin } from "../../constants/login";
+import { useNavigate } from "react-router-dom";
+import {  constLogin } from "../../constants/login";
 import { memo, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { findByUser } from "../../slice/user";
-import { createHeader } from "../../config/common";
 import Cookies from 'js-cookie'
-const http = "http://localhost:8080/user/me";
 function OAuth2RedirectHandle() {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
    
     useEffect(() => {

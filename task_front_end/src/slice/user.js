@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ACCESS_TOKEN, USER_LOGIN } from "../constants/login";
 import { FETCH_USER_FAILED, FETCH_USER_LOADING, FETCH_USER_SUCCEEDED } from "../constants/user";
-import BaseService from "../services/base";
 import { createHeader } from "../config/common";
 import axios from "axios";
 const initialState = {

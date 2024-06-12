@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createHeader } from "../../config/common";
-import { initialForm } from "../../constants/shop/shopPromotion";
 
 export const saveDataAdmin = createAsyncThunk('saveDataAdmin',
     async ({ http, data }, { rejectWithValue }) => {

@@ -6,7 +6,7 @@ import HeaderNotification from "./HeaderNotification";
 import HeaderUser from "./HeaderUser";
 import HeaderMenusMB from "./HeaderMenusMB";
 import HeaderMenusPc from "./HeaderMenusPC";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { findAllCategoryMenus, getAllCategoryMenus } from "../../slice/product/productCategoty";
 import store from "../../../src/store/store";
 import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
@@ -15,7 +15,7 @@ function Header() {
     const dispatch = useDispatch();
     useEffect(()=>{
         dispatch(findAllCategoryMenus())
-    },[])
+    },[dispatch])
     return (
         <div className="header">
             <div className="container-fluid container-header ">
