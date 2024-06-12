@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
+        working-directory: ./task_front_end
         run: |
           if [ -e yarn.lock ]; then
           yarn install --frozen-lockfile
