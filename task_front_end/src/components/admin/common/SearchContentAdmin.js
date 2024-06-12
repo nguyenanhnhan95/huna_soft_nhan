@@ -34,13 +34,13 @@ function SearchContentAdmin() {
             [key]: value[key]
           }
         };
-        console.log(copyQueryParameter)
         setQuery(copyQueryParameter)
         // Logs the updated queryParameter object
       }
     })
   }
   const debouncedHandleEnterData = useCallback(debounce(handelEnterData, 500), [query]);
+  
   return (
     <div className="search-content-admin">
       <form role="search">

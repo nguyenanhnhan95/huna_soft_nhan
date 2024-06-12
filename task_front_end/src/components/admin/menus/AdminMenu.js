@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "../../../css/admin/menus/menuAdmin.css"
 import { getListMainMenu } from "../../../services/mainMenu";
 import { createHeader } from "../../../config/common";
@@ -20,10 +20,7 @@ function AdminMenu() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let pathName = commonResource(location.pathname)
-  useEffect(() => {
-    getListMenu()
-  }, [])
-  const getListMenu = async () => {
+  const getListMenu = useCallback(async () => {
     const header = createHeader(localStorage.getItem(constLogin.ACCESS_TOKEN));
     try {
       let data = await getListMainMenu(header);
@@ -47,7 +44,10 @@ function AdminMenu() {
         
       }
     }
-  }
+  },[])
+  useEffect(() => {
+    getListMenu()
+  }, [getListMenu])
   const handleChangeOpenMenu = (menu, flagMenu) => {
     if (flagMenu) {
       if (menuActive === null || menuActive !== menu) {
@@ -73,7 +73,7 @@ function AdminMenu() {
       </div>
       <div className="main-menu-content ps ps--active-y">
         <ul id="main-menu-navigation" className="navigation navigation-main" data-menu="menu-navigation">
-          {menus.length != 0 && (
+          {menus.length !== 0 && (
             <li className={`nav-item ${menus[0].href === pathName || pathName === '/admin' ? 'active' : ''}`}>
               <NavLink className="d-flex align-items-center" to={menus[0].href} >
                 <i className="fa-solid fa-house" />
@@ -97,7 +97,7 @@ function AdminMenu() {
                   {menu.subMenus && menu.subMenus.map((subMenu, zIndex) => (
                     <ul className="menu-content" key={zIndex}>
                       <li >
-                        <NavLink className={`d-flex align-items-center ${subMenu.href == pathName ? 'active' : ''}`} to={`${ctx}${subMenu.href}`} onClick={() => handleChangeOpenMenu(subMenu, false)}>
+                        <NavLink className={`d-flex align-items-center ${subMenu.href === pathName ? 'active' : ''}`} to={`${ctx}${subMenu.href}`} onClick={() => handleChangeOpenMenu(subMenu, false)}>
                           <i className={subMenu.iconClass} />
                           <span className="menu-item text-truncate">{subMenu.title}</span>
                         </NavLink>

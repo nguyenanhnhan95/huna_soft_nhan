@@ -36,7 +36,7 @@ function RouteVariationOption() {
         };
 
         initializeState();
-    }, []);
+    }, [dispatch]);
 
     if (!initialized) {
         return <BackdropLoading />; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo

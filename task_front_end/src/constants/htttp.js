@@ -1,4 +1,3 @@
-import { variationSearch } from "./product/variation"
 
 export const linkHttp={
     domain:"localhost",

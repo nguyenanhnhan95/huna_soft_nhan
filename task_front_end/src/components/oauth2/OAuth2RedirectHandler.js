@@ -4,7 +4,7 @@ import { memo, useEffect } from "react";
 import Cookies from 'js-cookie'
 function OAuth2RedirectHandle() {
     const navigate = useNavigate();
-   const searchParams = useSearchParams();
+    const searchParams = useSearchParams();
     useEffect(() => {
         const keepLogin=Cookies.get('keepLogin')
         console.log(keepLogin)
@@ -18,7 +18,7 @@ function OAuth2RedirectHandle() {
             console.log(error)
             navigate("/login")
         }
-    }, [])
+    }, [navigate,searchParams])
     // const getUrlParameter=(name)=>{
     //     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     //     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');

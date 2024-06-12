@@ -7,10 +7,10 @@ function PageManage() {
     const dispatch = useDispatch();
     const handleSelectSize = useCallback((size) => {
         dispatch(selectSize(size))
-    }, [])
+    }, [dispatch])
     const handleChoicePage = useCallback((page) => {
         dispatch(choicePage(page))
-    }, [])
+    }, [dispatch])
     const listPage = useMemo(() => {
         const listPage = [];
         for (let i = 0; i < list.total / queryParameter.size; ++i) {
@@ -19,7 +19,7 @@ function PageManage() {
             );
         }
         return listPage;
-    }, [list])
+    }, [queryParameter.size,queryParameter.page])
     return (
         <div className="d-flex justify-content-between row container-content-data-page ">
             <div className="col-12 d-flex justify-content-end align-items-center">

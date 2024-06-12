@@ -1,8 +1,8 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import "../../../css/admin/common/saveAction.css"
 import { useDispatch, useSelector } from "react-redux";
 import { actionSave, resetPage } from "../../../slice/main/actionAdmin";
-import { memo, useCallback } from "react";
+import { memo } from "react";
 function SaveAction() {
   const {onClickAction, httpNavigate} = useSelector((state)=>state.actionAdmin)
   const dispatch = useDispatch();
