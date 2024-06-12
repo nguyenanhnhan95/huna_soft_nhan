@@ -2,11 +2,11 @@
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
 name: grocery_store
-
 on:
-  release:
-    types: [created]
-
+  push:
+    branches:
+      - main
+      - production
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,3 +31,4 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GIT_HUB_GROCERY_STORE}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
