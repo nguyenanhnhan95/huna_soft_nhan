@@ -9,6 +9,8 @@ import com.example.grocery_store_sales_online.utils.QueryListResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,5 +68,10 @@ public class VariationService extends BaseService implements IVariationService{
         }else {
             return null;
         }
+    }
+
+    @Override
+    public List<Variation> findAll() {
+        return variationRepository.findAll();
     }
 }

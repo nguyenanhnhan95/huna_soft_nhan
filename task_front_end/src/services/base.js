@@ -5,7 +5,7 @@ const getAll = async (http) => {
         return response.data;
 
     } catch (error) {
-
+        return error;
     }
 }
 const findAll = async (http, queryParam) => {

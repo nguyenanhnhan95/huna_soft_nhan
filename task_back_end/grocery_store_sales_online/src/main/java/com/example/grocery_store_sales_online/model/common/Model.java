@@ -23,6 +23,13 @@ public class Model implements IModel {
     private Date editDate;
     private boolean deleted;
 
+    public Model() {
+    }
+
+    public Model(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object obj) {
         boolean res;

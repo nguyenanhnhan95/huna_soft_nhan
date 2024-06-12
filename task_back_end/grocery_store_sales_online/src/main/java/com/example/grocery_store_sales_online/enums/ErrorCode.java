@@ -15,8 +15,8 @@ public enum ErrorCode implements IEnumComboItem {
     EXPIRED_TOKEN(4007,"Token đã hết hạn"),
     REFRESH_TOKEN(4008,"Refresh token")
     ;
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
     ErrorCode(int code, String message) {
         this.code = code;

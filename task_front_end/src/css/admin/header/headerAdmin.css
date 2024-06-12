@@ -21,7 +21,10 @@
     top:56px;
     left: -143px;
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
+    .main-content .container-header-main{
+        height: 50px;
+    }
     .container-header-main  .navbar-collapse .navbar-nav{
         flex-direction:row;
     }
@@ -55,17 +58,20 @@
     .container-header-main .main-content-header-right  .header-user .dropdown-menu-user{
         font-size: 0.5em;
         position: absolute;
-        top: 50px;
-        left: -148px;
+        top: 40px;
+        left: -155px;
         width: 200px;
     }
     .container-header-main .main-content-header-right .header-notification-modal{
-        top: 53px;
+        top: 41px;
         right: -57px;
         width: 86vw;
     }
 }
-@media only screen and (min-width: 1280px) and (max-width: 1366px){
+@media only screen and (min-width: 992px) {
+
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px){
     .container-header-main  .main-content-header-left .main-content-header-list{
         display: none;
     }

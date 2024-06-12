@@ -1,3 +1,9 @@
+import { memo } from "react"
+import ActionDropdown from "../../components/composite/ActionDropdown"
+import { variationHttp, variationOptionHttp } from "../htttp"
+import { useSelector } from "react-redux"
+import SelectItemSearch from "../../components/composite/SelectItemSearch"
+
 export const variationOptionAction = {
     add :{
         icon:"fa-solid fa-plus fa-sm pr-1",
@@ -14,13 +20,24 @@ export const variationOptionAction = {
         }
     }
 }
+export const initialForm={name:"",description:"",variation:""}
 export const variationOptionSearch={
     searchAdvanced:{
         style:{
-            display:"none"
+            display:"block"
         }
-    }
+    },
+    items:[
+        {
+            title:"Lựa chọn Option",
+            callApi:true,
+            data:variationHttp.variation,
+            search:{variation:null},
+            component:'SelectItemSearch'
+        },
+    ]
 }
+
 export const columnVariationOption=[
     {
         name:"STT",
@@ -31,7 +48,13 @@ export const columnVariationOption=[
     {
         name:"Gía Trị Option",
         style:{
-            width:"85%"
+            width:"20%"
+        }
+    },
+    {
+        name:"Option",
+        style:{
+            width:"65%"
         }
     },
     {
@@ -43,11 +66,21 @@ export const columnVariationOption=[
 ]
 export const dataActions=[
     {
-        name:"Sửa",
-        icon:"fa-solid fa-pencil mr-2"
+        name: "Sửa",
+        icon: "fa-solid fa-pencil mr-2",
+        action: "edit"
     },
     {
-        name:"Xóa",
-        icon:"fa-regular fa-trash-can mr-2"
+        name: "Xóa",
+        icon: "fa-regular fa-trash-can mr-2",
+        action: "delete",
     }
 ]
+export const queryParameter = {
+    size: 5,
+    page: 0,
+    criterias: {
+        name: "",
+        variation:null,
+    }
+}

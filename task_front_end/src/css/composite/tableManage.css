@@ -1,0 +1,27 @@
+.main-content-data {
+    background-color: white;
+    margin: 15px;
+    /*border-radius: 0 5px;*/
+}
+
+.main-content-data .container-content-data{
+    padding-bottom: 70px !important;
+}
+.main-content-data .container-content-data tbody .table-action i:hover{
+    cursor: pointer;
+}
+.main-content-data .container-content-data{
+    padding: 0;
+}
+.main-content-data .container-content-data .table .table-thead{
+    background-color: #0693e3;
+    color: white;
+}
+.main-content-data .container-content-data .table tbody tr td:last-child{
+    text-align: center;
+}
+@media only screen and (max-width: 1024px){
+    .main-content-data .container-content-data .table{
+        font-size: 0.7em;
+    }
+}

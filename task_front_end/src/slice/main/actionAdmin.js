@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createHeader } from "../../config/common";
+import { initialForm } from "../../constants/shop/shopPromotion";
 
 export const saveDataAdmin = createAsyncThunk('saveDataAdmin',
     async ({ http, data }, { rejectWithValue }) => {
@@ -14,7 +15,7 @@ export const saveDataAdmin = createAsyncThunk('saveDataAdmin',
     }
 )
 export const editDataAdmin = createAsyncThunk('editDataAdmin',
-    async ({http,id, data}, { rejectWithValue }) => {
+    async ({ http, id, data }, { rejectWithValue }) => {
         try {
             const response = await axios.patch(`${http}/?id=${id}`, data, createHeader());
             return response.data;
@@ -55,7 +56,6 @@ export const searchDataAdmin = createAsyncThunk('searchDataAdmin',
             }
 
         } catch (error) {
-            console.log(rejectWithValue(error.response.data))
             return rejectWithValue(error.response.data)
         }
     }
@@ -66,18 +66,18 @@ export const actionAdminSlice = createSlice({
         loading: false,
         list: { result: [], total: 0 },
         data: [],
-        dataEdit:null,
-        edit: false,
-        onClickAction:null,
+        onClickAction: null,
         close: false,
-        httpApi:'',
-        httpNavigate:'',
-        itemAction:null,
-        itemSearch:[],
-        nameColumn:[],
-        dataActions:[],
+        httpApi: '',
+        httpNavigate: '',
+        itemAction: null,
+        initialForm: {},
+        editForm:{},
+        itemSearch: [],
+        nameColumn: [],
+        dataActions: [],
+        TBodyTable: null,
         success: false,
-        rerenderView: false,
         error: null,
         queryParameter: {
             size: 5,
@@ -98,31 +98,33 @@ export const actionAdminSlice = createSlice({
         choicePage: (state, action) => {
             state.queryParameter.page = action.payload;
         },
-        onClickSaveAction:(state,action)=>{
-            state.onClickAction=action.payload;
+        onClickSaveAction: (state, action) => {
+            state.onClickAction = action.payload;
         },
         createQueryParameter: (state, action) => {
             state.queryParameter = action.payload;
         },
-        createDataEdit:(state,action)=>{
-            state.dataEdit=action.payload;
+        resetPage: (state, action) => {
+            const queryParameterTemp = { ...state.queryParameter, page: 0 }
+            state.queryParameter = queryParameterTemp;
+
         },
-        setActionModel:(state,action)=>{
-            state.httpApi=action.payload.httpApi;
-            state.httpNavigate=action.payload.httpNavigate;
-            state.itemAction=action.payload.itemAction,
-            state.itemSearch=action.payload.itemSearch,
-            state.queryParameter=action.payload.queryParameter,
-            state.nameColumn=action.payload.nameColumn,
-            state.dataActions=action.payload.dataActions
+        createDataEdit: (state, action) => {
+            state.editForm = action.payload;
+        },
+        setActionModel: (state, action) => {
+            state.initialForm = action.payload.initialForm;
+            state.editForm = action.payload.initialForm;
+            state.httpApi = action.payload.httpApi;
+            state.httpNavigate = action.payload.httpNavigate;
+            state.itemAction = action.payload.itemAction;
+            state.itemSearch = action.payload.itemSearch;
+            state.queryParameter = action.payload.queryParameter;
+            state.nameColumn = action.payload.nameColumn;
+            state.dataActions = action.payload.dataActions;
+            state.TBodyTable = action.payload.TBodyTable;
+            state.list={ result: [], total: 0 };
         }
-        // httpNavigate: variationHttp.variationNavigate,
-        //     httpApi: variationHttp.variation,
-        //     itemAction: variationAction,
-        //     itemSearch: variationSearch,
-        //     queryParameter:queryParameter,
-        //     nameColumn: columnVariation,
-        //     dataActions:dataActions,
     },
     extraReducers: (builder) => {
         builder.
@@ -169,7 +171,6 @@ export const actionAdminSlice = createSlice({
                 state.loading = false;
                 state.success = true;
                 state.error = null;
-                state.rerenderView = !state.rerenderView;
             })
             .addCase(deleteDataAdmin.rejected, (state, action) => {
                 state.loading = false;
@@ -194,12 +195,20 @@ export const actionAdminSlice = createSlice({
                         total: 0
                     }
                 }
+                // const queryParameterTemp= {...state.queryParameter,page:0}
+                // state.queryParameter=queryParameterTemp;
 
             })
             .addCase(searchDataAdmin.rejected, (state, action) => {
+                console.log(action)
                 state.loading = false;
                 state.success = false;
-                state.error = action.payload.result;
+                state.list = {
+                    result: [],
+                    total: 0
+                }
+                // state.error = action.payload.result;
+
             })
         builder.
             addCase(getDataByIdAdmin.pending, (state) => {
@@ -223,4 +232,5 @@ export const actionAdminSlice = createSlice({
             })
     }
 })
-export const { actionSave, selectSize, choicePage, createQueryParameter,createDataEdit,onClickSaveAction,setActionModel } = actionAdminSlice.actions
+export const { actionSave, selectSize, choicePage, createQueryParameter, createDataEdit,
+    onClickSaveAction, setActionModel, resetPage } = actionAdminSlice.actions

@@ -8,6 +8,7 @@ import menuContentMainSlice from "../slice/main/menuContentMain";
 import logger from 'redux-logger'
 import { thunk } from "redux-thunk";
 import { actionReducerStore } from "../constants/reducerSlice";
+import { Update } from "@mui/icons-material";
 export const staticReducers = {
     product: productSlice.reducer,
     user: userSlice.reducer,

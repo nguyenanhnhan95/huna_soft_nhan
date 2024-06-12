@@ -1,39 +1,52 @@
-.main-content-title{
+.main-content-title {
     margin: 0;
     padding-left: 10px;
     font-size: 1.5em;
     font-weight: 600;
 }
+
 .main-content-action {
     background-color: white;
-    height: 80px;
-    margin: 15px;
+    height: auto;
+    margin: 0 15px;
     border-radius: 5px;
 }
-.main-content-action .container-content-action{
-    display: flex;
+
+
+.main-content-action .container-content-action .row {
     align-items: center;
-    height: 80px;
-}
-.main-content-action .container-content-action .row{
     margin: 0;
     width: 100%;
-    display: flex;
-    align-items: center;
+    height: 70px;
 }
-.container-content-action button{
+
+.container-content-action button {
     border: none;
     border-radius: 5px;
-    height: 45px;
-    width: 160px;
+    height: 40px;
+    padding: 0 15px;
     color: white;
     font-size: 1.2em;
     font-weight: 500;
-    background-color:#0693e3;
+    background-color: #0693e3;
 }
-.container-content-action button:focus{
+
+.container-content-action button:focus {
     outline: none;
 }
-.container-content-action .nav-item button:hover{
+
+.container-content-action .nav-item button:hover {
     background-color: #0471af;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-content-action .container-content-action .row {
+        height: 50px;
+        flex-wrap: nowrap;
+    }
+    .container-content-action button {
+        height: 30px;
+        padding: 0px 5px;
+        font-size: 0.9em;
+    }
 }
