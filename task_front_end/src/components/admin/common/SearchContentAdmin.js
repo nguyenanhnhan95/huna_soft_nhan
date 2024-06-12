@@ -15,7 +15,7 @@ function SearchContentAdmin() {
 
   const handleSearch = useCallback(() => {
     dispatch(createQueryParameter(query))
-  }, [query])
+  }, [query,dispatch])
 
   const handleShowAdvanced = useCallback(() => {
     setShow(show => !show)

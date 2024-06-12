@@ -1,5 +1,5 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { useField, useFormikContext, ErrorMessage } from 'formik';
+import { FormControl,  MenuItem, Select } from '@mui/material';
+import { useField, useFormikContext} from 'formik';
 import "../../css/composite/selectedFieldFormik.css"
 export const SelectFieldFormik = ({ options, ...props }) => {
     const { setFieldValue } = useFormikContext();
