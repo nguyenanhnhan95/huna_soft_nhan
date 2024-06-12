@@ -1,6 +1,6 @@
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import "../../../../css/admin/shop/promotion/contentForm.css"
-import { memo, useEffect } from "react";
+import { memo} from "react";
 import * as yup from "yup";
 import { DatePickerField } from "../../../composite/DatePickerField";
 import { getBeforeDateCurrent } from "../../../../utils/common";

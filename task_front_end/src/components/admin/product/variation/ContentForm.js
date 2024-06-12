@@ -1,11 +1,8 @@
 import { Formik, Form, Field, ErrorMessage, } from "formik";
 import * as yup from "yup";
 import "../../../../css/admin/product/variation/contentForm.css"
-import { useDispatch, useSelector } from "react-redux";
-import { createDataEdit, editDataAdmin, getDataByIdAdmin, handleSave, onClickSaveAction, saveDataAdmin, transferHandleAction } from "../../../../slice/main/actionAdmin";
-import { memo, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { toastDefault, toastError, toastInformation, toastSuccess, toastWarning } from "../../../../config/toast";
+import { memo } from "react";
+
 
 function ContentForm(props) {
     const { handleSave, initialForm, buttonRef } = props;

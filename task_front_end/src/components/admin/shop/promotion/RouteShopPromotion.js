@@ -7,7 +7,6 @@ import { Route, Routes } from "react-router-dom";
 import { shopPromotionHttp } from "../../../../constants/htttp";
 import { columnShopPromotion, dataActions, initialForm, queryParameter, shopPromotionAction, shopPromotionSearch } from "../../../../constants/shop/shopPromotion";
 import TBodyTable from "./TBodyTable";
-import { Backdrop } from "@mui/material";
 import BackdropLoading from "../../../../utils/BackdropLoading";
 
 function RouteShopPromotion() {

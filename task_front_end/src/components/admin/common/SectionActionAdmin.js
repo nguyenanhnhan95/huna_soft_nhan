@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "../../../css/admin/common/sectionActionAdmin.css"
 import { Link } from "react-router-dom";
-import { memo, useCallback, useEffect } from "react";
+import { memo,  } from "react";
 import { createDataEdit } from "../../../slice/main/actionAdmin";
 function SectionActionAdmin() {
   const {itemAction,initialForm ,httpNavigate} = useSelector((state) => state.actionAdmin);

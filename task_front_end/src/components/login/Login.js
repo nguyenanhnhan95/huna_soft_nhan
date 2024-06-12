@@ -5,7 +5,7 @@ import BackgroundImg from "../../img/background_img_login.png"
 import { loginForm } from "../../slice/login/login";
 import store from "../../store/store";
 import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 store.injectReducer(actionReducerStore.clear,"","")
 store.injectReducer(actionReducerStore.add,reducerSliceKey.loginForm,loginForm.reducer)
 function Login() {

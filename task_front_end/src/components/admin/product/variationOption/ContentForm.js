@@ -1,9 +1,8 @@
 import { Formik, Form, Field, ErrorMessage, } from "formik";
 import * as yup from "yup";
 import "../../../../css/admin/product/variationOption/contentForm.css"
-import { linkHttp, linkHttpAdmin, variationHttp, variationOptionHttp } from "../../../../constants/htttp";
-import { memo, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {variationHttp} from "../../../../constants/htttp";
+import { memo, useEffect, useState } from "react";
 import BaseServiceAdmin from "../../../../services/admin/base";
 import { SelectFieldFormik } from "../../../composite/SelectedFieldFormik";
 function ContentForm(props) {

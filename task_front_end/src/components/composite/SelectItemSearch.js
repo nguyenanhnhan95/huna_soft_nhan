@@ -3,9 +3,8 @@ import "../../css/composite/selectItemSearch.css"
 import BaseServiceAdmin from "../../services/admin/base";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { validation } from "../../utils/validation";
 function SelectItemSearch(props) {
     const { handleSetQuery, item, query } = props;

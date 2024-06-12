@@ -4,7 +4,7 @@ import store from "../../store/store";
 import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
 import menuContentMainSlice from "../../slice/main/menuContentMain";
 import overPlayMenuMainSlice from "../../slice/main/overPlayMenu";
-import { actionAdminSlice, saveOrUpdateAdminSlice } from "../../slice/main/actionAdmin";
+import { actionAdminSlice} from "../../slice/main/actionAdmin";
 import { memo } from "react";
 import AdminMenu from "../../components/admin/menus/AdminMenu";
 store.injectReducer(actionReducerStore.clear, '', '')

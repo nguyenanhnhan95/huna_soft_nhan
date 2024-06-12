@@ -1,5 +1,5 @@
-import axios from "axios"
-import { FETCH_PRODUCT_FAILED, FETCH_PRODUCT_SUCCEEDED, FETCH_EMPLOYEES_START, FETCH_PRODUCT_LOADING } from "../../constants/product"
+
+import { FETCH_PRODUCT_FAILED, FETCH_PRODUCT_SUCCEEDED, FETCH_PRODUCT_LOADING } from "../../constants/product"
 import BaseService from "../../services/base"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const http='http://localhost:8080/product';
