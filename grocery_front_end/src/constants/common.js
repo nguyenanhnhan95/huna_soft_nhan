@@ -1,5 +1,5 @@
 export const ctx = "http://localhost:3000";
-export const debounce = (func, delay) => {
+export const debounce =  (func, delay) => {
   let timeoutId;
   return (...args) => {
     if (timeoutId) {
