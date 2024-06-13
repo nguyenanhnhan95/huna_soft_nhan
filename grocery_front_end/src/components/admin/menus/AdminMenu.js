@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "../../../css/admin/menus/menuAdmin.css"
 import { getListMainMenu } from "../../../services/mainMenu";
 import { createHeader } from "../../../config/common";
 import React from 'react';
 import { ctx } from "../../../constants/common";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onClickHandleOverPlay } from "../../../slice/main/overPlayMenu";
 import logoBrand from "../../../img/header/logo-sky.png"
@@ -17,10 +17,9 @@ function AdminMenu() {
   const [menus, setMenus] = useState([]);
   const [menuActive, setMenuActive] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   let pathName = commonResource(location.pathname)
-  const getListMenu = async () => {
+  const getListMenu =useCallback( async () => {
     const header = createHeader(localStorage.getItem(constLogin.ACCESS_TOKEN));
     try {
       let data = await getListMainMenu(header);
@@ -32,10 +31,10 @@ function AdminMenu() {
         switch (error.response.status) {
           case 403:
             alert("không có quyền")
-            navigate("/home")
+            // navigate("/home")
             break;
           case 4006:
-            navigate("/login")
+            // navigate("/login")
             break;
           default:
             
@@ -44,10 +43,10 @@ function AdminMenu() {
  
       }
     }
-  }
+  },[])
   useEffect(() => {
     getListMenu()
-  }, [])
+  }, [getListMenu])
   const handleChangeOpenMenu = (menu, flagMenu) => {
     if (flagMenu) {
       if (menuActive === null || menuActive !== menu) {
@@ -59,7 +58,6 @@ function AdminMenu() {
       dispatch(transferMenuToContentMain(menu))
     }
   }
-  console.log("ádasd")
   return (
     <div className={`main-menu  menu-fixed menu-light menu-accordion menu-shadow menu-native-scroll expanded ${isOpen ? `open` : ``}`} data-scroll-to-active="true">
       <div className="row">
