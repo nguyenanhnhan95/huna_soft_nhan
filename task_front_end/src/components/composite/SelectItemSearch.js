@@ -9,7 +9,7 @@ import { validation } from "../../utils/validation";
 function SelectItemSearch(props) {
     const { handleSetQuery, item, query } = props;
     const [options, setOptions] = useState([]);
-    const getOptions = useCallback( async () => {
+    const getOptions = async () => {
         try {
             const response = await BaseServiceAdmin.getAll(item.data)
             setOptions(response.result)
@@ -17,14 +17,14 @@ function SelectItemSearch(props) {
             console.log(error)
             setOptions([]);
         }
-    },[item.callApi,item.data])
+    }
     useEffect(() => {
         if (item.callApi) {
             getOptions()
         } else {
             return item.data;
         }
-    }, [getOptions])
+    }, [])
     const handleSelect = (value) => {
         const id = value.target.value;
         if (validation.isNumber(id)) {

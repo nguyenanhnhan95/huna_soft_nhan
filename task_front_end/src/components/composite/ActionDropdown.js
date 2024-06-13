@@ -29,7 +29,7 @@ function ActionDropdown(props) {
     }, [httpNavigate, id])
     const handleShowModal = useCallback((show) => {
         setShowModal(show)
-    }, [navigate,dispatch])
+    }, [])
     const handleDelete = useCallback(async () => {
         try {
 

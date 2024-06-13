@@ -14,7 +14,10 @@ function HomeSlider() {
         threeSlider
     ];
     const lengthItems = items.length;
-    const reloadSlider =useCallback(() => {
+    const nextSlide =useCallback( () => {
+        setActive((prevActive) => (prevActive + 1) % lengthItems);
+    },[lengthItems]);
+    const reloadSlider = useCallback(() => {
         const checkLeft = listRef.current.children[active].offsetLeft;
         listRef.current.style.left = -checkLeft + 'px';
         dotsRef.current.forEach((dot, index) => {
@@ -28,13 +31,13 @@ function HomeSlider() {
         refreshSlider.current = setInterval(() => {
             nextSlide();
         }, 3000);
-    },[active]);
+    },[active,nextSlide]);
     useEffect(() => {
         refreshSlider.current = setInterval(() => {
             nextSlide();
         }, 3000);
         return () => clearInterval(refreshSlider.current); // Cleanup on unmount
-    }, [refreshSlider]);
+    }, [nextSlide]);
     useEffect(() => {
 
         reloadSlider();
@@ -44,9 +47,7 @@ function HomeSlider() {
         setActive((prevActive) => (prevActive - 1 + lengthItems) % lengthItems);
     };
 
-    const nextSlide = () => {
-        setActive((prevActive) => (prevActive + 1) % lengthItems);
-    };
+  
 
     const goToSlide = (index) => {
         setActive(index);
@@ -67,12 +68,12 @@ function HomeSlider() {
             </div>
             <div className="dots">
                 {items.map((_, index) => (
-                   <li
-                   key={index}
-                   className={index === active ? 'active' : ''}
-                   onClick={() => goToSlide(index)}
-                   ref={(el) => (dotsRef.current[index] = el)}
-               ></li>
+                    <li
+                        key={index}
+                        className={index === active ? 'active' : ''}
+                        onClick={() => goToSlide(index)}
+                        ref={(el) => (dotsRef.current[index] = el)}
+                    ></li>
                 ))}
             </div>
         </div>

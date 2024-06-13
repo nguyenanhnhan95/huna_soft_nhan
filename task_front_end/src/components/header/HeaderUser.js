@@ -31,7 +31,7 @@ function HeaderUser() {
     const handleHeaderUserClick = () => {
         setIsModalUserVisible(!isModalUserVisible);
     };
-    const getUserData =useCallback( async () => {
+    const getUserData =async () => {
         try {
             await dispatch(findByUser(linkHttp.getUserHeader, createHeader())).unwrap();
         } catch (error) {
@@ -49,12 +49,12 @@ function HeaderUser() {
                 }
             }
         }
-    },[])
+    }
     useEffect(() => {
         if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
             getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
         }
-    }, [getUserData])
+    }, [])
   
     const handleRefreshToken = async () => {
         try {

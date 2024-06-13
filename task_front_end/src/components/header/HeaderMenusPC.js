@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import LogoSky from "../../img/header/logo-sky.png"
 function HeaderMenusPc() {
     const {  productCategories } = useSelector((state) => state.productCategoryMenus)

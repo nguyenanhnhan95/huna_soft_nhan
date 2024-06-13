@@ -20,7 +20,7 @@ function AdminMenu() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let pathName = commonResource(location.pathname)
-  const getListMenu = useCallback(async () => {
+  const getListMenu = async () => {
     const header = createHeader(localStorage.getItem(constLogin.ACCESS_TOKEN));
     try {
       let data = await getListMainMenu(header);
@@ -41,13 +41,13 @@ function AdminMenu() {
             
         }
       } else {
-        
+ 
       }
     }
-  },[])
+  }
   useEffect(() => {
     getListMenu()
-  }, [getListMenu])
+  }, [])
   const handleChangeOpenMenu = (menu, flagMenu) => {
     if (flagMenu) {
       if (menuActive === null || menuActive !== menu) {
@@ -59,12 +59,13 @@ function AdminMenu() {
       dispatch(transferMenuToContentMain(menu))
     }
   }
+  console.log("ádasd")
   return (
     <div className={`main-menu  menu-fixed menu-light menu-accordion menu-shadow menu-native-scroll expanded ${isOpen ? `open` : ``}`} data-scroll-to-active="true">
       <div className="row">
         <div className="col-8">
           <div className="menu-logo">
-            <img src={logoBrand} style={{ width: '130', height: '50px' }} />
+            <img src={logoBrand} alt="" style={{ width: '130', height: '50px' }} />
           </div>
         </div>
         <div className="col-4 close-overPlay">

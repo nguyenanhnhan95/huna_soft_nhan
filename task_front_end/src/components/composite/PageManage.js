@@ -5,12 +5,12 @@ import "../../css/composite/pageManage.css"
 function PageManage() {
     const { queryParameter, list } = useSelector((state) => state.actionAdmin);
     const dispatch = useDispatch();
-    const handleSelectSize = useCallback((size) => {
+    const handleSelectSize = (size) => {
         dispatch(selectSize(size))
-    }, [dispatch])
-    const handleChoicePage = useCallback((page) => {
+    }
+    const handleChoicePage = (page) => {
         dispatch(choicePage(page))
-    }, [dispatch])
+    }
     const listPage = useMemo(() => {
         const listPage = [];
         for (let i = 0; i < list.total / queryParameter.size; ++i) {
@@ -19,7 +19,7 @@ function PageManage() {
             );
         }
         return listPage;
-    }, [queryParameter.size,queryParameter.page])
+    }, [queryParameter.size,queryParameter.page,list.total])
     return (
         <div className="d-flex justify-content-between row container-content-data-page ">
             <div className="col-12 d-flex justify-content-end align-items-center">

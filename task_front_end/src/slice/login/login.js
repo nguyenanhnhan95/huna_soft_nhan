@@ -24,8 +24,7 @@ export const loginForm = createSlice({
         error: null
     },
     extraReducers: (builder) => {
-        builder.
-            addCase(loginFormAuth.pending, (state) => {
+        builder.addCase(loginFormAuth.pending, (state) => {
                 state.loading = true;
                 state.accessToken = null;
                 state.error = null;
