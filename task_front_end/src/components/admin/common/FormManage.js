@@ -11,7 +11,7 @@ function FormManage({Form}){
     const dispatch = useDispatch();
     const buttonRef=useRef(null);
     const {id} = useParams();
-    const getDataEdit=useCallback(async()=>{
+    const getDataEdit=async()=>{
         try{
             console.log(id)
             const response = await dispatch(getDataByIdAdmin({http:httpApi,data:id*1})).unwrap();
@@ -22,13 +22,13 @@ function FormManage({Form}){
             toastError("Dữ liệu đang lỗi!")
         }
         
-    },[httpApi,id,dispatch])
+    };
     useEffect(()=>{
         dispatch(onClickSaveAction({buttonSave:buttonRef.current}))
         if(id!==undefined && validation.isNumber(id)){
             getDataEdit()
         } 
-    },[getDataEdit])
+    },[])
     const handleSave = useCallback(async (value, setErrors) => {
         try {
   

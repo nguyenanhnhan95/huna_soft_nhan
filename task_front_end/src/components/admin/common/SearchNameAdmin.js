@@ -3,25 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { createQueryParameter } from "../../../slice/main/actionAdmin";
 import { debounce } from "../../../constants/common";
 function SearchNameAdmin(props) {
-    const {  handleShowAdvanced } = props;
-    const { itemSearch, queryParameter } = useSelector((state) => state.actionAdmin)
-    const [query, setQuery] = useState(queryParameter)
+    const {  handleShowAdvanced,handleSetQuery,query } = props;
+    const { itemSearch } = useSelector((state) => state.actionAdmin)
     const dispatch = useDispatch();
-    const handleSearch = useCallback(() => {
+    const handleSearch = () => {
         dispatch(createQueryParameter(query))
-    }, [query, dispatch])
+    };
     const handelEnterData = (value) => {
-        Object.keys(queryParameter.criterias).forEach(key => {
+        Object.keys(query.criterias).forEach(key => {
             if (value.hasOwnProperty(key)) {
                 // Logs the key if it exists in both objects
                 let copyQueryParameter = {
-                    ...queryParameter,
+                    ...query,
                     criterias: {
-                        ...queryParameter.criterias,
+                        ...query.criterias,
                         [key]: value[key]
                     }
                 };
-                setQuery(copyQueryParameter)
+                handleSetQuery(copyQueryParameter)
                 // Logs the updated queryParameter object
             }
         })
