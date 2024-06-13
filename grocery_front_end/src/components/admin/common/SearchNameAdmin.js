@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createQueryParameter } from "../../../slice/main/actionAdmin";
 import { debounce } from "../../../constants/common";
@@ -6,10 +6,12 @@ function SearchNameAdmin(props) {
     const {  handleShowAdvanced,handleSetQuery,query } = props;
     const { itemSearch } = useSelector((state) => state.actionAdmin)
     const dispatch = useDispatch();
+
     const handleSearch = () => {
         dispatch(createQueryParameter(query))
     };
-    const handelEnterData = (value) => {
+
+    const handelEnterData =useCallback( (value) => {
         Object.keys(query.criterias).forEach(key => {
             if (value.hasOwnProperty(key)) {
                 // Logs the key if it exists in both objects
@@ -24,8 +26,9 @@ function SearchNameAdmin(props) {
                 // Logs the updated queryParameter object
             }
         })
-    }
-    const debouncedHandleEnterData = useCallback(debounce(handelEnterData, 500), []);
+    },[handleSetQuery,query])
+
+    const debouncedHandleEnterData = useMemo(() => debounce(handelEnterData, 500), [handelEnterData]);
     return (
         <div className="row container-content-search-head">
             <div className={itemSearch.searchAdvanced.style.display === 'none' ? 'col-12 col-md-9 col-xl-10 container-content-search-name' : 'col-12 col-md-9 col-xl-10 container-content-search-name'} >

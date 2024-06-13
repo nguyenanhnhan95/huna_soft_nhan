@@ -10,16 +10,16 @@ import { linkHttp } from "../../constants/htttp";
 function HeaderUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const getUserDataRef = useRef();
     const {  user, } = useSelector((state) => state.user)
     const [isModalUserVisible, setIsModalUserVisible] = useState(false);
     const headerUserRef = useRef(null);
     const headerUserModalRef = useRef(null);
-    
     const handleRefreshToken =useCallback( async () => {
         try {
             const response = await getRefreshToken(localStorage.getItem(constLogin.ACCESS_TOKEN))
             localStorage.setItem(constLogin.ACCESS_TOKEN, response.accessToken)
-            getUserData()
+            getUserDataRef.current();
 
         } catch (error) {
             localStorage.removeItem(constLogin.ACCESS_TOKEN);
@@ -45,6 +45,8 @@ function HeaderUser() {
             }
         }
     },[dispatch,navigate,handleRefreshToken])
+   
+    
     useEffect(() => {
         if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
             getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
