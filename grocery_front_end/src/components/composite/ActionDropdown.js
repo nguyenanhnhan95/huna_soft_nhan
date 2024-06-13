@@ -13,6 +13,9 @@ function ActionDropdown(props) {
     const [showModal, setShowModal] = useState(false)
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const handleShowModal = useCallback((show) => {
+        setShowModal(show)
+    }, [])
     const handleAction = useCallback((action) => {
         switch (action.action) {
             case 'edit':
@@ -27,9 +30,7 @@ function ActionDropdown(props) {
                 return;
         }
     }, [httpNavigate, id])
-    const handleShowModal = useCallback((show) => {
-        setShowModal(show)
-    }, [])
+    
     const handleDelete = useCallback(async () => {
         try {
 

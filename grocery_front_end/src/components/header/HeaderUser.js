@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect,useRef, useState } from "react";
+import { memo,  useCallback,  useEffect,useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findByUser } from "../../slice/user";
 import {  PROVIDER_ID,  USER_LOGIN, constLogin } from "../../constants/login";
@@ -14,24 +14,19 @@ function HeaderUser() {
     const [isModalUserVisible, setIsModalUserVisible] = useState(false);
     const headerUserRef = useRef(null);
     const headerUserModalRef = useRef(null);
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (headerUserRef.current && !headerUserRef.current.contains(event.target)) {
-                setIsModalUserVisible(false);
-            }
+    
+    const handleRefreshToken =useCallback( async () => {
+        try {
+            const response = await getRefreshToken(localStorage.getItem(constLogin.ACCESS_TOKEN))
+            localStorage.setItem(constLogin.ACCESS_TOKEN, response.accessToken)
+            getUserData()
+
+        } catch (error) {
+            localStorage.removeItem(constLogin.ACCESS_TOKEN);
+            navigate("/login");
         }
-
-        document.addEventListener('click', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
-
-    const handleHeaderUserClick = () => {
-        setIsModalUserVisible(!isModalUserVisible);
-    };
-    const getUserData =async () => {
+    },[navigate])
+    const getUserData =useCallback( async () => {
         try {
             await dispatch(findByUser(linkHttp.getUserHeader, createHeader())).unwrap();
         } catch (error) {
@@ -49,25 +44,32 @@ function HeaderUser() {
                 }
             }
         }
-    }
+    },[dispatch,navigate,handleRefreshToken])
     useEffect(() => {
         if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
             getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
         }
-    }, [])
+    },[getUserData])
   
-    const handleRefreshToken = async () => {
-        try {
-            const response = await getRefreshToken(localStorage.getItem(constLogin.ACCESS_TOKEN))
-            localStorage.setItem(constLogin.ACCESS_TOKEN, response.accessToken)
-            getUserData()
-
-        } catch (error) {
-            localStorage.removeItem(constLogin.ACCESS_TOKEN);
-            navigate("/login");
+    
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (headerUserRef.current && !headerUserRef.current.contains(event.target)) {
+                setIsModalUserVisible(false);
+            }
         }
 
-    }
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+    const handleHeaderUserClick = () => {
+        setIsModalUserVisible(!isModalUserVisible);
+    };
+    
     const handleLogout = () => {
         let token = localStorage.getItem(constLogin.ACCESS_TOKEN);
         localStorage.removeItem(constLogin.ACCESS_TOKEN);
