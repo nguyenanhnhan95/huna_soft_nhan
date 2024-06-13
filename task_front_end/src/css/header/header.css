@@ -13,7 +13,7 @@
     /* Horizontally centers the content */
     /* Vertically centers the content */
     height: 80px;
-    
+
     /* Ensure the container takes the full height */
 }
 
@@ -325,7 +325,16 @@
         /* Adjust this value based on your content height */
     }
 
-    .header-item-mob-item .header-item-mob-item-subs:hover {
+    .header-item-mob-item button {
+        width: 100%;
+        border: none;
+        text-align: start;
+        background-color: white;
+    }
+    .header-item-mob-item button:focus{
+        outline: none;
+    }
+    /* .header-item-mob-item .header-item-mob-item-subs:hover :not(.dropdown) {
         -webkit-transition: -webkit-transform .25s ease;
         transition: -webkit-transform .25s ease;
         transition: transform .25s ease;
@@ -333,7 +342,7 @@
         -webkit-transform: translateX(5px);
         -ms-transform: translateX(5px);
         transform: translateX(5px);
-    }
+    } */
 
     .header-item-mob-item .header-item-mob-item-subs .rotate {
         transform: rotate(90deg);
@@ -346,9 +355,11 @@
         border-radius: 10px;
         color: #0693e3 !important;
     }
-    .header-item-mob-item .clicked .i{
+
+    .header-item-mob-item .clicked .i {
         margin-left: 15px;
     }
+
     .header-item-mob-item .header-item-mob-item-sub .header-item-mob-item-sub-item {
         margin-left: 18px;
         line-height: 30px;
@@ -377,7 +388,7 @@
         width: 90%;
     }
 
-    .header-item-mob .header-item-mob-menu .header-item-mob-item a {
+    .header-item-mob .header-item-mob-menu .header-item-mob-item button {
         color: black;
         font-size: 1.9em;
         text-decoration: none;
@@ -397,7 +408,7 @@
         color: #0866FF;
     }
 
-    .header-item-mob .header-item-mob-menu .header-item-mob-item a .dropdown {
+    .header-item-mob .header-item-mob-menu .header-item-mob-item button .dropdown {
         position: absolute;
         right: 0;
         margin: 20px;
@@ -419,7 +430,7 @@
         font-size: 3em;
     }
 
-   
+
 
     .header-cart .header-cart-numbers {
         top: -20px;
@@ -471,14 +482,15 @@
         display: none;
     }
 
-    
+
 }
 
 @media only screen and (min-width: 1025px) and (max-width: 1279px) {
     .header-item-mob {
         display: none;
     }
-    .header-search-mob{
+
+    .header-search-mob {
         display: none;
     }
 }
@@ -487,7 +499,8 @@
     .header-item-mob {
         display: none;
     }
-    .header-search-mob{
+
+    .header-search-mob {
         display: none;
     }
 

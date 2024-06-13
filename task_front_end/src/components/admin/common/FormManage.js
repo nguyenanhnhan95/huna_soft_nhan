@@ -24,19 +24,15 @@ function FormManage({Form}){
         
     },[httpApi,id,dispatch])
     useEffect(()=>{
-        console.log(id)
         dispatch(onClickSaveAction({buttonSave:buttonRef.current}))
         if(id!==undefined && validation.isNumber(id)){
-            console.log(id)
             getDataEdit()
-        }else{
-            // dispatch(createDataEdit(initialForm))
-        }  
+        } 
     },[getDataEdit])
     const handleSave = useCallback(async (value, setErrors) => {
         try {
   
-            if(id!=undefined && validation.isNumber(id)){
+            if(id!==undefined && validation.isNumber(id)){
                 await dispatch(editDataAdmin({ http: httpApi,id:id, data: value })).unwrap()
             }else{
                  await dispatch(saveDataAdmin({ http: httpApi, data: value })).unwrap()
@@ -51,7 +47,7 @@ function FormManage({Form}){
         } catch (error) {
             setErrors(error.result)
         }
-    },[id,httpApi,close,dispatch])
+    },[id,httpApi,close,dispatch,httpNavigate,navigate])
     return(
         <Form buttonRef={buttonRef} initialForm={editForm} handleSave={handleSave}/>
     )
