@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react"
+import { memo,  useEffect, useState } from "react"
 import "../../css/composite/selectItemSearch.css"
 import BaseServiceAdmin from "../../services/admin/base";
 import InputLabel from '@mui/material/InputLabel';

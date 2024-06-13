@@ -11,24 +11,22 @@ function FormManage({Form}){
     const dispatch = useDispatch();
     const buttonRef=useRef(null);
     const {id} = useParams();
-    const getDataEdit=async()=>{
+    const getDataEdit=useCallback(async()=>{
         try{
-            console.log(id)
             const response = await dispatch(getDataByIdAdmin({http:httpApi,data:id*1})).unwrap();
             if(response.code===200){
                 dispatch(createDataEdit(response.result))
             }
         }catch(error){
             toastError("Dữ liệu đang lỗi!")
-        }
-        
-    };
+        }       
+    },[httpApi,id,dispatch]);
     useEffect(()=>{
         dispatch(onClickSaveAction({buttonSave:buttonRef.current}))
         if(id!==undefined && validation.isNumber(id)){
             getDataEdit()
         } 
-    },[])
+    },[getDataEdit,id,dispatch])
     const handleSave = useCallback(async (value, setErrors) => {
         try {
   
