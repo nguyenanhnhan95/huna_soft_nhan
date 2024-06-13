@@ -1,0 +1,91 @@
+.login .loin-img{
+    padding: 0;
+}
+.login .loin-img img{
+    height: 700px;
+    width: 100%;
+}
+.login .login-form .card-login{
+    border: none;
+}
+.login .login-form .card-login .card-header{
+    background-color: white;
+    border: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+.login .login-form .card-login .card-body form{
+    width: 380px;
+}
+.login .login-form .card-login .card-body form .form-label{
+    font-size: 0.9em;
+}
+.login .login-form .card-login .card-body form .form-password{
+    position: relative;
+}
+.login .login-form .card-login .card-body form .form-password i{
+    position: absolute;
+    top: 43px;
+    right: 13px;
+}
+.login .login-form .card-login .card-body form .form-check-input{
+    margin-bottom: 3px;
+}
+.login .login-form .card-login .card-body form .form-password i:hover{
+    color: #78909C;
+    cursor: pointer;
+}
+.login .login-form .card-login .card-body form .form-error{
+    font-size: 0.9em;
+    padding-left: 5px;
+    color: red;
+}
+.login .login-form .card-login .card-body form .form-check-label{
+    font-size: 0.8em;
+}
+.login .login-form .card-login .card-body form .form-submit{
+    width: 100%;
+    border-radius: 6px;
+    border: none;
+    height: 35px;
+    font-size: 1.1em;
+    outline-style: none;
+}
+.login .login-form .card-login .card-body form .form-submit:hover{
+    background-color: #0693e3;
+    color: white;
+    font-weight: 500;
+}
+.login .login-form .card-login .card-body .separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.login .login-form .card-login .card-body .separator::before,
+.login .login-form .card-login .card-body .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #78909C;
+}
+
+.login .login-form .card-login .card-body .separator:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.login .login-form .card-login .card-body .separator:not(:empty)::after {
+    margin-left: .5em;
+}
+.login .login-form .card-login .card-body  .submit-social img{
+    height: 50px;
+    width: 50px;
+}
+.login .login-form .card-login .card-body  .submit-social img:hover{
+    cursor: pointer;
+}
+@media only screen and (max-width: 1024px) {
+    .login .loin-img{
+        display: none;
+    }
+}

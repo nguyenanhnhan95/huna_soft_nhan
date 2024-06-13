@@ -1,0 +1,15 @@
+.card-upload-img{
+    display: flex;
+    flex-direction: column;
+}
+ .card-upload-img .card-upload-img-upload .card-upload-img-upload-button{
+     border-radius: 5px;
+     outline: none;
+     border-color: #0693e3;
+     color: #0693e3;
+     padding: 4px 15px;
+     font-size: 1em;
+ }
+.main-content-form-product .card-upload-img .card-upload-img-upload .card-upload-img-upload-button i{
+    margin-right: 5px;
+}
