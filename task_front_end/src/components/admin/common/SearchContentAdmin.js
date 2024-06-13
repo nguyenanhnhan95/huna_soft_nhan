@@ -1,8 +1,6 @@
 import React, { memo, useCallback, useState } from "react";
 import "../../../css/admin/common/searchContentAdmin.css"
-import { useDispatch, useSelector } from "react-redux";
-import { createQueryParameter } from "../../../slice/main/actionAdmin";
-import { debounce } from "../../../constants/common";
+import { useSelector } from "react-redux";
 import { componentsAdvanced } from "../../../utils/common";
 import SearchNameAdmin from "./SearchNameAdmin";
 function SearchContentAdmin() {
@@ -23,7 +21,7 @@ function SearchContentAdmin() {
     <div className="search-content-admin">
       <form role="search">
         <div className={`container-fluid container-content-search ${show ? 'show' : ''}`} >
-          <SearchNameAdmin  handleShowAdvanced={handleShowAdvanced} />
+          <SearchNameAdmin  handleShowAdvanced={handleShowAdvanced} handleSetQuery={handleSetQuery} query={query} />
           <div className="row container-content-search-advanced">
             {itemSearch.items.map((each, index) => {
               const Component = componentsAdvanced[each.component];
@@ -33,7 +31,7 @@ function SearchContentAdmin() {
               return (
                 <Component
                   handleSetQuery={handleSetQuery}
-                  query={queryParameter}
+                  query={query}
                   item={each}
                   key={index}
                 />
