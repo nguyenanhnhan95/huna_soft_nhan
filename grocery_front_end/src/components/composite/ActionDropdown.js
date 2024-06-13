@@ -29,7 +29,7 @@ function ActionDropdown(props) {
             default:
                 return;
         }
-    }, [httpNavigate, id])
+    }, [httpNavigate, id,handleShowModal,navigate])
     
     const handleDelete = useCallback(async () => {
         try {
@@ -42,7 +42,7 @@ function ActionDropdown(props) {
             console.log(error);
         }
         setShowModal(false)
-    }, [httpApi, id])
+    }, [httpApi, id,handleShowModal,dispatch])
     return (
         <div className="dropdown">
             <i className="fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false" />
