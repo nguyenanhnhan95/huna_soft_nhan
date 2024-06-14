@@ -25,9 +25,8 @@ function InputDataSearch(props) {
             return item.data;
         }
     }, [item.callApi, item.data, getOptions])
-    const handleInputChange = (newInputValue) => {
+    const handleInputChange =useCallback( (newInputValue) => {
         if(newInputValue!==undefined && newInputValue.length>0){
-            console.log(newInputValue)
             const newSearchName = { ...item.search };
             const firstKey = Object.keys(newSearchName)[0];
             const newQueryParameter = {
@@ -37,7 +36,6 @@ function InputDataSearch(props) {
                     [firstKey]: newInputValue,
                 }
             }
-            console.log(newQueryParameter)
             handleSetQuery(newQueryParameter)
         }else{
             console.log(newInputValue)
@@ -52,7 +50,7 @@ function InputDataSearch(props) {
             }
             handleSetQuery(newQueryParameter)
         }
-    }
+    },[query,handleSetQuery,item])
     const debouncedHandleEnterData = useMemo(() => debounce(handleInputChange, 500), [handleInputChange]);
     return (
         <div className="col-12 col-md-4 col-xl-3 container-content-search-advanced-item">
