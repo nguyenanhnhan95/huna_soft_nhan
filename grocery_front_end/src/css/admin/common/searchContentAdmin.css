@@ -84,6 +84,7 @@
     overflow: hidden;
     -webkit-transition: max-height 0.3s ease;
     transition: max-height 0.3s ease;
+    margin-top: 5px;
 }
 .search-content-admin .show .container-content-search-advanced {
     max-height: 500px;

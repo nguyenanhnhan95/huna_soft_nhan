@@ -1,17 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { linkHttp } from "../../constants/htttp";
-import { constLogin } from "../../constants/login";
+import { linkHttp } from "../../constants/common/resource";
+import { constLogin } from "../../constants/login/login";
 
 export const loginFormAuth = createAsyncThunk('auth/login',
     async (account,{rejectWithValue}) => {
         try {
-            console.log(account)
             const response = await axios.post(linkHttp.authLogin, account);
             localStorage.setItem(constLogin.ACCESS_TOKEN, response.data.accessToken);
             return response.data;
         } catch(error) {
-            console.log(rejectWithValue(error.response.data))
             return rejectWithValue(error.response.data)
         }
     }

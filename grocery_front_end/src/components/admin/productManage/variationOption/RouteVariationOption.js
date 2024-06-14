@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import FormBasic from "./FormBasic";
-import Manage from "./Manage";
-import { useDispatch } from "react-redux";
-import { setActionModel } from "../../../../slice/main/actionAdmin";
 import { Route, Routes } from "react-router-dom";
-import { columnShopPromotion, dataActions, initialForm, queryParameter, shopPromotionAction, shopPromotionHttp, shopPromotionSearch } from "../../../../constants/admin/shop/shopPromotion";
-import TBodyTable from "./TBodyTable";
+import Manage from "./Manage";
+import FormBasic from "./FormBasic";
+import { useDispatch } from "react-redux";
+import { columnVariationOption, dataActions, initialForm, queryParameter, variationOptionAction, variationOptionHttp, variationOptionSearch } from "../../../../constants/admin/productManage/variationOption";
+import { setActionModel } from "../../../../slice/main/actionAdmin";
+import { useEffect, useState } from "react";
 import BackdropLoading from "../../../../utils/BackdropLoading";
+import TBodyTable from "./TBodyTable";
 
-function RouteShopPromotion() {
+function RouteVariationOption() {
     const dispatch = useDispatch();
     const [initialized, setInitialized] = useState(false);
 
@@ -17,12 +17,12 @@ function RouteShopPromotion() {
         const initializeState = async () => {
             try {
                 await dispatch(setActionModel({
-                    httpNavigate: shopPromotionHttp.shopPromotionNavigate,
-                    httpApi: shopPromotionHttp.shopPromotion,
-                    itemAction: shopPromotionAction,
-                    itemSearch: shopPromotionSearch,
+                    httpNavigate: variationOptionHttp.variationOptionNavigate,
+                    httpApi: variationOptionHttp.variationOption,
+                    itemAction: variationOptionAction,
+                    itemSearch: variationOptionSearch,
                     queryParameter: queryParameter,
-                    nameColumn: columnShopPromotion,
+                    nameColumn: columnVariationOption,
                     dataActions: dataActions,
                     initialForm: initialForm,
                     TBodyTable: TBodyTable
@@ -38,7 +38,7 @@ function RouteShopPromotion() {
     }, [dispatch]);
 
     if (!initialized) {
-        return <BackdropLoading />;; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
+        return <BackdropLoading />; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
     }
 
     return (
@@ -49,5 +49,4 @@ function RouteShopPromotion() {
         </Routes>
     );
 }
-
-export default RouteShopPromotion;
+export default RouteVariationOption;

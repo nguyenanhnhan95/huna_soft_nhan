@@ -1,6 +1,6 @@
 import logo_google from "../../img/header/logo_google.png"
 import logo_facebook from "../../img/header/logo_facebook.png"
-import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL } from '../../constants/login';
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL } from '../../constants/login/login';
 import { Link } from "react-router-dom";
 function SocialLogin() {
     return (

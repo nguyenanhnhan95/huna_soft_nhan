@@ -3,6 +3,10 @@
     margin: 15px;
     border-radius: 5px;
 }
+.main-content-form-variation .card-header{
+    background-color: white;
+    font-size: 1.2em;
+}
 .main-content-form-variation .card-form-variation .form-control{
     width: 100%;
 }

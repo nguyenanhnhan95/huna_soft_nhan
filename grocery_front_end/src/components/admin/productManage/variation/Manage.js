@@ -1,8 +1,7 @@
 import { memo } from "react";
-import TableManage from "../../../composite/table/TableManage";
 import SearchContentAdmin from "../../common/SearchContentAdmin";
 import SectionActionAdmin from "../../common/SectionActionAdmin";
-
+import TableManage from "../../../composite/table/TableManage";
 function Manage() {
     return (
         <>

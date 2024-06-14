@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./components/login/Login";
 import Home from "../src/pages/home/Home"
 import OAuth2RedirectHandle from "./components/oauth2/OAuth2RedirectHandler";
 import Test from "./components/test";
 import Admin from "./pages/admin/Admin";
 import { useEffect, useState } from "react";
 import BackdropLoading from "./utils/BackdropLoading";
+import Login from "./pages/login/Login";
 
 function App() {
   const [hidden, setHidden] = useState(true);
