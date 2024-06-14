@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import FormBasic from "./FormBasic";
+import { Routes,Route } from "react-router-dom";
 import Manage from "./Manage";
+import FormBasic from "./FormBasic";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import { setActionModel } from "../../../../slice/main/actionAdmin";
-import { Route, Routes } from "react-router-dom";
-import { columnShopPromotion, dataActions, initialForm, queryParameter, shopPromotionAction, shopPromotionHttp, shopPromotionSearch } from "../../../../constants/admin/shop/shopPromotion";
+import { columnProducts, dataActions, initialForm, productsAction, productsHttp, productsSearch, queryParameter } from "../../../../constants/admin/productManage/products";
 import TBodyTable from "./TBodyTable";
-import BackdropLoading from "../../../../utils/BackdropLoading";
-
-function RouteShopPromotion() {
+function RouteProduct(){
     const dispatch = useDispatch();
     const [initialized, setInitialized] = useState(false);
 
@@ -17,12 +15,12 @@ function RouteShopPromotion() {
         const initializeState = async () => {
             try {
                 await dispatch(setActionModel({
-                    httpNavigate: shopPromotionHttp.shopPromotionNavigate,
-                    httpApi: shopPromotionHttp.shopPromotion,
-                    itemAction: shopPromotionAction,
-                    itemSearch: shopPromotionSearch,
+                    httpNavigate: productsHttp.productsNavigate,
+                    httpApi: productsHttp.products,
+                    itemAction: productsAction,
+                    itemSearch: productsSearch,
                     queryParameter: queryParameter,
-                    nameColumn: columnShopPromotion,
+                    nameColumn: columnProducts,
                     dataActions: dataActions,
                     initialForm: initialForm,
                     TBodyTable: TBodyTable
@@ -38,7 +36,7 @@ function RouteShopPromotion() {
     }, [dispatch]);
 
     if (!initialized) {
-        return <BackdropLoading />;; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
+        return <div>Loading...</div>; // Hoặc bất kỳ component nào khác bạn muốn hiển thị trong khi khởi tạo
     }
 
     return (
@@ -49,5 +47,4 @@ function RouteShopPromotion() {
         </Routes>
     );
 }
-
-export default RouteShopPromotion;
+export default RouteProduct;

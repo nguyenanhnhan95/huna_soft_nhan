@@ -1,12 +1,12 @@
 import { memo,  useCallback,  useEffect,useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findByUser } from "../../slice/user";
-import {  PROVIDER_ID,  USER_LOGIN, constLogin } from "../../constants/login";
+import {  PROVIDER_ID,  USER_LOGIN, constLogin } from "../../constants/login/login";
 import {useNavigate } from "react-router-dom";
 import "../../css/header/headerUser.css"
 import { getRefreshToken } from "../../services/token";
-import { linkHttp } from "../../constants/htttp";
 import { createHeader } from "../../utils/common";
+import { linkHttp } from "../../constants/common/resource";
 function HeaderUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();

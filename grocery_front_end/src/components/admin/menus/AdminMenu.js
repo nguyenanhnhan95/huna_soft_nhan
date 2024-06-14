@@ -2,14 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import "../../../css/admin/menus/menuAdmin.css"
 import { getListMainMenu } from "../../../services/mainMenu";
 import React from 'react';
-import { ctx } from "../../../constants/common";
 import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onClickHandleOverPlay } from "../../../slice/main/overPlayMenu";
 import logoBrand from "../../../img/header/logo-sky.png"
 import { transferMenuToContentMain } from "../../../slice/main/menuContentMain";
-import { commonResource } from "../../../common/menuAdmin";
 import { createHeader } from "../../../utils/common";
+import { commonResource, ctx } from "../../../constants/common/resource";
 
 function AdminMenu() {
   const isOpen = useSelector((state) => state.overPlayMenuMain.open)

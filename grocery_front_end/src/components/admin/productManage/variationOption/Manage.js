@@ -1,14 +1,13 @@
 import { memo } from "react";
-import TableManage from "../../../composite/table/TableManage";
-import SearchContentAdmin from "../../common/SearchContentAdmin";
 import SectionActionAdmin from "../../common/SectionActionAdmin";
-
+import SearchContentAdmin from "../../common/SearchContentAdmin";
+import TableManage from "../../../composite/table/TableManage";
 function Manage() {
     return (
         <>
             <SectionActionAdmin />
-            <SearchContentAdmin />
-            <TableManage />
+            <SearchContentAdmin  />
+            <TableManage  />
         </>
     )
 }

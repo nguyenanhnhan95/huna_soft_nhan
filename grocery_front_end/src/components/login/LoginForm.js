@@ -2,11 +2,11 @@ import { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as yup from "yup";
 import Cookies from 'js-cookie'
-import { constLogin } from "../../constants/login";
+import { constLogin } from "../../constants/login/login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginFormAuth } from "../../slice/login/login";
-import { linkHttp } from "../../constants/htttp";
+import { linkHttp } from "../../constants/common/resource";
 function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
     const [keepLogin,setKeepLogin] = useState(false)

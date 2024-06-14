@@ -1,4 +1,3 @@
-import { memo } from "react";
 import TableManage from "../../../composite/table/TableManage";
 import SearchContentAdmin from "../../common/SearchContentAdmin";
 import SectionActionAdmin from "../../common/SectionActionAdmin";
@@ -12,4 +11,4 @@ function Manage() {
         </>
     )
 }
-export default memo(Manage);
+export default Manage;
