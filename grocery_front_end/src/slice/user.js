@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { FETCH_USER_FAILED, FETCH_USER_LOADING, FETCH_USER_SUCCEEDED } from "../constants/user";
-import { createHeader } from "../config/common";
 import axios from "axios";
+import { createHeader } from "../utils/common";
 const initialState = {
     authenticate: false,
     user: null,

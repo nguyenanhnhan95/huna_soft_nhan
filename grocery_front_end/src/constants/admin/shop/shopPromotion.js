@@ -1,3 +1,5 @@
+import { typeSearchAdvanced } from "../../common"
+import { shopPromotionHttp } from "../../htttp"
 
 
 export const shopPromotionAction = {
@@ -25,10 +27,23 @@ export const shopPromotionSearch = {
     },
     items:[
         {
+            title:"Mã code",
+            callApi:true,
+            data:shopPromotionHttp.shopPromotionCode,
+            search:{code:null},
+            component:typeSearchAdvanced.InputDataSearch
+        },
+        {
             title:"Ngày bắt đầu",
             search:{startDate:null},
-            component:'DateItemSearch'
+            component:typeSearchAdvanced.DateItemSearch
         },
+        {
+            title:"Ngày kết thúc",
+            search:{endDate:null},
+            component:typeSearchAdvanced.DateItemSearch
+        },
+
     ]
 }
 export const columnShopPromotion = [

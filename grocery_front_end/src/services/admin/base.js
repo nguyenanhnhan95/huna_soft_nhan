@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createHeader } from "../../config/common";
+import { createHeader } from "../../utils/common";
 const getAll = async (http) => {
     try {
         const response = await axios.get(http,createHeader());

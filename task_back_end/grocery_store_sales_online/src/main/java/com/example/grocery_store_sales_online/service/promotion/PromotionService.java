@@ -70,4 +70,9 @@ public class PromotionService extends BaseService implements IPromotionService {
     public Optional<Promotion> findByCode(String code) {
         return promotionRepository.findByCode(code.trim());
     }
+
+    @Override
+    public List<Promotion> getListCode() {
+        return promotionRepository.getListCode();
+    }
 }

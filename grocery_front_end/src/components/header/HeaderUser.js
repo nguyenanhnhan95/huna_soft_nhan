@@ -4,9 +4,9 @@ import { findByUser } from "../../slice/user";
 import {  PROVIDER_ID,  USER_LOGIN, constLogin } from "../../constants/login";
 import {useNavigate } from "react-router-dom";
 import "../../css/header/headerUser.css"
-import { createHeader } from "../../config/common";
 import { getRefreshToken } from "../../services/token";
 import { linkHttp } from "../../constants/htttp";
+import { createHeader } from "../../utils/common";
 function HeaderUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();

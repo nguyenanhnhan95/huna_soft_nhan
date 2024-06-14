@@ -16,7 +16,7 @@ function SearchContentAdmin() {
   const handleSetQuery = useCallback((value) => {
     setQuery(value)
   }, [])
-  
+  console.log(query)
   return (
     <div className="search-content-admin">
       <form role="search">
@@ -26,6 +26,7 @@ function SearchContentAdmin() {
             {itemSearch.items.map((each, index) => {
               const Component = componentsAdvanced[each.component];
               if (!Component) {
+                console.log(index)
                 return null; // Skip rendering if the component is not defined
               }
               return (

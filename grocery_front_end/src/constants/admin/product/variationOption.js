@@ -1,5 +1,5 @@
-
-import { variationHttp} from "../htttp";
+import { typeSearchAdvanced } from "../../common"
+import { variationHttp } from "../../htttp"
 
 export const variationOptionAction = {
     add :{
@@ -30,7 +30,7 @@ export const variationOptionSearch={
             callApi:true,
             data:variationHttp.variation,
             search:{variation:null},
-            component:'SelectItemSearch'
+            component:typeSearchAdvanced.SelectItemSearch
         },
     ]
 }

@@ -13,3 +13,8 @@ export const debounce =  (func, delay) => {
 export const informationModalDelete = {
   title: "Bạn có muốn xóa dữ liệu này ?"
 }
+export const typeSearchAdvanced={
+  DateItemSearch:"DateItemSearch",
+  SelectItemSearch:"SelectItemSearch",
+  InputDataSearch:"InputDataSearch"
+}

@@ -119,4 +119,15 @@ public class PromotionController {
             return new ResponseEntity<>(apiResponse,HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/codes")
+    public ResponseEntity<ApiResponse<List<Promotion>>> getListCode(){
+        List<Promotion> promotions = promotionService.getListCode();
+        ApiResponse<List<Promotion>> result = new ApiResponse<>();
+        if(promotions.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+            result = new ApiResponse<>(EResponseStatus.FETCH_DATA_SUCCESS.getCode(), EResponseStatus.FETCH_DATA_SUCCESS.getLabel(), promotions);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
 }

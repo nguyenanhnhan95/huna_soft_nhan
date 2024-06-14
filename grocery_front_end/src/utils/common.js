@@ -1,10 +1,22 @@
 import DateItemSearch from "../components/composite/DateItemSearch";
+import InputDataSearch from "../components/composite/InputDataSearch";
 import SelectItemSearch from "../components/composite/SelectItemSearch";
+import { constLogin } from "../constants/login";
+
+export const createHeader = () => {
+    return {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem(constLogin.ACCESS_TOKEN)
+        }
+    }
+}
+
 export function getBeforeDateCurrent() {
     const oneDayAgo = new Date();
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
     return oneDayAgo;
 }
+
 export function convertDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -20,5 +32,6 @@ export function convertDate(date) {
 }
 export const componentsAdvanced = {
     SelectItemSearch,
-    DateItemSearch
+    DateItemSearch,
+    InputDataSearch
   };

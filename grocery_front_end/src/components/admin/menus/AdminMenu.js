@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "../../../css/admin/menus/menuAdmin.css"
 import { getListMainMenu } from "../../../services/mainMenu";
-import { createHeader } from "../../../config/common";
 import React from 'react';
 import { ctx } from "../../../constants/common";
 import { NavLink, useLocation } from "react-router-dom";
@@ -10,7 +9,7 @@ import { onClickHandleOverPlay } from "../../../slice/main/overPlayMenu";
 import logoBrand from "../../../img/header/logo-sky.png"
 import { transferMenuToContentMain } from "../../../slice/main/menuContentMain";
 import { commonResource } from "../../../common/menuAdmin";
-import { constLogin } from "../../../constants/login";
+import { createHeader } from "../../../utils/common";
 
 function AdminMenu() {
   const isOpen = useSelector((state) => state.overPlayMenuMain.open)
@@ -20,7 +19,7 @@ function AdminMenu() {
   const dispatch = useDispatch();
   let pathName = commonResource(location.pathname)
   const getListMenu =useCallback( async () => {
-    const header = createHeader(localStorage.getItem(constLogin.ACCESS_TOKEN));
+    const header = createHeader()
     try {
       let data = await getListMainMenu(header);
       setMenus(data)

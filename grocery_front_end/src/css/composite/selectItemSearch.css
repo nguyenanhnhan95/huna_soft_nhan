@@ -1,7 +1,4 @@
-.search-content-admin .container-content-search-advanced .container-content-search-advanced-item{
-    display: flex;
-    justify-content: start;
-}
+
 .search-content-admin .container-content-search-advanced .container-content-search-advanced-item .MuiFormControl-root{
     width: 100%;
 }

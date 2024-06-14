@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setActionModel } from "../../../../slice/main/actionAdmin";
 import { Route, Routes } from "react-router-dom";
 import { shopPromotionHttp } from "../../../../constants/htttp";
-import { columnShopPromotion, dataActions, initialForm, queryParameter, shopPromotionAction, shopPromotionSearch } from "../../../../constants/shop/shopPromotion";
+import { columnShopPromotion, dataActions, initialForm, queryParameter, shopPromotionAction, shopPromotionSearch } from "../../../../constants/admin/shop/shopPromotion";
 import TBodyTable from "./TBodyTable";
 import BackdropLoading from "../../../../utils/BackdropLoading";
 

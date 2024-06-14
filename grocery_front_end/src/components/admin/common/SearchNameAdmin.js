@@ -27,7 +27,6 @@ function SearchNameAdmin(props) {
             }
         })
     },[handleSetQuery,query])
-
     const debouncedHandleEnterData = useMemo(() => debounce(handelEnterData, 500), [handelEnterData]);
     return (
         <div className="row container-content-search-head">
