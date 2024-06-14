@@ -18,7 +18,6 @@ function TableManage() {
   useEffect(()=>{
     getListResult();
   },[getListResult])
-  
   return (
     <div className="main-content-data pb-3">
       <div className="container-fluid container-content-data table-responsive">
@@ -26,7 +25,7 @@ function TableManage() {
           <thead className="table-thead">
             <tr >
               {nameColumn.map((each, index) => (
-                <th scope="col" style={{ minWidth: each.style.width }} key={index}>{each.name}</th>
+                <th scope="col" style={each.style} key={index}>{each.name}</th>
               ))}
             </tr>
           </thead>

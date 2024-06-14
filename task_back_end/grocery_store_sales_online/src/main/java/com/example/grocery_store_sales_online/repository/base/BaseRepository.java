@@ -5,19 +5,24 @@ import com.querydsl.core.SimpleQuery;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.core.EntityInformation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Optional;
 @NoRepositoryBean
 public abstract class BaseRepository <T,ID> extends SimpleJpaRepository<T,ID> implements IBaseRepository<T,ID>{
+    private static final Logger logger = LoggerFactory.getLogger(BaseRepository.class);
     @PersistenceContext
     protected EntityManager em;
     protected EntityInformation<T,ID> entityInformation;
@@ -63,6 +68,16 @@ public abstract class BaseRepository <T,ID> extends SimpleJpaRepository<T,ID> im
             page = 0;
         }
         return (A) qry.offset((long) page * size).limit(size);
+    }
+    protected Date stringToDate(String str){
+        try {
+            ZonedDateTime zonedDateTime = ZonedDateTime.parse(str, DateTimeFormatter.ISO_DATE_TIME);
+            return Date.from(zonedDateTime.toInstant());
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return null;
+        }
+
     }
 
 }

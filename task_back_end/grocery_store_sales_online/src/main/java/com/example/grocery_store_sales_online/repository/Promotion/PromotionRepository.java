@@ -6,6 +6,7 @@ import com.example.grocery_store_sales_online.model.shop.QPromotion;
 import com.example.grocery_store_sales_online.repository.base.BaseRepository;
 import com.example.grocery_store_sales_online.utils.QueryListResult;
 import com.example.grocery_store_sales_online.utils.QueryParameter;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
@@ -49,16 +50,20 @@ public class PromotionRepository extends BaseRepository<Promotion, Long> impleme
                 keyword = "%" + keyword + "%";
                 jpaQuery.where(promotion.name.like(keyword));
             }
-            Date startDate = (Date) MapUtils.getObject(params, "startDate");
-            Date endDate = (Date) MapUtils.getObject(params, "endDate");
-            Date now = new Date();
+            String code = MapUtils.getString(params, "code");
+            if (StringUtils.isNotBlank(code)) {
+                code = "%" + code + "%";
+                jpaQuery.where(promotion.code.like(code));
+            }
+            Date startDate =stringToDate(MapUtils.getString(params, "startDate"));
+            Date endDate = stringToDate(MapUtils.getString(params, "endDate"));
             if (startDate == null && endDate != null) {
-                jpaQuery.where(promotion.endDate.before(now));
+                jpaQuery.where(promotion.endDate.eq(endDate));
             } else if (startDate != null) {
                 if (endDate != null) {
-                    jpaQuery.where(promotion.startDate.before(now).and(promotion.endDate.after(now)));
+                    jpaQuery.where(promotion.startDate.after(startDate).and(promotion.endDate.before(endDate)));
                 } else {
-                    jpaQuery.where(promotion.startDate.before(now));
+                    jpaQuery.where(promotion.startDate.after(startDate));
                 }
             }
         }
@@ -71,5 +76,15 @@ public class PromotionRepository extends BaseRepository<Promotion, Long> impleme
         Promotion result = jpaQuery.select(promotion).from(promotion)
                 .where(promotion.code.eq(code)).fetchOne();
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public List<Promotion> getListCode() {
+        JPAQuery<Promotion> jpaQuery = new JPAQuery<>(em);
+        List<Promotion> promotions = jpaQuery
+                .select(Projections.constructor(Promotion.class,promotion.code))
+                .from(promotion)
+                .fetch();
+        return promotions;
     }
 }

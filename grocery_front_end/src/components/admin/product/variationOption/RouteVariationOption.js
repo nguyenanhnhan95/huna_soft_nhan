@@ -3,7 +3,7 @@ import Manage from "./Manage";
 import FormBasic from "./FormBasic";
 import { useDispatch } from "react-redux";
 import {  variationOptionHttp } from "../../../../constants/htttp";
-import { columnVariationOption, dataActions, initialForm, queryParameter, variationOptionAction, variationOptionSearch } from "../../../../constants/product/variationOption";
+import { columnVariationOption, dataActions, initialForm, queryParameter, variationOptionAction, variationOptionSearch } from "../../../../constants/admin/product/variationOption";
 import { setActionModel } from "../../../../slice/main/actionAdmin";
 import { useEffect, useState } from "react";
 import BackdropLoading from "../../../../utils/BackdropLoading";

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setActionModel } from "../../../../slice/main/actionAdmin";
 import { variationHttp } from "../../../../constants/htttp";
-import { columnVariation, dataActions, initialForm, queryParameter, variationAction, variationSearch } from "../../../../constants/product/variation";
+import { columnVariation, dataActions, initialForm, queryParameter, variationAction, variationSearch } from "../../../../constants/admin/product/variation";
 import TBodyTable from "./TBodyTable";
 
 function RouteVariation() {

@@ -27,4 +27,5 @@ export const shopPromotionHttp={
     shopPromotion:"http://localhost:8080/shop-promotion",
     shopPromotionSearch:"http://localhost:8080/shop-promotion/search",
     shopPromotionNavigate:"/admin/shop-promotion",
+    shopPromotionCode:"http://localhost:8080/shop-promotion/codes"
 }
