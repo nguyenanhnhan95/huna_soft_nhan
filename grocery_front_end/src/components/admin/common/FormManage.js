@@ -28,20 +28,16 @@ function FormManage({Form}){
         } 
     },[getDataEdit,id,dispatch])
     const handleSave = useCallback(async (value, setErrors) => {
-        try {
-  
+        try {  
             if(id!==undefined && validation.isNumber(id)){
                 await dispatch(editDataAdmin({ http: httpApi,id:id, data: value })).unwrap()
             }else{
                  await dispatch(saveDataAdmin({ http: httpApi, data: value })).unwrap()
             }
             toastSuccess("Bạn đã lưu dữ liệu thành công")
-            if (close) {
-                
+            if (close) {                
                 navigate(httpNavigate)
-            }
-
-           
+            }         
         } catch (error) {
             setErrors(error.result)
         }

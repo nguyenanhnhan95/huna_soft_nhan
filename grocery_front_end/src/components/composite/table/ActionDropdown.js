@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "../../../css/composite/table/actionDropdown.css"
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteDataAdmin, resetPage } from "../../../slice/main/actionAdmin";
-import { toastSuccess } from "../../../config/toast";
+import { deleteDataAdmin } from "../../../slice/main/actionAdmin";
 import ComponentModal from "../modal/ComponentModal";
 import { informationModalDelete } from "../../../constants/common/modal";
 
@@ -31,17 +30,9 @@ function ActionDropdown(props) {
         }
     }, [httpNavigate, id,handleShowModal,navigate])
     
-    const handleDelete = useCallback(async () => {
-        try {
-
-            const response = await dispatch(deleteDataAdmin({ http: httpApi, data: id })).unwrap();
+    const handleDelete = useCallback(() => {
+           dispatch(deleteDataAdmin({ http: httpApi, data: id }))
             handleShowModal(false);
-            dispatch(resetPage())
-            toastSuccess(response.message)
-        } catch (error) {
-            console.log(error);
-        }
-        setShowModal(false)
     }, [httpApi, id,handleShowModal,dispatch])
     return (
         <div className="dropdown">

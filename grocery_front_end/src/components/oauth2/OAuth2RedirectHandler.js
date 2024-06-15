@@ -4,10 +4,9 @@ import { memo, useEffect } from "react";
 import Cookies from 'js-cookie'
 function OAuth2RedirectHandle() {
     const navigate = useNavigate();
-    const searchParams = useSearchParams();
+    const [searchParams] = useSearchParams();
     useEffect(() => {
-        const keepLogin=Cookies.get('keepLogin')
-        console.log(keepLogin)
+        // const keepLogin=Cookies.get('keepLogin')
         const token = searchParams.get('token');
         const error = searchParams.get('error');
         if (token) {

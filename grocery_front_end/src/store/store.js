@@ -1,13 +1,14 @@
 import { Tuple, combineReducers, configureStore } from "@reduxjs/toolkit";
 import { productSlice } from "../slice/product/product";
 import { userSlice } from "../slice/user";
-import { loginForm } from "../slice/login/login";
 import { thunk } from "redux-thunk";
 import { actionReducerStore } from "../constants/reducerSlice";
+import { loadingFetchSlice } from "../slice/Loading/loadingFetch";
 export const staticReducers = {
     product: productSlice.reducer,
     user: userSlice.reducer,
-    loginForm: loginForm.reducer
+    fetchLoading:loadingFetchSlice.reducer
+    // loginForm: loginForm.reducer
     // productCategoryMenus: getAllCategoryMenus.reducer,
     // overPlayMenuMain: overPlayMenuMainSlice.reducer,
     // menuContentMain: menuContentMainSlice.reducer,
@@ -17,7 +18,6 @@ export const staticReducers = {
 //     ...asyncReducers
 // });
 export function createReducerManager() {
-    console.log()
     // Create an object which maps keys to reducers
     const reducers = { ...staticReducers }
 
@@ -25,7 +25,6 @@ export function createReducerManager() {
     let combinedReducer = combineReducers(reducers)
     // An array which is used to delete state keys when reducers are removed
     let keysToRemove = []
-
     return {
         getReducerMap: () => reducers,
 
@@ -63,7 +62,6 @@ export function createReducerManager() {
             if (!key || !reducers[key]) {
                 return
             }
-            console.log(key)
             // Remove it from the reducer mapping
             delete reducers[key]
 
@@ -87,6 +85,7 @@ export const store = configureStore({
 store.asyncReducers = {};
 
 store.injectReducer = (action, key, asyncReducer) => {
+    console.log(action +""+key)
     switch (action) {
         case actionReducerStore.add:
             store.asyncReducers[key] = asyncReducer;
@@ -100,7 +99,7 @@ store.injectReducer = (action, key, asyncReducer) => {
             reducerManager.clear()
             break;
         default:
-            reducerManager.clear()
+            return;
     }
     store.replaceReducer(reducerManager.reduce);
 };

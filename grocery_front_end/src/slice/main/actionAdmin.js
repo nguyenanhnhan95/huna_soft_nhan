@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createHeader } from "../../utils/common";
+import { toastError, toastSuccess } from "../../config/toast";
 
 export const saveDataAdmin = createAsyncThunk('saveDataAdmin',
     async ({ http, data }, { rejectWithValue }) => {
@@ -34,12 +35,16 @@ export const getDataByIdAdmin = createAsyncThunk('getDataByIdAdmin',
     }
 )
 export const deleteDataAdmin = createAsyncThunk('deleteDataAdmin',
-    async ({ http, data }, { rejectWithValue }) => {
+    async ({ http, data }, { rejectWithValue,dispatch }) => {
         try {
             const response = await axios.delete(`${http}/?id=${data}`, createHeader());
+            if(response.data.code===200){
+                dispatch(resetPage())
+                toastSuccess(response.data.message)
+            }
             return response.data;
         } catch (error) {
-            console.log(rejectWithValue(error.response.data))
+            toastError(rejectWithValue(error.response.data).payload.message)
             return rejectWithValue(error.response.data)
         }
     }

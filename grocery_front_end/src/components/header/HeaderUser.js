@@ -1,4 +1,4 @@
-import { memo,  useCallback,  useEffect,useRef, useState } from "react";
+import { memo,  useCallback,  useEffect,useId,useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findByUser } from "../../slice/user";
 import {  PROVIDER_ID,  USER_LOGIN, constLogin } from "../../constants/login/login";
@@ -11,10 +11,11 @@ function HeaderUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const getUserDataRef = useRef();
-    const {  user, } = useSelector((state) => state.user)
+    const {  user } = useSelector((state) => state.user)
     const [isModalUserVisible, setIsModalUserVisible] = useState(false);
     const headerUserRef = useRef(null);
     const headerUserModalRef = useRef(null);
+    const idFetchUser = useId();
     const handleRefreshToken =useCallback( async () => {
         try {
             const response = await getRefreshToken(localStorage.getItem(constLogin.ACCESS_TOKEN))
@@ -28,7 +29,7 @@ function HeaderUser() {
     },[navigate])
     const getUserData =useCallback( async () => {
         try {
-            await dispatch(findByUser(linkHttp.getUserHeader, createHeader())).unwrap();
+            await dispatch(findByUser({http:linkHttp.getUserHeader,id:idFetchUser}, createHeader())).unwrap();
         } catch (error) {
             if (error.status) {
                 switch (error.status) {
@@ -48,6 +49,7 @@ function HeaderUser() {
    
     
     useEffect(() => {
+         
         if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
             getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
         }
@@ -60,7 +62,6 @@ function HeaderUser() {
                 setIsModalUserVisible(false);
             }
         }
-
         document.addEventListener('click', handleClickOutside);
 
         return () => {

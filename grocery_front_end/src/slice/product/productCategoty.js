@@ -1,10 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { addErrorTask, addLoadingTask, removeLoadingTask } from "../Loading/loadingFetch";
+
 
 export const findAllCategoryMenus = createAsyncThunk('productCategoryMenus',
-    async()=>{
-        const response = await axios.get("http://localhost:8080/category");
-        return response.data;
+    async(idFetch, { dispatch })=>{
+        
+        dispatch(addLoadingTask(idFetch))
+        try{
+            const response = await axios.get("http://localhost:8080/category");
+            return response.data;
+        }catch(error){
+            dispatch(addErrorTask(idFetch))
+        }finally {
+            dispatch(removeLoadingTask(idFetch));
+        }
     }
 )
 export const getAllCategoryMenus = createSlice({
