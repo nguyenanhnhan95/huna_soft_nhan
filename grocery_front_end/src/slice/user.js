@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { FETCH_USER_FAILED, FETCH_USER_LOADING, FETCH_USER_SUCCEEDED } from "../constants/user";
 import axios from "axios";
 import { createHeader } from "../utils/common";
-import { addErrorTask, addLoadingTask, removeLoadingTask } from "./Loading/loadingFetch";
 const initialState = {
     authenticate: false,
     user: null,
@@ -10,16 +9,13 @@ const initialState = {
     loading: false,
     error: null,
 }
-export const findByUser = createAsyncThunk('user', async ({ http, id }, { dispatch, rejectWithValue }) => {
-    dispatch(addLoadingTask(id))
+export const findByUser = createAsyncThunk('user', async (http, { dispatch, rejectWithValue }) => {
     try {
         const response = await axios.get(http, createHeader());
         return response.data;
     } catch (error) {
-        dispatch(addErrorTask(id))
         return rejectWithValue(error.response.data)
     } finally {
-        dispatch(removeLoadingTask(id))
     }
 })
 export const userSlice = createSlice({
