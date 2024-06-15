@@ -1,4 +1,4 @@
-import { memo, useEffect, useId} from "react";
+import { memo, useEffect} from "react";
 import "../../css/header/header.css"
 import HeaderSearch from "./HeaderSearch";
 import HeaderCart from "./HeaderCart";
@@ -10,9 +10,8 @@ import { useDispatch } from "react-redux";
 import { findAllCategoryMenus} from "../../slice/product/productCategoty";
 function Header() {
     const dispatch = useDispatch();
-    const idCategoryMenus = useId();
     useEffect(()=>{
-        dispatch(findAllCategoryMenus(idCategoryMenus))
+        dispatch(findAllCategoryMenus())
     },[dispatch])  
     return (
         <div className="header">

@@ -3,11 +3,9 @@ import { productSlice } from "../slice/product/product";
 import { userSlice } from "../slice/user";
 import { thunk } from "redux-thunk";
 import { actionReducerStore } from "../constants/reducerSlice";
-import { loadingFetchSlice } from "../slice/Loading/loadingFetch";
 export const staticReducers = {
     product: productSlice.reducer,
     user: userSlice.reducer,
-    fetchLoading:loadingFetchSlice.reducer
     // loginForm: loginForm.reducer
     // productCategoryMenus: getAllCategoryMenus.reducer,
     // overPlayMenuMain: overPlayMenuMainSlice.reducer,
