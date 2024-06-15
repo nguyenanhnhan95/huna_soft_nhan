@@ -6,7 +6,6 @@ export const reducerSliceKey={
     overPlayMenuMain:"overPlayMenuMain",
     menuContentMain:"menuContentMain",
     actionAdmin:"actionAdmin",
-    loadingView:"loadingView"
 }
 export const actionReducerStore={
     add:"add",

@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { memo, useEffect, useId} from "react";
 import "../../css/header/header.css"
 import HeaderSearch from "./HeaderSearch";
 import HeaderCart from "./HeaderCart";
@@ -7,15 +7,13 @@ import HeaderUser from "./HeaderUser";
 import HeaderMenusMB from "./HeaderMenusMB";
 import HeaderMenusPc from "./HeaderMenusPC";
 import { useDispatch } from "react-redux";
-import { findAllCategoryMenus, getAllCategoryMenus } from "../../slice/product/productCategoty";
-import store from "../../../src/store/store";
-import { actionReducerStore, reducerSliceKey } from "../../constants/reducerSlice";
-store.injectReducer(actionReducerStore.add,reducerSliceKey.productCategoryMenus,getAllCategoryMenus.reducer)
+import { findAllCategoryMenus} from "../../slice/product/productCategoty";
 function Header() {
     const dispatch = useDispatch();
+    const idCategoryMenus = useId();
     useEffect(()=>{
-        dispatch(findAllCategoryMenus())
-    },[dispatch])
+        dispatch(findAllCategoryMenus(idCategoryMenus))
+    },[dispatch])  
     return (
         <div className="header">
             <div className="container-fluid container-header ">
@@ -35,4 +33,4 @@ function Header() {
         </div>
     )
 }
-export default Header;
+export default memo(Header);
