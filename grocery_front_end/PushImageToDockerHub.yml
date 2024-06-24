@@ -1,0 +1,21 @@
+name: Build and push Docker image to Docker Hub
+on: push
+jobs: 
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps: 
+      -name: Check out the repo
+       uses: actions/checkout@v3
+
+      -name: Login to Docker Hub
+       uses: docker/login-action@v2
+       width:
+        username: ${{secrets.DOCKER_HUB_USER_NAME}}
+        password: ${{secrets.DOCKER_HUB_TOKEN}}
+      -name: Build and push Docker image
+       uses: docker/build-push-action@v4
+       with:
+        context: GROCERY_FRONT_END/
+        push: true
+        tags: anhnhan/grocery_shop:grocery-shop-client
