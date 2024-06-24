@@ -1,11 +1,10 @@
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import "../../../../css/admin/shop/promotion/contentForm.css"
-import { memo} from "react";
+import { memo } from "react";
 import * as yup from "yup";
 import { DatePickerField } from "../../../composite/formik/DatePickerField";
-import { getBeforeDateCurrent } from "../../../../utils/common";
 function ContentForm(props) {
-    const { handleSave,  buttonRef,initialForm } = props;
+    const { handleSave, buttonRef, initialForm } = props;
     console.log(initialForm)
     return (
         <div className="main-content-form-promotion" >
@@ -13,12 +12,12 @@ function ContentForm(props) {
                 <Formik
                     enableReinitialize={true}
                     initialValues={{
-                        name:  initialForm.name,
+                        name: initialForm.name,
                         code: initialForm.code,
-                        description:initialForm.description,
+                        description: initialForm.description,
                         discountRate: initialForm.discountRate,
                         startDate: new Date(initialForm.startDate),
-                        endDate: initialForm.endDate,
+                        endDate:initialForm.endDate===null? null: new Date(initialForm.endDate),
                     }}
                     validationSchema={yup.object({
                         name: yup.string().required("Chưa nhập tên :"),
@@ -28,11 +27,14 @@ function ContentForm(props) {
                             .min(1, "Gía trị nhỏ nhất 1"),
                         startDate: yup.date()
                             .nullable()  // Cho phép để trống
-                            .notRequired()
-                            .min(getBeforeDateCurrent(), "Nhập ngày không phù hợp : "),
+                            .notRequired(),
+                            // .when('endDate', {
+                            //     is: null,
+                            //     then: yup.date().min(new Date(), "Nhập ngày không phù hợp: ")
+                            // }),
                         endDate: yup.date()
-                        .nullable()  // Cho phép để trống
-                        .notRequired()
+                            .nullable()  // Cho phép để trống
+                            .notRequired()
                             .min(yup.ref('startDate'), "Ngày kết thúc phải sau ngày bắt đầu")
                     })}
                     onSubmit={(data, { setErrors }) =>
@@ -63,12 +65,12 @@ function ContentForm(props) {
                                 </div>
                                 <div className="col-12 col-md-4  mt-2">
                                     <label htmlFor="startDate">Ngày bắt đầu</label>
-                                    <Field name="startDate" component={DatePickerField}  className="form-control" type="date" />
+                                    <Field name="startDate" component={DatePickerField} className="form-control" type="date" />
                                     <ErrorMessage className="form-text form-error" name='startDate' component='div' />
                                 </div>
                                 <div className="col-12 col-md-4  mt-2">
                                     <label htmlFor="endDate">Ngày kết thúc</label>
-                                    <Field name="endDate" component={DatePickerField}  className="form-control" type="date" />
+                                    <Field name="endDate" component={DatePickerField} className="form-control" type="date" />
                                     <ErrorMessage className="form-text form-error" name='endDate' component='div' />
                                 </div>
                             </div>

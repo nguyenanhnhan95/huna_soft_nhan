@@ -9,7 +9,6 @@ import TBodyTable from "./TBodyTable";
 function RouteProduct(){
     const dispatch = useDispatch();
     const [initialized, setInitialized] = useState(false);
-
     useEffect(() => {
         window.scrollTo(0, 0, 'smooth')
         const initializeState = async () => {

@@ -18,7 +18,6 @@ function HeaderNotification() {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
-
     const handleNotificationHeaderClick = () => {
         if (isModalNotificationVisible) {
             notifyHeaderModalRef.current.style.display = 'none';

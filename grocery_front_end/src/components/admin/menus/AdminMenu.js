@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import "../../../css/admin/menus/menuAdmin.css"
 import { getListMainMenu } from "../../../services/mainMenu";
 import React from 'react';
@@ -8,7 +8,7 @@ import { onClickHandleOverPlay } from "../../../slice/main/overPlayMenu";
 import logoBrand from "../../../img/header/logo-sky.png"
 import { transferMenuToContentMain } from "../../../slice/main/menuContentMain";
 import { createHeader } from "../../../utils/common";
-import { commonResource, ctx } from "../../../constants/common/resource";
+import { checkResourceAdmin, commonResource, ctx, linkHttp } from "../../../constants/common/resource";
 
 function AdminMenu() {
   const isOpen = useSelector((state) => state.overPlayMenuMain.open)
@@ -17,14 +17,33 @@ function AdminMenu() {
   const location = useLocation();
   const dispatch = useDispatch();
   let pathName = commonResource(location.pathname)
-  const getListMenu =useCallback( async () => {
+  const handlePathMenu =useCallback( (data) => {
+    let size = data.length;
+    for (let i = 0; i < size; ++i) {
+      if (checkResourceAdmin(data[i].resources, location.pathname)) {
+        setMenuActive(data[i])
+        dispatch(transferMenuToContentMain(data[i]))
+        return;
+      }
+      let sizeSub = data[i].subMenus.length;
+      for (let j = 0; j < sizeSub; ++j) {
+        if (checkResourceAdmin(data[i].subMenus[j].resources, location.pathname)) {
+          setMenuActive(data[i])
+          dispatch(transferMenuToContentMain(data[i]))
+          return;
+        }
+      }
+    }
+    window.location.href=linkHttp.linkNotFound;
+  },[dispatch,location.pathname])
+  const getListMenu = useCallback(async () => {
     const header = createHeader()
     try {
       let data = await getListMainMenu(header);
+      handlePathMenu(data);
       setMenus(data)
     } catch (error) {
       console.log(error)
-      // alert("nhan")
       if (error.response.data) {
         switch (error.response.status) {
           case 403:
@@ -35,13 +54,13 @@ function AdminMenu() {
             // navigate("/login")
             break;
           default:
-            
+
         }
       } else {
- 
+
       }
     }
-  },[])
+  }, [])
   useEffect(() => {
     getListMenu()
   }, [getListMenu])
@@ -111,4 +130,4 @@ function AdminMenu() {
     </div>
   )
 }
-export default AdminMenu;
+export default memo(AdminMenu);

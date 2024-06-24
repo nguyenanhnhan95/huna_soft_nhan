@@ -16,7 +16,6 @@ function SearchContentAdmin() {
   const handleSetQuery = useCallback((value) => {
     setQuery(value)
   }, [])
-  console.log(query)
   return (
     <div className="search-content-admin">
       <form role="search">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../../css/admin/header/headerAdmin.css"
-import {  useRef } from "react";
+import {  memo, useRef } from "react";
 import { useDispatch} from "react-redux";
 import HeaderNotification from "../../header/HeaderNotification";
 import HeaderUser from "../../header/HeaderUser";
@@ -47,4 +47,4 @@ function HeaderAdmin() {
         </div>
     )
 }
-export default HeaderAdmin;
+export default memo(HeaderAdmin);

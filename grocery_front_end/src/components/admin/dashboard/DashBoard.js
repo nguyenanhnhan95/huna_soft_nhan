@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "../../../css/admin/dashBoard/dashBoard.css"
 function DashBoard(){
     return(
@@ -192,4 +193,4 @@ function DashBoard(){
       </div>
     )
 }
-export default DashBoard;
+export default memo(DashBoard);

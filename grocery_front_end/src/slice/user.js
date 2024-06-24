@@ -33,7 +33,7 @@ export const userSlice = createSlice({
                 state.error = null;
             })
             .addCase(findByUser.fulfilled, (state, action) => {
-                state.authenticate = false;
+                state.authenticate = true;
                 state.user = action.payload;
                 state.loading = false;
                 state.status = FETCH_USER_SUCCEEDED;
