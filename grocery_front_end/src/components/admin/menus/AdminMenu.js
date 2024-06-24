@@ -60,7 +60,7 @@ function AdminMenu() {
 
       }
     }
-  }, [])
+  }, [handlePathMenu])
   useEffect(() => {
     getListMenu()
   }, [getListMenu])
