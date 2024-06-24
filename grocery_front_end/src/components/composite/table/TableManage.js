@@ -10,7 +10,6 @@ function TableManage() {
     try {
       const encodedQuery = encodeURIComponent(JSON.stringify(queryParameter));
       await dispatch(searchDataAdmin({ http: httpApi + '/search', data: encodedQuery })).unwrap();
-
     } catch (error) {
       console.log(error)
     }

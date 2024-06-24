@@ -2,16 +2,16 @@ import { memo,  useCallback,  useEffect,useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findByUser } from "../../slice/user";
 import {  PROVIDER_ID,  USER_LOGIN, constLogin } from "../../constants/login/login";
-import {useNavigate } from "react-router-dom";
 import "../../css/header/headerUser.css"
 import { getRefreshToken } from "../../services/token";
 import { createHeader } from "../../utils/common";
 import { linkHttp } from "../../constants/common/resource";
+import InformationUserHeader from "./InformationUserHeader";
+import RedirectAdminHeader from "./RedirectAdminHeader";
 function HeaderUser() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const getUserDataRef = useRef();
-    const {  user } = useSelector((state) => state.user)
+    const { authenticate } = useSelector((state) => state.user)
     const [isModalUserVisible, setIsModalUserVisible] = useState(false);
     const headerUserRef = useRef(null);
     const headerUserModalRef = useRef(null);
@@ -23,9 +23,9 @@ function HeaderUser() {
 
         } catch (error) {
             localStorage.removeItem(constLogin.ACCESS_TOKEN);
-            navigate("/login");
+            handleLogIn();
         }
-    },[navigate])
+    },[])
     const getUserData =useCallback( async () => {
         try {
             await dispatch(findByUser(linkHttp.getUserHeader, createHeader())).unwrap();
@@ -34,22 +34,21 @@ function HeaderUser() {
                 switch (error.status) {
                     case 4007:
                         localStorage.removeItem(constLogin.ACCESS_TOKEN);
-                        navigate("/login");
+                        handleLogIn()
                         break;
                     case 4008:
                         handleRefreshToken()
                         break;
                     default:
-                        navigate("/login");
+                        handleLogIn()
                 }
             }
         }
-    },[dispatch,navigate,handleRefreshToken])
+    },[dispatch,handleRefreshToken])
    
     
     useEffect(() => {
-         
-        if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null) {
+        if (localStorage.getItem(constLogin.ACCESS_TOKEN) !== null ) {
             getUserData(localStorage.getItem(constLogin.ACCESS_TOKEN));
         }
     },[getUserData])
@@ -71,26 +70,29 @@ function HeaderUser() {
     const handleHeaderUserClick = () => {
         setIsModalUserVisible(!isModalUserVisible);
     };
-    
+    const handleLogIn=()=>{
+        window.location.href=linkHttp.linkLogin;
+    }
     const handleLogout = () => {
         let token = localStorage.getItem(constLogin.ACCESS_TOKEN);
         localStorage.removeItem(constLogin.ACCESS_TOKEN);
         localStorage.removeItem(PROVIDER_ID);
         localStorage.removeItem(USER_LOGIN);
-        window.location.href = `http://localhost:8080/logout?token=${token}`;
+        window.location.href = `${linkHttp.linkLogOut}?token=${token}`;
     }
     return (
         <>
 
-            { user ?
+            { authenticate ?
                 <div className="header-user dropdown d-flex justify-content-center" ref={headerUserRef} onClick={handleHeaderUserClick}>
-                    <div className="header-user-item"><span>{user.name.toLowerCase().substr(0, 1)}</span></div>
+                    <InformationUserHeader/>
                     <div className={`dropdown-menu dropdown-menu-user ${isModalUserVisible ? 'show' : 'close'}`} ref={headerUserModalRef}>
-                        <div className="dropdown-item"><i className="fa-solid fa-user-gear mr-1"></i>Cập nhập tài khoản</div>
+                        <div className="dropdown-item"><i className="fa-solid fa-user-gear mr-2"></i>Cập nhập tài khoản</div>
+                        <RedirectAdminHeader/>
                         <div className="dropdown-item" onClick={() => handleLogout()}><i className="fa-solid fa-power-off mr-2"></i>Đăng xuất</div>
                     </div>
                 </div>
-                : <div className="header-user-login" onClick={() => navigate("/login")}>Đăng nhập</div>
+                :<div className="header-user-login" onClick={()=>handleLogIn()} >Đăng nhập</div>
             }
 
 

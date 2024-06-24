@@ -6,15 +6,7 @@ import { actionReducerStore } from "../constants/reducerSlice";
 export const staticReducers = {
     product: productSlice.reducer,
     user: userSlice.reducer,
-    // loginForm: loginForm.reducer
-    // productCategoryMenus: getAllCategoryMenus.reducer,
-    // overPlayMenuMain: overPlayMenuMainSlice.reducer,
-    // menuContentMain: menuContentMainSlice.reducer,
 }
-// const createReducer = (asyncReducers) => combineReducers({
-//     ...staticReducers,
-//     ...asyncReducers
-// });
 export function createReducerManager() {
     // Create an object which maps keys to reducers
     const reducers = { ...staticReducers }
@@ -83,7 +75,6 @@ export const store = configureStore({
 store.asyncReducers = {};
 
 store.injectReducer = (action, key, asyncReducer) => {
-    console.log(action +""+key)
     switch (action) {
         case actionReducerStore.add:
             store.asyncReducers[key] = asyncReducer;

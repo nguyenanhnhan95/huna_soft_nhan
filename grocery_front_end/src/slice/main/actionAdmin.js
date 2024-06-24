@@ -7,17 +7,18 @@ export const saveDataAdmin = createAsyncThunk('saveDataAdmin',
     async ({ http, data }, { rejectWithValue }) => {
         try {
             const response = await axios.post(http, data, createHeader());
+            toastSuccess(response.data.message)
             return response.data;
         } catch (error) {
-            console.log(error)
             return rejectWithValue(error.response.data)
         }
     }
 )
 export const editDataAdmin = createAsyncThunk('editDataAdmin',
-    async ({ http, id, data }, { rejectWithValue }) => {
+    async ({ http, id, data }, { rejectWithValue ,getState}) => {
         try {
             const response = await axios.patch(`${http}/?id=${id}`, data, createHeader());
+            toastSuccess(response.data.message)
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -143,7 +144,6 @@ export const actionAdminSlice = createSlice({
                 state.error = null;
             })
             .addCase(saveDataAdmin.rejected, (state, action) => {
-                console.log(action)
                 state.loading = false;
                 state.success = false;
                 state.error = action.payload;

@@ -22,7 +22,6 @@ function ActionDropdown(props) {
                 navigate(`${httpNavigate}/edit/${id}`);
                 break;
             case 'delete':
-                console.log('sdad')
                 handleShowModal(true)
                 break;
             default:
