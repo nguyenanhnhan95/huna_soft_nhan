@@ -6,7 +6,8 @@ export const linkHttp={
     linkLogin:"http://localhost:3000/login",
     linkLogOut:"http://localhost:8080/logout",
     linkNotFound:"http://localhost:3000/not-found",
-    linkAdmin:"http://localhost:3000/admin"
+    linkAdmin:"http://localhost:3000/admin",
+    linkMenuAdminSide:"http://localhost:8080/menu/admin-side"
 }
 export function commonResource(href){
     return href.replace("/add", "").replace(/\/edit\/\d+/, "").replace(/\/view\/\d+/, "");

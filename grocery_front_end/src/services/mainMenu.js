@@ -1,7 +1,7 @@
 import axios from "axios";
-const httpMainMenu = "http://localhost:8080/admin/main-menus"
+import { linkHttp } from "../constants/common/resource";
 export const getListMainMenu = async (headers) => {
-        const response = await axios.get(httpMainMenu, headers);
+        const response = await axios.get(linkHttp.linkMenuAdminSide, headers);
         return response.data;
 
 }

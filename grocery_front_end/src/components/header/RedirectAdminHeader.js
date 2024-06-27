@@ -18,7 +18,7 @@ function RedirectAdminHeader() {
     }
     return (
         <div className="dropdown-item" style={{display:handleCheckLocation()?'block':'none'}} onClick={()=>navigate("/admin")}>
-            <i class="fa-solid fa-users mr-2"></i>Quản lý nhân sự</div>
+            <i className="fa-solid fa-users mr-2"></i>Quản lý nhân sự</div>
     )
 }
 export default memo(RedirectAdminHeader)
