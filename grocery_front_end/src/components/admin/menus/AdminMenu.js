@@ -44,10 +44,11 @@ function AdminMenu() {
       setMenus(data)
     } catch (error) {
       console.log(error)
-      if (error.response.data) {
+      if (error?.response?.data) {
         switch (error.response.status) {
           case 403:
-            alert("không có quyền")
+            console.log(error)
+            console.log("không có quyền")
             // navigate("/home")
             break;
           case 4006:
